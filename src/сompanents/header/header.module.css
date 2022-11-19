@@ -1,0 +1,22 @@
+.header {
+    background: #686a77;
+    grid-area: head;
+    border: 1px solid #c3b1bd;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+}
+
+.header__img{
+    text-align: start;
+}
+
+.header__imgItem{
+    display: flex;
+    align-items: center;
+    padding:10px 10px 10px 10px;
+}
+.header__imgItem img{
+    width: 30px;
+    border-radius: 50%
+}
