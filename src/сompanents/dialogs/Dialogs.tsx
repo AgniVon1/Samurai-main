@@ -7,17 +7,32 @@ import { v1 } from "uuid"
 
 export const Dialogs = () => {
 
-    const message0 ={
-            id: v1(),
-            text:"сообщение",
-    }
+    let messages =[
+        {id: v1() , text: "cooбщение0"},
+        {id: v1() , text: "cooбщение1"},
+        {id: v1() , text: "cooбщение2"},
+        {id: v1() , text: "cooбщение3"},
+        {id: v1() , text: "cooбщение4"},
+        {id: v1() , text: "cooбщение5"},
+        {id: v1() , text: "cooбщение6"},
+    ]
+
+    let diologs = [
+        {id: v1() , name: "Mark"},
+        {id: v1() , name: "Tom"},
+        {id: v1() , name: "Mercava"},
+    ]
+
+    const mappedMessages = messages.map((m) =>  <Message message =  {m}/>)
+    const mappedDiologs = diologs.map((d) =>  <Dialog id= {d.id} name = {d.name}/>)
+
     return (
         <div className={styles.dialogs}>
             <div className={styles.dialogs_items}>
-                <Dialog id={1} name={"Ilya"}/>
+                {mappedDiologs}
             </div>
             <div className={styles.messages}>
-                <Message message = {message0}/>
+                {mappedMessages}
             </div>
         </div>
     );
