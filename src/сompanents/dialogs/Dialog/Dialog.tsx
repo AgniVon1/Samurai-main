@@ -5,7 +5,6 @@ import React from "react";
 type DialogType = {
     id:number,
     name:string
-
 }
 
 export const Dialog:React.FC<DialogType> = (props) => {

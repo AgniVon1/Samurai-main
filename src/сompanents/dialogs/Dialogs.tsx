@@ -2,21 +2,14 @@ import React from 'react';
 import styles from './dialogs.module.css'
 import {Dialog} from "./Dialog/Dialog";
 import {Message} from "./Dialog/Message";
+import { v1 } from "uuid"
 
 
 export const Dialogs = () => {
 
     const message0 ={
-        id: 100,
-            user: {
-        avatar: "https://belarustime.by/wp-content/uploads/2022/08/bez-nazvaniya-44.jpg",
-            name: 'Ilya',
-    },
-        message: {
-            text: 'сообщение',
-                time: '22:00',
-        },
-
+            id: v1(),
+            text:"сообщение",
     }
     return (
         <div className={styles.dialogs}>
@@ -24,7 +17,7 @@ export const Dialogs = () => {
                 <Dialog id={1} name={"Ilya"}/>
             </div>
             <div className={styles.messages}>
-                <Message message={message0}/>
+                <Message message = {message0}/>
             </div>
         </div>
     );

@@ -3,7 +3,9 @@ import styles from './post.module.css'
 
 
 type PostType = {
-    message:string;
+    id:string,
+    message:string,
+    likeCounts:number,
 }
 
 export const Post:React.FC<PostType> = (props) => {
