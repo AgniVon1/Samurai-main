@@ -1,21 +1,19 @@
 import './App.css';
 import {Header} from "./сompanents/header/Header";
 import {Navbar} from "./сompanents/navbar/Navbar";
-import {Profile} from "./сompanents/profile/Profile";
+import {Profile, ProfilePropsType} from "./сompanents/profile/Profile";
 import {BrowserRouter, Route} from "react-router-dom";
-import {Dialogs} from "./сompanents/dialogs/Dialogs";
+import {Dialogs, DialogsPropsType} from "./сompanents/dialogs/Dialogs";
 import React from "react";
-import {PostType} from "./сompanents/profile/post/Post";
-import {MessagePropsType} from "./сompanents/dialogs/Dialog/Message";
-import {DialogPropsType} from "./сompanents/dialogs/Dialog/Dialog";
 
 type AppType = {
-    posts: Array<PostType>,
-    messages:Array<MessagePropsType>,
-    dialogs:Array<DialogPropsType>
+    state: {
+        profilePage:ProfilePropsType,
+        messagePage:DialogsPropsType,
+    }
 }
 
-const App: React.FC<AppType> = (props) => {
+const App: React.FC<AppType> = ({state:{profilePage,messagePage}}) => {
 
     return (
         <BrowserRouter>
@@ -27,8 +25,9 @@ const App: React.FC<AppType> = (props) => {
                         {/* <Route path={"/profile"} component={Profile}/>
                         <Route path={"/dialogs"} component={Dialogs}/>*/}
 
-                        <Route path={"/dialogs"} render={() => <Dialogs dialogs={props.dialogs} messages={props.messages}/>}/>
-                        <Route path={"/profile"} render={() => <Profile posts={props.posts}/>}/>
+                        <Route path={"/dialogs"}
+                               render={() => <Dialogs  messages={messagePage.messages} dialogs={messagePage.dialogs}/>}/>
+                        <Route path={"/profile"} render={() => <Profile posts={profilePage.posts}/>}/>
                     </div>
                 </div>
             </div>
