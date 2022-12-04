@@ -10,18 +10,13 @@ export const state = {
             {id: v1(), message: "mes4", likeCounts: 0},
             {id: v1(), message: "mes5", likeCounts: 0},
         ],
-
-
     },
-
     messagePage: {
-
         dialogs: [
             {id: v1(), name: "Mark"},
             {id: v1(), name: "Tom"},
             {id: v1(), name: "Mercava"},
         ],
-
         messages: [
             {message: {id: v1(), text: "cooбщение0"}},
             {message: {id: v1(), text: "cooбщение1"}},
@@ -31,6 +26,17 @@ export const state = {
             {message: {id: v1(), text: "cooбщение5"}},
         ],
     },
+}
+type messagePageType = {
+    dialogs: Array<{id: string, name: string}>,
+    messages: Array<{message:{id: string, text: string}}>,
+}
 
+type profilePageType = {
+    posts: Array<{id: string, message:string, likeCounts: number}>,
+}
 
+export type StateType = {
+    messagePage: messagePageType
+    profilePage: profilePageType
 }
