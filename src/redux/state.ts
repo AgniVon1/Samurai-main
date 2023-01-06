@@ -1,11 +1,19 @@
 import {v1} from "uuid";
+import {rerenderTree} from "../render";
 export const addPost = () => {
-    const  newPost = {id: v1(), message: "mes5", likeCounts: 0}
+    const  newPost = {id: v1(), message:state.profilePage.text, likeCounts: 0}
     state.profilePage.posts.push(newPost)
+    rerenderTree(state)
 }
+export const changeText = (text:string) => {
+    state.profilePage.text = text
+    rerenderTree(state)
+}
+
 
 export const state = {
     profilePage: {
+        text:"",
         posts: [
             {id: v1(), message: "mes0", likeCounts: 0},
             {id: v1(), message: "mes1", likeCounts: 0},
@@ -30,6 +38,7 @@ export const state = {
             {message: {id: v1(), text: "cooбщение5"}},
         ],
     },
+
 }
 
 type messagePageType = {
@@ -38,10 +47,12 @@ type messagePageType = {
 }
 
 type profilePageType = {
+    text:string,
     posts: Array<{id: string, message:string, likeCounts: number}>,
 }
 
 export type StateType = {
-    messagePage: messagePageType
-    profilePage: profilePageType
+    messagePage: messagePageType,
+    profilePage: profilePageType,
+    text:string
 }
