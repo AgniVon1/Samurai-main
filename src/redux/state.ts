@@ -1,4 +1,8 @@
 import {v1} from "uuid";
+export const addPost = () => {
+    const  newPost = {id: v1(), message: "mes5", likeCounts: 0}
+    state.profilePage.posts.push(newPost)
+}
 
 export const state = {
     profilePage: {
@@ -27,6 +31,7 @@ export const state = {
         ],
     },
 }
+
 type messagePageType = {
     dialogs: Array<{id: string, name: string}>,
     messages: Array<{message:{id: string, text: string}}>,

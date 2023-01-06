@@ -5,15 +5,14 @@ import {Profile, ProfilePropsType} from "./сompanents/profile/Profile";
 import {BrowserRouter, Route} from "react-router-dom";
 import {Dialogs, DialogsPropsType} from "./сompanents/dialogs/Dialogs";
 import React from "react";
+import {StateType} from "./redux/state";
 
 type AppType = {
-    state: {
-        profilePage:ProfilePropsType,
-        messagePage:DialogsPropsType,
-    }
+    state: StateType
+    addPost: () =>void,
 }
 
-const App: React.FC<AppType> = ({state:{profilePage,messagePage}}) => {
+const App: React.FC<AppType> = (props) => {
 
     return (
         <BrowserRouter>
@@ -26,8 +25,8 @@ const App: React.FC<AppType> = ({state:{profilePage,messagePage}}) => {
                         <Route path={"/dialogs"} component={Dialogs}/>*/}
 
                         <Route path={"/dialogs"}
-                               render={() => <Dialogs  messages={messagePage.messages} dialogs={messagePage.dialogs}/>}/>
-                        <Route path={"/profile"} render={() => <Profile posts={profilePage.posts}/>}/>
+                               render={() => <Dialogs  messages={props.state.messagePage.messages} dialogs={props.state.messagePage.dialogs}/>}/>
+                        <Route path={"/profile"} render={() => <Profile posts={props.state.profilePage.posts} addPost={props.addPost}/>}/>
                     </div>
                 </div>
             </div>
