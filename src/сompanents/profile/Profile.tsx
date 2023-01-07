@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useState} from 'react';
 import styles from './profile.module.css'
 import {Post, PostType} from "./post/Post";
-import {changeText} from "../../redux/state";
+
 
 
 export type ProfilePropsType = {
@@ -18,11 +18,11 @@ export const Profile: React.FC<ProfilePropsType> = (props) => {
     const addPostOnClickHandler = () =>{
         alert("addPost was called")
         props.addPost()
-        changeText("")
+        props.changeText("")
 
     }
     const onChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) =>{
-        changeText( e.currentTarget.value)
+        props.changeText( e.currentTarget.value)
     }
 
     return (
