@@ -9,7 +9,7 @@ import App from './App';
 
 export const rerenderTree = (state:StateType) => {
     ReactDOM.render(
-        <App state={state} addPost={store.addPost.bind(store)} changeText = {store.changeText.bind(store)}></App>,
+        <App state={state} dispatch = {store.dispatch.bind(store)}></App>,
         document.getElementById('root')
     );
 

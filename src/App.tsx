@@ -5,12 +5,11 @@ import {Profile, ProfilePropsType} from "./сompanents/profile/Profile";
 import {BrowserRouter, Route} from "react-router-dom";
 import {Dialogs, DialogsPropsType} from "./сompanents/dialogs/Dialogs";
 import React from "react";
-import {StateType} from "./redux/state";
+import {ActionType, StateType} from "./redux/state";
 
 type AppType = {
-    state: StateType
-    addPost: () =>void,
-    changeText: (t:string) =>void,
+    state: StateType,
+    dispatch:(action:ActionType)=>void,
 }
 
 const App: React.FC<AppType> = (props) => {
@@ -27,7 +26,7 @@ const App: React.FC<AppType> = (props) => {
 
                         <Route path={"/dialogs"}
                                render={() => <Dialogs  messages={props.state.messagePage.messages} dialogs={props.state.messagePage.dialogs}/>}/>
-                        <Route path={"/profile"} render={() => <Profile posts={props.state.profilePage.posts} addPost={props.addPost} text={props.state.profilePage.text} changeText = {props.changeText}/>}/>
+                        <Route path={"/profile"} render={() => <Profile posts={props.state.profilePage.posts} dispatch = {props.dispatch} text = {props.state.profilePage.text}/>}/>
                     </div>
                 </div>
             </div>

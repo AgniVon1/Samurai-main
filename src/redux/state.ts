@@ -1,7 +1,8 @@
 import {v1} from "uuid";
+import {ActionTypes} from "redux-form";
 
 
-export let store = {
+export let store : StoreType= {
     _state: {
         profilePage: {
             text: "",
@@ -36,31 +37,65 @@ export let store = {
 
         return this._state
     },
-    addPost: function () {
+    _addPost: function () {
         // @ts-ignore
         const newPost = {id: v1(), message: this._state.profilePage.text, likeCounts: 0}
         // @ts-ignore
         this._state.profilePage.posts.push(newPost)
         // @ts-ignore
-        this.rerenderTree(this._state)
+        this._onChange(this._state)
     },
-    rerenderTree: function () {
+    _onChange: function (state:StateType) {
         alert("State was changes")
     },
 
-    subscribe: function (observer: (any: any) => void) {
-        // @ts-ignore
-        this.rerenderTree = observer
+    subscribe: function (callback: (state:StateType) => void) {
+        this._onChange = callback
     },
-    changeText: function (text: string) {
+    _changeText: function (text: string) {
         // @ts-ignore
         this._state.profilePage.text = text
         // @ts-ignore
-        this.rerenderTree(this._state)
+        this._onChange(this._state)
     },
-
+    dispatch: function(action:ActionType){
+        switch (action.type) {
+            case "ADD-POST":
+                this._addPost()
+                break;
+            case "CHANGE-TEXTAREA":
+                console.log(this)
+                this._changeText(action.text)
+                break;
+        }
+    }
 }
 
+
+export type StoreType = {
+    _state: StateType,
+    _addPost: () => void,
+    _onChange: (state:StateType) => void,
+    _changeText: (text: string) => void
+    subscribe: (callback: (state:StateType) => void) => void,
+    getState: () => StateType,
+    dispatch: (action: ActionType) => void,
+}
+
+export type ActionType = addPostActionType | changeTextActionType
+export type addPostActionType = ReturnType<typeof addPostAC>
+export type changeTextActionType = ReturnType<typeof changeTextAC>
+
+export const addPostAC = () => {
+    return { type:"ADD-POST",
+    }as const
+}
+
+export const changeTextAC = (text: string) => {
+    return { type:"CHANGE-TEXTAREA",
+        text: text
+    } as const
+}
 
 export type messagePageType = {
     dialogs: Array<{ id: string, name: string }>,
