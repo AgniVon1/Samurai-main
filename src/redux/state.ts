@@ -1,5 +1,6 @@
 import {v1} from "uuid";
-import {rerenderTree} from "../render";
+
+let rerenderTree = (state:StateType) => {}
 export const addPost = () => {
     const  newPost = {id: v1(), message:state.profilePage.text, likeCounts: 0}
     state.profilePage.posts.push(newPost)
@@ -10,6 +11,9 @@ export const changeText = (text:string) => {
     rerenderTree(state)
 }
 
+export const subscribe = (observer:(any:any) => void ) =>{
+     rerenderTree = observer
+}
 
 export const state = {
     profilePage: {
@@ -54,5 +58,4 @@ type profilePageType = {
 export type StateType = {
     messagePage: messagePageType,
     profilePage: profilePageType,
-    text:string
 }
