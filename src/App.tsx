@@ -1,9 +1,9 @@
 import './App.css';
 import {Header} from "./сompanents/header/Header";
 import {Navbar} from "./сompanents/navbar/Navbar";
-import {Profile, ProfilePropsType} from "./сompanents/profile/Profile";
+import {Profile} from "./сompanents/profile/Profile";
 import {BrowserRouter, Route} from "react-router-dom";
-import {Dialogs, DialogsPropsType} from "./сompanents/dialogs/Dialogs";
+import {Dialogs} from "./сompanents/dialogs/Dialogs";
 import React from "react";
 import {ActionType, StateType} from "./redux/state";
 
@@ -25,7 +25,7 @@ const App: React.FC<AppType> = (props) => {
                         <Route path={"/dialogs"} component={Dialogs}/>*/}
 
                         <Route path={"/dialogs"}
-                               render={() => <Dialogs  messages={props.state.messagePage.messages} dialogs={props.state.messagePage.dialogs}/>}/>
+                               render={() => <Dialogs  messages={props.state.messagePage.messages} dialogs={props.state.messagePage.dialogs} textNewMess={props.state.messagePage.textNewMess} dispatch = {props.dispatch}/>}/>
                         <Route path={"/profile"} render={() => <Profile posts={props.state.profilePage.posts} dispatch = {props.dispatch} text = {props.state.profilePage.text}/>}/>
                     </div>
                 </div>

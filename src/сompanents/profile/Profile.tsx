@@ -1,7 +1,7 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 import styles from './profile.module.css'
 import {Post, PostType} from "./post/Post";
-import {ActionType, addPostAC, changeTextAC} from "../../redux/state";
+import {ActionType, addNewPostAC, changeTextNewPostAC} from "../../redux/state";
 
 
 
@@ -17,12 +17,12 @@ export const Profile: React.FC<ProfilePropsType> = (props) => {
 
     const addPostOnClickHandler = () =>{
         alert("addPost was called")
-        props.dispatch( addPostAC())
-        props.dispatch( changeTextAC(""))
+        props.dispatch( addNewPostAC())
+        props.dispatch( changeTextNewPostAC(""))
 
     }
     const onChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) =>{
-        props.dispatch( changeTextAC(e.currentTarget.value))
+        props.dispatch( changeTextNewPostAC(e.currentTarget.value))
     }
 
     return (

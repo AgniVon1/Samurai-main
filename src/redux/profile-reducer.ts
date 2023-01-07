@@ -1,10 +1,10 @@
 import {v1} from "uuid";
-import {profileActionType, profilePageType} from "./state";
+import {ActionType, profilePageType} from "./state";
 
 const CHANGE_TEXTAREA = "CHANGE-TEXTAREA"
 const ADD_POST = "ADD-POST"
 
-const profileReducer = (state: profilePageType, action: profileActionType) => {
+const profileReducer = (state: profilePageType, action: ActionType) => {
     const copyState = JSON.parse(JSON.stringify(state))
     switch (action.type) {
         case ADD_POST:

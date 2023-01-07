@@ -1,8 +1,10 @@
 import {v1} from "uuid";
 import profileReducer from "./profile-reducer";
 
+import messageReducer from "./message-reducer";
 
-export let store : StoreType= {
+
+export let store: StoreType = {
     _state: {
         profilePage: {
             text: "",
@@ -16,6 +18,7 @@ export let store : StoreType= {
             ],
         },
         messagePage: {
+            textNewMess: "",
             dialogs: [
                 {id: v1(), name: "Mark"},
                 {id: v1(), name: "Tom"},
@@ -39,12 +42,13 @@ export let store : StoreType= {
         alert("State was changes")
     },
 
-    subscribe: function (callback: (state:StateType) => void) {
+    subscribe: function (callback: (state: StateType) => void) {
         this._onChange = callback
     },
 
-    dispatch: function(action:ActionType){
-        this._state.profilePage = profileReducer(this._state.profilePage,action)
+    dispatch: function (action: ActionType) {
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.messagePage = messageReducer(this._state.messagePage, action)
         this._onChange(this._state)
     }
 }
@@ -52,31 +56,54 @@ export let store : StoreType= {
 
 export type StoreType = {
     _state: StateType,
-    _onChange: (state:StateType) => void,
-    subscribe: (callback: (state:StateType) => void) => void,
+    _onChange: (state: StateType) => void,
+    subscribe: (callback: (state: StateType) => void) => void,
     getState: () => StateType,
     dispatch: (action: ActionType) => void,
 }
 
-export type ActionType = profileActionType
+export type ActionType = profileActionType | messageActionType
 
 
-export type profileActionType = addPostActionType | changeTextActionType
- type addPostActionType = ReturnType<typeof addPostAC>
- type changeTextActionType = ReturnType<typeof changeTextAC>
+export type profileActionType = addNewPostActionType | changeTextNewPostActionType
+type addNewPostActionType = ReturnType<typeof addNewPostAC>
+type changeTextNewPostActionType = ReturnType<typeof changeTextNewPostAC>
 
-export const addPostAC = () => {
-    return { type:"ADD-POST",
-    }as const
+
+
+export type messageActionType = sendNewMessActionType | changeTextNewMessActionType
+type sendNewMessActionType = ReturnType<typeof sendNewMessAC>
+type changeTextNewMessActionType = ReturnType<typeof changeTextNewMessAC>
+
+export const sendNewMessAC = () => {
+    return {
+        type: "SEND-MESSAGE",
+    } as const
 }
 
-export const changeTextAC = (text: string) => {
-    return { type:"CHANGE-TEXTAREA",
+export const changeTextNewMessAC = (text: string) => {
+    return {
+        type: "CHANGE-NEW-MESS",
+        textNewMess: text
+    } as const
+}
+
+
+export const addNewPostAC = () => {
+    return {
+        type: "ADD-POST",
+    } as const
+}
+
+export const changeTextNewPostAC = (text: string) => {
+    return {
+        type: "CHANGE-TEXTAREA",
         text: text
     } as const
 }
 
 export type messagePageType = {
+    textNewMess: string,
     dialogs: Array<{ id: string, name: string }>,
     messages: Array<{ message: { id: string, text: string } }>,
 }
