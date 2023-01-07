@@ -18,4 +18,19 @@ const profileReducer = (state: profilePageType, action: ActionType) => {
             return state
     }
 }
+
+export type addNewPostActionType = ReturnType<typeof addNewPostAC>
+export type changeTextNewPostActionType = ReturnType<typeof changeTextNewPostAC>
+export const addNewPostAC = () => {
+    return {
+        type: ADD_POST,
+    } as const
+}
+
+export const changeTextNewPostAC = (text: string) => {
+    return {
+        type: CHANGE_TEXTAREA,
+        text: text
+    } as const
+}
 export default profileReducer

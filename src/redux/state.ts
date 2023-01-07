@@ -1,7 +1,7 @@
 import {v1} from "uuid";
-import profileReducer from "./profile-reducer";
+import profileReducer, { addNewPostActionType, changeTextNewPostActionType} from "./profile-reducer";
 
-import messageReducer from "./message-reducer";
+import messageReducer, {changeTextNewMessActionType, sendNewMessActionType} from "./message-reducer";
 
 
 export let store: StoreType = {
@@ -62,45 +62,10 @@ export type StoreType = {
     dispatch: (action: ActionType) => void,
 }
 
-export type ActionType = profileActionType | messageActionType
-
-
-export type profileActionType = addNewPostActionType | changeTextNewPostActionType
-type addNewPostActionType = ReturnType<typeof addNewPostAC>
-type changeTextNewPostActionType = ReturnType<typeof changeTextNewPostAC>
+export type ActionType = sendNewMessActionType | changeTextNewMessActionType | addNewPostActionType | changeTextNewPostActionType
 
 
 
-export type messageActionType = sendNewMessActionType | changeTextNewMessActionType
-type sendNewMessActionType = ReturnType<typeof sendNewMessAC>
-type changeTextNewMessActionType = ReturnType<typeof changeTextNewMessAC>
-
-export const sendNewMessAC = () => {
-    return {
-        type: "SEND-MESSAGE",
-    } as const
-}
-
-export const changeTextNewMessAC = (text: string) => {
-    return {
-        type: "CHANGE-NEW-MESS",
-        textNewMess: text
-    } as const
-}
-
-
-export const addNewPostAC = () => {
-    return {
-        type: "ADD-POST",
-    } as const
-}
-
-export const changeTextNewPostAC = (text: string) => {
-    return {
-        type: "CHANGE-TEXTAREA",
-        text: text
-    } as const
-}
 
 export type messagePageType = {
     textNewMess: string,

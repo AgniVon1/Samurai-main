@@ -19,4 +19,21 @@ const messageReducer = (state: messagePageType, action: ActionType) => {
             return state
     }
 }
+
+export type sendNewMessActionType = ReturnType<typeof sendNewMessAC>
+export type changeTextNewMessActionType = ReturnType<typeof changeTextNewMessAC>
+
+export const sendNewMessAC = () => {
+    return {
+        type: SEND_NEW_MESS,
+    } as const
+}
+
+export const changeTextNewMessAC = (text: string) => {
+    return {
+        type: CHANGE_TEXT_NEW_MESS,
+        textNewMess: text
+    } as const
+}
+
 export default messageReducer
