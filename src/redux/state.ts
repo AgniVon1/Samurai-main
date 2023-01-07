@@ -1,5 +1,5 @@
 import {v1} from "uuid";
-import {ActionTypes} from "redux-form";
+import profileReducer from "./profile-reducer";
 
 
 export let store : StoreType= {
@@ -32,59 +32,38 @@ export let store : StoreType= {
         },
     },
     getState: function () {
-
-        // @ts-ignore
-
         return this._state
     },
-    _addPost: function () {
-        // @ts-ignore
-        const newPost = {id: v1(), message: this._state.profilePage.text, likeCounts: 0}
-        // @ts-ignore
-        this._state.profilePage.posts.push(newPost)
-        // @ts-ignore
-        this._onChange(this._state)
-    },
-    _onChange: function (state:StateType) {
+
+    _onChange: function () {
         alert("State was changes")
     },
 
     subscribe: function (callback: (state:StateType) => void) {
         this._onChange = callback
     },
-    _changeText: function (text: string) {
-        // @ts-ignore
-        this._state.profilePage.text = text
-        // @ts-ignore
-        this._onChange(this._state)
-    },
+
     dispatch: function(action:ActionType){
-        switch (action.type) {
-            case "ADD-POST":
-                this._addPost()
-                break;
-            case "CHANGE-TEXTAREA":
-                console.log(this)
-                this._changeText(action.text)
-                break;
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage,action)
+        this._onChange(this._state)
     }
 }
 
 
 export type StoreType = {
     _state: StateType,
-    _addPost: () => void,
     _onChange: (state:StateType) => void,
-    _changeText: (text: string) => void
     subscribe: (callback: (state:StateType) => void) => void,
     getState: () => StateType,
     dispatch: (action: ActionType) => void,
 }
 
-export type ActionType = addPostActionType | changeTextActionType
-export type addPostActionType = ReturnType<typeof addPostAC>
-export type changeTextActionType = ReturnType<typeof changeTextAC>
+export type ActionType = profileActionType
+
+
+export type profileActionType = addPostActionType | changeTextActionType
+ type addPostActionType = ReturnType<typeof addPostAC>
+ type changeTextActionType = ReturnType<typeof changeTextAC>
 
 export const addPostAC = () => {
     return { type:"ADD-POST",
