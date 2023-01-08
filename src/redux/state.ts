@@ -65,8 +65,6 @@ export type StoreType = {
 export type ActionType = sendNewMessActionType | changeTextNewMessActionType | addNewPostActionType | changeTextNewPostActionType
 
 
-
-
 export type messagePageType = {
     textNewMess: string,
     dialogs: Array<{ id: string, name: string }>,

@@ -16,13 +16,11 @@ export const Dialogs: React.FC<DialogsPropsType> = ({
                                                         dispatch,
                                                     }) => {
     const mappedMessages = messages.map((m) => <Message message={m.message}/>)
-    const mappedDiologs = dialogs.map((d) => <Dialog id={d.id} name={d.name}/>)
+    const mappedDialogs = dialogs.map((d) => <Dialog id={d.id} name={d.name}/>)
 
     const sendMessOnClickHandler = () => {
         alert("addMess was called")
         dispatch(sendNewMessAC())
-        dispatch(changeTextNewMessAC(""))
-
     }
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         dispatch(changeTextNewMessAC(e.currentTarget.value))
@@ -30,7 +28,7 @@ export const Dialogs: React.FC<DialogsPropsType> = ({
     return (
         <div className={styles.dialogs}>
             <div className={styles.dialogs_items}>
-                {mappedDiologs}
+                {mappedDialogs}
             </div>
             <div className={styles.messages}>
                 {mappedMessages}

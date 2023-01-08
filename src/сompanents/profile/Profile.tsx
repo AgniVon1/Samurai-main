@@ -19,8 +19,6 @@ export const Profile: React.FC<ProfilePropsType> = (props) => {
     const addPostOnClickHandler = () =>{
         alert("addPost was called")
         props.dispatch( addNewPostAC())
-        props.dispatch( changeTextNewPostAC(""))
-
     }
     const onChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) =>{
         props.dispatch( changeTextNewPostAC(e.currentTarget.value))

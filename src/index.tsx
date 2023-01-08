@@ -1,18 +1,20 @@
 
-import {StateType, store} from "./redux/state";
+import {messagePageType, StateType} from "./redux/state";
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import storeRedux from "./redux/redux-store";
+import {Provider} from "react-redux";
 
-
-
-export const rerenderTree = (state:StateType) => {
-    ReactDOM.render(
-        <App state={state} dispatch = {store.dispatch.bind(store)}></App>,
-        document.getElementById('root')
-    );
-
+const rerenderTree = (state:StateType) => {
+     ReactDOM.render(
+         <App state={state} dispatch={storeRedux.dispatch}></App>,
+         document.getElementById('root')
+     );
 }
-rerenderTree(store.getState())
-store.subscribe(rerenderTree)
+rerenderTree(storeRedux.getState())
+
+storeRedux.subscribe(() =>  {rerenderTree(storeRedux.getState())})
+

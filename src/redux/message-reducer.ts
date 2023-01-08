@@ -1,20 +1,48 @@
-import {ActionType, messagePageType} from "./state";
+import {ActionType, messagePageType, profilePageType} from "./state";
 import {v1} from "uuid";
+import {message} from "antd";
 
 
 const SEND_NEW_MESS = "SEND-MESSAGE"
 const CHANGE_TEXT_NEW_MESS = "CHANGE-NEW-MESS"
 
-const messageReducer = (state: messagePageType, action: ActionType) => {
-    const copyState = JSON.parse(JSON.stringify(state))
+const initialMessagesPageState: messagePageType =
+    {
+        textNewMess: "",
+        dialogs: [
+            {id: v1(), name: "Mark"},
+            {id: v1(), name: "Tom"},
+            {id: v1(), name: "Mercava"},
+        ],
+        messages: [
+            {message: {id: v1(), text: "cooбщение0"}},
+            {message: {id: v1(), text: "cooбщение1"}},
+            {message: {id: v1(), text: "cooбщение2"}},
+            {message: {id: v1(), text: "cooбщение3"}},
+            {message: {id: v1(), text: "cooбщение4"}},
+            {message: {id: v1(), text: "cooбщение5"}},
+        ],
+    }
+
+
+const messageReducer = (state: messagePageType = initialMessagesPageState, action: ActionType): messagePageType => {
     switch (action.type) {
         case SEND_NEW_MESS:
-            const newMess =  {message: {id: v1(), text: state.textNewMess}}
-            copyState.messages.push(newMess)
-            return copyState
+            return {
+                ...state,
+                textNewMess: "",
+                dialogs: [...state.dialogs],
+                messages:
+                    [...state.messages.map(m => ({...m})),
+                        {message: {id: v1(), text: state.textNewMess}}],
+            }
         case CHANGE_TEXT_NEW_MESS:
-            copyState.textNewMess = action.textNewMess
-            return copyState
+            return {
+                ...state,
+                textNewMess: action.textNewMess,
+                dialogs: [...state.dialogs],
+                messages: state.messages.map(m => ({...m})),
+            }
         default:
             return state
     }
