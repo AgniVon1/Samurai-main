@@ -5,8 +5,8 @@ import {Profile} from "./сompanents/profile/Profile";
 import {BrowserRouter, Route} from "react-router-dom";
 import {Dialogs} from "./сompanents/dialogs/Dialogs";
 import React from "react";
-import {ActionType, messagePageType, profilePageType, StateType, store} from "./redux/state";
-import storeRedux from "./redux/redux-store";
+import {ActionType,StateType} from "./redux/state";
+
 
 type AppType = {
     state:StateType
@@ -34,8 +34,7 @@ const App: React.FC<AppType> = ({
                                                       textNewMess={state.messagePage.textNewMess}
                                                       dispatch={dispatch}/>}/>
                         <Route path={"/profile"}
-                               render={() => <Profile posts={state.profilePage.posts} dispatch={dispatch}
-                                                      text={state.profilePage.text}/>}/>
+                               render={() => <Profile state={state.profilePage} dispatch={dispatch}/>}/>
                     </div>
                 </div>
             </div>
