@@ -3,20 +3,13 @@ import {Header} from "./сompanents/header/Header";
 import {Navbar} from "./сompanents/navbar/Navbar";
 import {Profile} from "./сompanents/profile/Profile";
 import {BrowserRouter, Route} from "react-router-dom";
-import {Dialogs} from "./сompanents/dialogs/Dialogs";
 import React from "react";
-import {ActionType,StateType} from "./redux/state";
 
 
-type AppType = {
-    state:StateType
-    dispatch: (action: ActionType) => void
-}
 
-const App: React.FC<AppType> = ({
-                                    state,
-                                    dispatch
-                                }) => {
+type AppType = {}
+
+const App: React.FC<AppType> = () => {
 
     return (
         <BrowserRouter>
@@ -27,14 +20,10 @@ const App: React.FC<AppType> = ({
                     <div className="App_content">
                         {/* <Route path={"/profile"} component={Profile}/>
                         <Route path={"/dialogs"} component={Dialogs}/>*/}
-
                         <Route path={"/dialogs"}
-                               render={() => <Dialogs messages={state.messagePage.messages}
-                                                      dialogs={state.messagePage.dialogs}
-                                                      textNewMess={state.messagePage.textNewMess}
-                                                      dispatch={dispatch}/>}/>
+                               render={() => <Profile/>}/>
                         <Route path={"/profile"}
-                               render={() => <Profile state={state.profilePage} dispatch={dispatch}/>}/>
+                               render={() => <Profile/>}/>
                     </div>
                 </div>
             </div>

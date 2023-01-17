@@ -4,7 +4,7 @@ import profileReducer, { addNewPostActionType, changeTextNewPostActionType} from
 import messageReducer, {changeTextNewMessActionType, sendNewMessActionType} from "./message-reducer";
 
 
-export let store: StoreType = {
+export let store1: StoreType = {
     _state: {
         profilePage: {
             text: "",

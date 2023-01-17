@@ -1,37 +1,40 @@
 import React, {ChangeEvent} from 'react';
-import {Post, PostPropsType} from "./Posts/Post";
+import {Post} from "./Posts/Post";
+import {profilePageType} from "../../../redux/state";
 
 export type MyPostsPropsType = {
-    posts: Array<PostPropsType>,
-    textNewPost: string,
+    profilePage: profilePageType,
     addPost: () => void,
     onNewPost: (text: string) => void,
 }
 
 export const MyPosts: React.FC<MyPostsPropsType> = ({
-                                                        posts,
-                                                        textNewPost,
+                                                        profilePage:
+                                                            {
+                                                                posts: posts,
+                                                                text: textNewPost
+                                                            },
                                                         addPost,
                                                         onNewPost,
                                                     }) => {
     const mappedPosts = posts.map((p) => <Post id={p.id} likeCounts={p.likeCounts} message={p.message}/>)
-    const onChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>)=>{
+    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         onNewPost(e.currentTarget.value)
     }
-    const addPostOnClickHandler =()=>{
+    const addPostOnClickHandler = () => {
         addPost()
     }
     return (
 
+        <div>
             <div>
-                <div>
-                    <textarea onChange={onChangeHandler} value={textNewPost}></textarea>
-                </div>
-                <div>
-                    <button onClick={addPostOnClickHandler}>Add post</button>
-                </div>
-                {mappedPosts}
+                <textarea onChange={onChangeHandler} value={textNewPost}></textarea>
             </div>
+            <div>
+                <button onClick={addPostOnClickHandler}>Add post</button>
+            </div>
+            {mappedPosts}
+        </div>
 
 
     );
