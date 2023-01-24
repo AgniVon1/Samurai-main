@@ -1,12 +1,12 @@
-import {ActionType, messagePageType, profilePageType} from "./state";
+import {ActionType, DialogPageType} from "./state";
 import {v1} from "uuid";
-import {message} from "antd";
+
 
 
 const SEND_NEW_MESS = "SEND-MESSAGE"
 const CHANGE_TEXT_NEW_MESS = "CHANGE-NEW-MESS"
 
-const initialMessagesPageState: messagePageType =
+const initialMessagesPageState: DialogPageType =
     {
         textNewMess: "",
         dialogs: [
@@ -25,7 +25,7 @@ const initialMessagesPageState: messagePageType =
     }
 
 
-const messageReducer = (state: messagePageType = initialMessagesPageState, action: ActionType): messagePageType => {
+const dialogReducer = (state: DialogPageType = initialMessagesPageState, action: ActionType): DialogPageType => {
     switch (action.type) {
         case SEND_NEW_MESS:
             return {
@@ -64,4 +64,4 @@ export const changeTextNewMessAC = (text: string) => {
     } as const
 }
 
-export default messageReducer
+export default dialogReducer

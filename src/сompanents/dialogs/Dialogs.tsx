@@ -2,28 +2,32 @@ import React, {ChangeEvent} from 'react';
 import styles from './dialogs.module.css'
 import {Dialog} from "./Dialog/Dialog";
 import {Message} from "./Dialog/Message";
-import {ActionType, messagePageType} from "../../redux/state";
-import {changeTextNewMessAC, sendNewMessAC} from "../../redux/message-reducer";
+import {DialogPageType} from "../../redux/state";
 
-export type DialogsPropsType = messagePageType & {
-    dispatch: (action: ActionType) => void,
+
+export type DialogsPropsType = {
+    dialogPage:DialogPageType
+    sendNewMess: () => void,
+    changeTextNewMess: (value: string) => void,
 }
 
 export const Dialogs: React.FC<DialogsPropsType> = ({
-                                                        textNewMess,
-                                                        dialogs,
-                                                        messages,
-                                                        dispatch,
+                                                        dialogPage: {
+                                                            textNewMess: textNewMess,
+                                                            dialogs: dialogs,
+                                                            messages: messages,
+                                                        },
+                                                        sendNewMess,
+                                                        changeTextNewMess,
                                                     }) => {
     const mappedMessages = messages.map((m) => <Message message={m.message}/>)
     const mappedDialogs = dialogs.map((d) => <Dialog id={d.id} name={d.name}/>)
 
     const sendMessOnClickHandler = () => {
-        alert("addMess was called")
-        dispatch(sendNewMessAC())
+        sendNewMess()
     }
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        dispatch(changeTextNewMessAC(e.currentTarget.value))
+        changeTextNewMess(e.currentTarget.value)
     }
     return (
         <div className={styles.dialogs}>

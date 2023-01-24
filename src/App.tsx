@@ -4,13 +4,12 @@ import {Navbar} from "./сompanents/navbar/Navbar";
 import {Profile} from "./сompanents/profile/Profile";
 import {BrowserRouter, Route} from "react-router-dom";
 import React from "react";
-
+import DialogsContainer from "./сompanents/dialogs/Dialog/DialogsContainer";
 
 
 type AppType = {}
 
 const App: React.FC<AppType> = () => {
-
     return (
         <BrowserRouter>
             <div className="App">
@@ -21,7 +20,7 @@ const App: React.FC<AppType> = () => {
                         {/* <Route path={"/profile"} component={Profile}/>
                         <Route path={"/dialogs"} component={Dialogs}/>*/}
                         <Route path={"/dialogs"}
-                               render={() => <Profile/>}/>
+                               render={() => <DialogsContainer/>}/>
                         <Route path={"/profile"}
                                render={() => <Profile/>}/>
                     </div>

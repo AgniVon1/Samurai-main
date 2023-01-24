@@ -10,12 +10,12 @@ const mapStateToProps = (state:StateType) =>{
         profilePage:state.profilePage
     }
 };
-const mapDispathToProps = (dispatch:(action:ActionType)=> void) =>{
+const mapDispatchToProps = (dispatch:(action:ActionType)=> void) =>{
     return {
         addPost:() => { dispatch(addNewPostAC())},
         onNewPost:(text:string) =>{dispatch(changeTextNewPostAC(text))}
     }
 };
-export const MyPostsContainer = connect(mapStateToProps,mapDispathToProps)(MyPosts)
+export const MyPostsContainer = connect(mapStateToProps,mapDispatchToProps)(MyPosts)
 
 

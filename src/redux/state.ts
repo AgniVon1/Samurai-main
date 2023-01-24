@@ -1,7 +1,7 @@
 import {v1} from "uuid";
 import profileReducer, { addNewPostActionType, changeTextNewPostActionType} from "./profile-reducer";
 
-import messageReducer, {changeTextNewMessActionType, sendNewMessActionType} from "./message-reducer";
+import dialogReducer, {changeTextNewMessActionType, sendNewMessActionType} from "./dialog-reducer";
 
 
 export let store1: StoreType = {
@@ -17,7 +17,7 @@ export let store1: StoreType = {
                 {id: v1(), message: "mes5", likeCounts: 0},
             ],
         },
-        messagePage: {
+        dialogPage: {
             textNewMess: "",
             dialogs: [
                 {id: v1(), name: "Mark"},
@@ -48,7 +48,7 @@ export let store1: StoreType = {
 
     dispatch: function (action: ActionType) {
         this._state.profilePage = profileReducer(this._state.profilePage, action)
-        this._state.messagePage = messageReducer(this._state.messagePage, action)
+        this._state.dialogPage = dialogReducer(this._state.dialogPage, action)
         this._onChange(this._state)
     }
 }
@@ -65,7 +65,7 @@ export type StoreType = {
 export type ActionType = sendNewMessActionType | changeTextNewMessActionType | addNewPostActionType | changeTextNewPostActionType
 
 
-export type messagePageType = {
+export type DialogPageType = {
     textNewMess: string,
     dialogs: Array<{ id: string, name: string }>,
     messages: Array<{ message: { id: string, text: string } }>,
@@ -77,6 +77,6 @@ export type profilePageType = {
 }
 
 export type StateType = {
-    messagePage: messagePageType,
+    dialogPage: DialogPageType,
     profilePage: profilePageType,
 }

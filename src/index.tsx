@@ -7,7 +7,7 @@ import store from "./redux/redux-store";
 import {Provider} from "react-redux";
 
 
-const rerenderTree = () => {
+
     ReactDOM.render(
         <Provider store={store}>
             <App/>
@@ -15,10 +15,8 @@ const rerenderTree = () => {
         ,
         document.getElementById('root')
     );
-}
-rerenderTree()
 
-store.subscribe(() => {
-    rerenderTree()
-})
+
+
+
 
