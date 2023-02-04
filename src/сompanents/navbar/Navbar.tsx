@@ -12,6 +12,9 @@ export const Navbar = () => {
             <div className={styles.item}>
                 <NavLink to="/dialogs">Diologs</NavLink>
             </div>
+            <div className={styles.item}>
+                <NavLink to="/users">Users</NavLink>
+            </div>
         </nav>
     );
 };

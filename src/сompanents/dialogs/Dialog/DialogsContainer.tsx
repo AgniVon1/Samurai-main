@@ -2,7 +2,8 @@ import React from 'react';
 import {connect} from "react-redux";
 import {Dialogs} from "../Dialogs";
 import {changeTextNewMessAC, sendNewMessAC} from "../../../redux/dialog-reducer";
-import {ActionType, StateType} from "../../../redux/state";
+import {ActionType} from "../../../redux/state";
+import {rootStateType} from "../../../redux/redux-store";
 
 
 const mapDispatchToProps = (dispatch: (a: ActionType) => void) => ({
@@ -14,7 +15,7 @@ const mapDispatchToProps = (dispatch: (a: ActionType) => void) => ({
     }
 });
 
-const mapStateToProps = (state: StateType) => ({
+const mapStateToProps = (state: rootStateType) => ({
     dialogPage: state.dialogPage,
 });
 

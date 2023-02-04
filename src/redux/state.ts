@@ -2,6 +2,7 @@ import {v1} from "uuid";
 import profileReducer, { addNewPostActionType, changeTextNewPostActionType} from "./profile-reducer";
 
 import dialogReducer, {changeTextNewMessActionType, sendNewMessActionType} from "./dialog-reducer";
+import {UsersType} from "./users-reducer";
 
 
 export let store1: StoreType = {
@@ -75,8 +76,9 @@ export type profilePageType = {
     text: string,
     posts: Array<{ id: string, message: string, likeCounts: number }>,
 }
-
-export type StateType = {
+ type StateType = {
     dialogPage: DialogPageType,
     profilePage: profilePageType,
 }
+
+
