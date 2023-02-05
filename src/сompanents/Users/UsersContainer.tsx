@@ -6,12 +6,50 @@ import {
     setCurrentPageAC, setTotalUsersCountAC,
     setUsersAC,
     unFollowUserAC,
-    UsersActionType,
+    UsersActionType, UsersType,
     UserType
 } from "../../redux/users-reducer";
-import {UsersClassComponent} from "./UsersClassComponent";
+
+import axios from "axios";
+import {UsersComponent} from "./UsersComponent";
 
 
+type UsersPropsType =  UsersType & {
+    followUser: (id: string) => void,
+    unFollowUser: (id: string) => void,
+    setUsers: (users: Array<UserType>) => void,
+    setCurrentPage: (page:number) => void,
+    setTotalUsersCount: (count:number) => void,
+}
+
+class UsersContainer extends React.Component<UsersPropsType>{
+    componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setUsers(response.data.items)
+                this.props.setTotalUsersCount(response.data.totalCount)
+            })
+    }
+    onPageChanged = (p:number) =>{
+        this.props.setCurrentPage(p)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setUsers(response.data.items)
+            })
+    }
+
+    render() {
+        return <UsersComponent users={this.props.users}
+                               pageSize={this.props.pageSize}
+                               totalUserCount={this.props.totalUserCount}
+                               currentPage={this.props.currentPage}
+                               followUser={this.props.followUser}
+                               unFollowUser={this.props.unFollowUser}
+                               setUsers={this.props.setUsers}
+                               setCurrentPage={this.onPageChanged}
+                               setTotalUsersCount={this.props.setTotalUsersCount}/>
+    }
+}
 
 const mapStateToProps = (state:rootStateType) => {
     return {
@@ -39,4 +77,5 @@ const mapDispatchToProps = (dispatch: (a: UsersActionType) => void) => ({
         dispatch(setTotalUsersCountAC(usersCount))}
 });
 
-export default connect(mapStateToProps,mapDispatchToProps)(UsersClassComponent);
+export default connect(mapStateToProps,mapDispatchToProps)(UsersContainer);
+

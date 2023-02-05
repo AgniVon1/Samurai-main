@@ -1,5 +1,3 @@
-
-
 export type UsersType = {
     users: Array<UserType>,
     pageSize:number,
