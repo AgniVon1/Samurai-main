@@ -1,7 +1,10 @@
-import {v1} from "uuid";
+
 
 export type UsersType = {
-    users: Array<UserType>
+    users: Array<UserType>,
+    pageSize:number,
+    totalUserCount:number,
+    currentPage:number,
 }
 
 export type UserType = {
@@ -12,24 +15,30 @@ export type UserType = {
         large: string
 },
     status: string,
-    followed: boolean
+    followed: boolean,
 }
 
 const initialUsersState: UsersType =
     {
         users: [
 
-        ]
-
+        ],
+        pageSize:5,
+        totalUserCount:40,
+        currentPage:1,
     }
 
 const FOLLOW = "USERS/FOLLOW"
 const UNFOLLOW = "USERS/UNFOLLOW"
 const SET_USERS = "USERS/SET_USER"
+const SET_CURRENT_PAGE = "USERS/SET_CURRENT_PAGE"
+const SET_TOTAL_USERS_COUNT = "USERS/SET_TOTAL_USERS_COUNT"
 
  export type UsersActionType = ReturnType<typeof unFollowUserAC>
     | ReturnType<typeof followUserAC>
     | ReturnType<typeof setUsersAC>
+    | ReturnType<typeof setCurrentPageAC>
+    | ReturnType<typeof setTotalUsersCountAC>
 
 
 export const unFollowUserAC = (userID: string) => {
@@ -40,6 +49,13 @@ export const followUserAC = (userID: string) => {
 }
 export const setUsersAC = (users:Array<UserType>) => {
     return {type: SET_USERS, users} as const
+}
+
+export const setCurrentPageAC = (page:number) => {
+    return {type: SET_CURRENT_PAGE, page} as const
+}
+export const setTotalUsersCountAC = (usersCount:number) => {
+    return {type: SET_TOTAL_USERS_COUNT, usersCount} as const
 }
 
 const usersReducer = (state: UsersType = initialUsersState, action: UsersActionType): UsersType => {
@@ -63,7 +79,17 @@ const usersReducer = (state: UsersType = initialUsersState, action: UsersActionT
         case SET_USERS:
             return {
                 ...state,
-                users: [...state.users,...action.users]
+                users: [...action.users]
+            }
+        case SET_CURRENT_PAGE:
+            return {
+                ...state,
+                currentPage: action.page
+            }
+        case SET_TOTAL_USERS_COUNT:
+            return {
+                ...state,
+                totalUserCount: action.usersCount
             }
         default:
             return state
