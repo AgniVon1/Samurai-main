@@ -5,7 +5,14 @@ export type UsersType = {
 }
 
 export type UserType = {
-    id: string, avatarURL:string,followed: boolean, fullname: string, status: string, location: { city: string, country: string }
+    name: string,
+    id: string,
+    photos: {
+    small: string,
+        large: string
+},
+    status: string,
+    followed: boolean
 }
 
 const initialUsersState: UsersType =
