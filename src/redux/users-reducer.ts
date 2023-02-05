@@ -3,6 +3,7 @@ export type UsersType = {
     pageSize:number,
     totalUserCount:number,
     currentPage:number,
+    isFetching:boolean
 }
 
 export type UserType = {
@@ -14,6 +15,7 @@ export type UserType = {
 },
     status: string,
     followed: boolean,
+
 }
 
 const initialUsersState: UsersType =
@@ -24,6 +26,7 @@ const initialUsersState: UsersType =
         pageSize:5,
         totalUserCount:40,
         currentPage:1,
+        isFetching : false,
     }
 
 const FOLLOW = "USERS/FOLLOW"
@@ -31,29 +34,34 @@ const UNFOLLOW = "USERS/UNFOLLOW"
 const SET_USERS = "USERS/SET_USER"
 const SET_CURRENT_PAGE = "USERS/SET_CURRENT_PAGE"
 const SET_TOTAL_USERS_COUNT = "USERS/SET_TOTAL_USERS_COUNT"
+const TOGGLE_IS_FETCHING = "USERS/TOGGLE_IS_FETCHING"
 
- export type UsersActionType = ReturnType<typeof unFollowUserAC>
-    | ReturnType<typeof followUserAC>
-    | ReturnType<typeof setUsersAC>
-    | ReturnType<typeof setCurrentPageAC>
-    | ReturnType<typeof setTotalUsersCountAC>
+ export type UsersActionType = ReturnType<typeof unFollowUser>
+    | ReturnType<typeof followUser>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setTotalUsersCount>
+     | ReturnType<typeof togglelIsFetching>
 
 
-export const unFollowUserAC = (userID: string) => {
+
+export const unFollowUser = (userID: string) => {
     return {type: UNFOLLOW, userID} as const
 }
-export const followUserAC = (userID: string) => {
+export const followUser = (userID: string) => {
     return {type: FOLLOW, userID} as const
 }
-export const setUsersAC = (users:Array<UserType>) => {
+export const setUsers = (users:Array<UserType>) => {
     return {type: SET_USERS, users} as const
 }
-
-export const setCurrentPageAC = (page:number) => {
+export const setCurrentPage = (page:number) => {
     return {type: SET_CURRENT_PAGE, page} as const
 }
-export const setTotalUsersCountAC = (usersCount:number) => {
+export const setTotalUsersCount = (usersCount:number) => {
     return {type: SET_TOTAL_USERS_COUNT, usersCount} as const
+}
+export const togglelIsFetching = (value:boolean) => {
+    return {type: TOGGLE_IS_FETCHING, value} as const
 }
 
 const usersReducer = (state: UsersType = initialUsersState, action: UsersActionType): UsersType => {
@@ -88,6 +96,11 @@ const usersReducer = (state: UsersType = initialUsersState, action: UsersActionT
             return {
                 ...state,
                 totalUserCount: action.usersCount
+            }
+        case TOGGLE_IS_FETCHING:
+            return {
+                ...state,
+                isFetching: action.value
             }
         default:
             return state
