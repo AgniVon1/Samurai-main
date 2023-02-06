@@ -2,6 +2,7 @@ import React from 'react';
 import {UsersType, UserType} from "../../redux/users-reducer";
 import s from "../Users/users.module.css"
 import axios from "axios";
+import {NavLink} from "react-router-dom";
 
 type UsersPropsType =UsersType & {
     followUser: (id: string) => void,
@@ -23,7 +24,9 @@ export const UsersComponent: React.FC<UsersPropsType> = (props) =>{
         <div>
             {props.users.map((u) => <div key={u.id}>
                  <span>
-                      <img src={u.photos.small}/>
+                       <NavLink to = {'/profile/'+ u.id}>
+                           <img src={u.photos.small}/>
+                       </NavLink>
                      {
                          u.followed
                              ? <button onClick={() => props.unFollowUser(u.id)}>Unfollow</button>

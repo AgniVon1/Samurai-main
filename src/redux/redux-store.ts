@@ -1,13 +1,13 @@
 import {combineReducers, createStore} from 'redux'
 
-import profileReducer from "./profile-reducer";
+import profileReducer, {ProfilePageType} from "./profile-reducer";
 import dialogReducer from "./dialog-reducer";
 import usersReducer, {UsersType} from "./users-reducer";
-import {DialogPageType, profilePageType} from "./state";
+import {DialogPageType} from "./state";
 
 export type rootStateType  = {
     dialogPage: DialogPageType,
-    profilePage: profilePageType,
+    profilePage: ProfilePageType,
     usersPage: UsersType
 }
 

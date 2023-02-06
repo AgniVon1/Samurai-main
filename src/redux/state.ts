@@ -48,7 +48,7 @@ export let store1: StoreType = {
     },
 
     dispatch: function (action: ActionType) {
-        this._state.profilePage = profileReducer(this._state.profilePage, action)
+      //  this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogPage = dialogReducer(this._state.dialogPage, action)
         this._onChange(this._state)
     }

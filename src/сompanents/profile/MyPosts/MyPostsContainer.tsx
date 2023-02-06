@@ -1,6 +1,6 @@
 import React from 'react';
 import {ActionType} from "../../../redux/state";
-import {addNewPostAC, changeTextNewPostAC} from "../../../redux/profile-reducer";
+import {addNewPost, changeTextNewPost} from "../../../redux/profile-reducer";
 import {connect} from "react-redux";
 import {MyPosts} from "./MyPosts";
 import {rootStateType} from "../../../redux/redux-store";
@@ -13,8 +13,8 @@ const mapStateToProps = (state:rootStateType) =>{
 };
 const mapDispatchToProps = (dispatch:(action:ActionType)=> void) =>{
     return {
-        addPost:() => { dispatch(addNewPostAC())},
-        onNewPost:(text:string) =>{dispatch(changeTextNewPostAC(text))}
+        addPost:() => { dispatch(addNewPost())},
+        onNewPost:(text:string) =>{dispatch(changeTextNewPost(text))}
     }
 };
 export const MyPostsContainer = connect(mapStateToProps,mapDispatchToProps)(MyPosts)

@@ -6,6 +6,8 @@ import {BrowserRouter, Route} from "react-router-dom";
 import React from "react";
 import DialogsContainer from "./сompanents/dialogs/Dialog/DialogsContainer";
 import UsersContainer from "./сompanents/Users/UsersContainer";
+import ProfileContainer from "./сompanents/profile/ProfileContainer";
+
 
 
 type AppType = {}
@@ -23,7 +25,7 @@ const App: React.FC<AppType> = () => {
                         <Route path={"/dialogs"}
                                render={() => <DialogsContainer/>}/>
                         <Route path={"/profile"}
-                               render={() => <Profile/>}/>
+                               render={() => <ProfileContainer />}/>
 
                             <Route path={"/users"}  render={() => <UsersContainer/>}/>
                     </div>

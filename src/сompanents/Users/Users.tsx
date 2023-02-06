@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {UserType} from "../../redux/users-reducer";
 import axios from "axios";
+import {NavLink} from "react-router-dom";
 
 type UsersPropsType = {
     users: Array<UserType>,
@@ -26,13 +27,17 @@ export const Users: React.FC<UsersPropsType> = ({users,pageSize,totalUserCount, 
         <div>
             {users.map((u) => <div key={u.id}>
                  <span>
-                  <img src={u.photos.small}/>
-                     {
-                         u.followed
-                             ? <button onClick={() => unFollowUser(u.id)}>Unfollow</button>
-                             : <button onClick={() => followUser(u.id)}>Follow</button>
-                     }
-                 </span>
+                     <div>
+                         <NavLink to = {'/profile/'+ u.id}><img src={u.photos.small}/></NavLink>
+
+                     </div>
+
+                       {
+                           u.followed
+                                ? <button onClick={() => unFollowUser(u.id)}>Unfollow</button>
+                                 : <button onClick={() => followUser(u.id)}>Follow</button>
+                       }
+                   </span>
                 <span>
         <span>
             <div>{u.name}</div>
