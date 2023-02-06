@@ -1,8 +1,10 @@
 import React from 'react';
 import styles from './header.module.css'
+import {NavLink} from "react-router-dom";
+import {HeaderPropsType} from "./HeaderContainer";
 
 
-export const Header = () => {
+export const Header:React.FC<HeaderPropsType> = ({login,isAuth}) => {
     return (
         <div className={styles.header}>
             <div className={styles.header__img}>
@@ -12,6 +14,12 @@ export const Header = () => {
                         alt={"Logo"}
                     />
                 </div>
+            </div>
+            <div className={styles.loginBlock}>
+                <NavLink to={'/login'}>
+                    {isAuth!} && Login
+                    {isAuth && login}
+                </NavLink>
             </div>
         </div>
     );

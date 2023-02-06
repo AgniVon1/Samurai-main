@@ -14,6 +14,7 @@ import {
 import axios from "axios";
 import {UsersComponent} from "./UsersComponent";
 import {Preloader} from "../common/preloader/Preloader";
+import {API} from "../../api/api";
 
 
 type UsersPropsType =  UsersType & {
@@ -28,23 +29,18 @@ type UsersPropsType =  UsersType & {
 
 class UsersContainer extends React.Component<UsersPropsType>{
     componentDidMount() {
-
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.togglelIsFetching(false)
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
-
-            })
+        API.getUsers().then(data =>{
+            this.props.togglelIsFetching(false)
+            this.props.setUsers(data.items)
+        } )
     }
     onPageChanged = (p:number) =>{
         this.props.togglelIsFetching(true)
         this.props.setCurrentPage(p)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.togglelIsFetching(false)
-                this.props.setUsers(response.data.items)
-            })
+        API.getUsers().then(data =>{
+            this.props.togglelIsFetching(false)
+            this.props.setUsers(data.items)
+        } )
     }
 
     render() {

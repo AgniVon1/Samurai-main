@@ -20,3 +20,7 @@
     width: 30px;
     border-radius: 50%
 }
+.loginBlock {
+    float: right;
+    color: maroon;
+}

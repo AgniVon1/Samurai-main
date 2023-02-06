@@ -7,6 +7,7 @@ import React from "react";
 import DialogsContainer from "./сompanents/dialogs/Dialog/DialogsContainer";
 import UsersContainer from "./сompanents/Users/UsersContainer";
 import ProfileContainer from "./сompanents/profile/ProfileContainer";
+import HeaderContainer from "./сompanents/header/HeaderContainer";
 
 
 
@@ -17,14 +18,14 @@ const App: React.FC<AppType> = () => {
         <BrowserRouter>
             <div className="App">
                 <div className="App__gird">
-                    <Header/>
+                    <HeaderContainer/>
                     <Navbar/>
                     <div className="App_content">
                         {/* <Route path={"/profile"} component={Profile}/>
                         <Route path={"/dialogs"} component={Dialogs}/>*/}
                         <Route path={"/dialogs"}
                                render={() => <DialogsContainer/>}/>
-                        <Route path={"/profile"}
+                        <Route path={"/profile/:userId?"}
                                render={() => <ProfileContainer />}/>
 
                             <Route path={"/users"}  render={() => <UsersContainer/>}/>
