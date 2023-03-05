@@ -8,7 +8,7 @@ import {Redirect} from "react-router-dom";
 
 export type DialogsPropsType = {
     dialogPage:DialogPageType
-    isAuth:boolean
+
     sendNewMess: () => void,
     changeTextNewMess: (value: string) => void,
 }
@@ -18,12 +18,11 @@ export const Dialogs: React.FC<DialogsPropsType> = ({
                                                             textNewMess: textNewMess,
                                                             dialogs: dialogs,
                                                             messages: messages,
-                                                        },isAuth:isAuth,
+                                                        },
                                                         sendNewMess,
                                                         changeTextNewMess,
                                                     }) => {
 
-  if (!isAuth) return <Redirect to={"/login"}/>
   const mappedMessages = messages.map((m) => <Message message={m.message}/>)
     const mappedDialogs = dialogs.map((d) => <Dialog id={d.id} name={d.name}/>)
 

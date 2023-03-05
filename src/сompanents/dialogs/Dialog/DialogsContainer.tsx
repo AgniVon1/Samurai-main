@@ -21,7 +21,6 @@ const mapDispatchToProps = (dispatch: (a: ActionType) => void) => ({
 
 const mapStateToProps = (state: rootStateType) => ({
     dialogPage: state.dialogPage,
-    isAuth:state.auth.isAuth,
 });
 
 
