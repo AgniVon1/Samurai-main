@@ -47,6 +47,7 @@ type ActionType = ReturnType<typeof unFollowUser>
     | ReturnType<typeof setTotalUsersCount>
    | ReturnType<typeof togglelIsFetching>
 
+export type ActionAssure = ReturnType<typeof togglelIsFetching>
 
 
 export const unFollowUser = (userID: string) => {
@@ -123,7 +124,6 @@ export  const unFollowTC = (userId:string) => {
     return async (dispatch:Dispatch<ActionType>) =>{
         dispatch(togglelIsFetching(true))
         await API.unFollow(userId).then(data => {
-            console.log("unfolow")
             data.resultCode === 0 &&  dispatch(unFollowUser(userId))
             dispatch(togglelIsFetching(false))
         })
@@ -133,8 +133,6 @@ export  const followTC = (userId:string) => {
     return async (dispatch:Dispatch<ActionType>) =>{
         dispatch(togglelIsFetching(true))
         await API.follow(userId).then(data => {
-            console.log("folow")
-            console.log(data.resultCode)
             data.resultCode === 0 &&  dispatch(followUser(userId))
             dispatch(togglelIsFetching(false))
         })

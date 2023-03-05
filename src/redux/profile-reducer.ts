@@ -1,4 +1,7 @@
 import {v1} from "uuid";
+import {Dispatch} from "redux";
+import {API} from "../api/api";
+import {ActionAssure, togglelIsFetching} from "./users-reducer";
 
 const CHANGE_TEXTAREA = "PROFILE/CHANGE-TEXTAREA"
 const ADD_POST = "PROFILE/ADD-POST"
@@ -64,6 +67,7 @@ const initialProfilePageState:ProfilePageType = {
 type  ActionType = addNewPostActionType
  | changeTextNewPostActionType
  | setProfileActionType
+| ActionAssure
 
 const profileReducer = (state: ProfilePageType = initialProfilePageState, action: ActionType): ProfilePageType => {
     switch (action.type) {
@@ -82,10 +86,19 @@ const profileReducer = (state: ProfilePageType = initialProfilePageState, action
         case SET_PROFILE:
             return {
                 ...state,
-               profile: {...action.profile}
+                profile: {...action.profile}
             }
         default:
             return state
+    }
+}
+export const setProfileTC = (userId:number) => {
+    return async (dispatch : Dispatch<ActionType>) => {
+        dispatch(togglelIsFetching(true))
+        API.getProfile(userId).then(data => {
+            dispatch(setProfile(data))
+            dispatch(togglelIsFetching(false))
+        })
     }
 }
 
