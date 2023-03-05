@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {API, authAPI} from "../api/api";
+import {setUsers, togglelIsFetching} from "./users-reducer";
 
 const SET_USER_DATA = "AUTH/SET_USER_DATA"
 
@@ -50,5 +53,16 @@ export const setAuthUserData = (id:number,email:string,login:string) => {
         login,
     } as const
 }
+export const setAuthUserDataTC = () => {
+    return async (dispatch : Dispatch<ActionType>) => {
+        authAPI.me().then(data => {
+            data.resultCode === 0 && dispatch(setAuthUserData(
+              data.data.id,
+              data.data.login,
+              data.data.email))
+        })
+    }
+}
+
 
 export default authReducer
