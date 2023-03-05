@@ -10,6 +10,7 @@ import {
 } from "../../redux/profile-reducer";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 type MapStateToPropsType = ProfilePageType
 type MapDispatchToPropsType = {
@@ -43,9 +44,10 @@ const mapStateToProps = (state:rootStateType):MapStateToPropsType => (
            /* isAuth:state.auth.isAuth*/
         }
     )
-const Companent = withRouter(ProfileContainer)
-export default WithAuthRedirect(connect(mapStateToProps,{
-    addNewPost,
-    changeTextNewPost,
-    setProfile:setProfileTC,
-})(Companent))
+
+export default compose<React.ComponentType>(
+  connect(mapStateToProps,{
+  addNewPost,
+  changeTextNewPost,
+  setProfile:setProfileTC,
+}),WithAuthRedirect,withRouter)(ProfileContainer)
