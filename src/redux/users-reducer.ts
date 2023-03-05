@@ -1,3 +1,7 @@
+import {API} from "../api/api";
+import {Dispatch} from "redux";
+
+
 export type UsersType = {
     users: Array<UserType>,
     pageSize:number,
@@ -36,12 +40,12 @@ const SET_CURRENT_PAGE = "USERS/SET_CURRENT_PAGE"
 const SET_TOTAL_USERS_COUNT = "USERS/SET_TOTAL_USERS_COUNT"
 const TOGGLE_IS_FETCHING = "USERS/TOGGLE_IS_FETCHING"
 
- export type UsersActionType = ReturnType<typeof unFollowUser>
+type ActionType = ReturnType<typeof unFollowUser>
     | ReturnType<typeof followUser>
     | ReturnType<typeof setUsers>
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUsersCount>
-     | ReturnType<typeof togglelIsFetching>
+   | ReturnType<typeof togglelIsFetching>
 
 
 
@@ -64,7 +68,7 @@ export const togglelIsFetching = (value:boolean) => {
     return {type: TOGGLE_IS_FETCHING, value} as const
 }
 
-const usersReducer = (state: UsersType = initialUsersState, action: UsersActionType): UsersType => {
+const usersReducer = (state: UsersType = initialUsersState, action: ActionType): UsersType => {
     switch (action.type) {
         case FOLLOW:
             return {
@@ -106,5 +110,48 @@ const usersReducer = (state: UsersType = initialUsersState, action: UsersActionT
             return state
     }
 }
+export const getUsersTC = (currentPage:number) => {
+  return async (dispatch : Dispatch<ActionType>) => {
+      dispatch(togglelIsFetching(true))
+     await API.getUsers(currentPage).then(data => {
+          dispatch(setUsers(data.items))
+          dispatch(togglelIsFetching(false))
+      })
+  }
+}
+export  const unFollowTC = (userId:string) => {
+    return async (dispatch:Dispatch<ActionType>) =>{
+        dispatch(togglelIsFetching(true))
+        await API.unFollow(userId).then(data => {
+            console.log("unfolow")
+            data.resultCode === 0 &&  dispatch(unFollowUser(userId))
+            dispatch(togglelIsFetching(false))
+        })
+    }
+}
+export  const followTC = (userId:string) => {
+    return async (dispatch:Dispatch<ActionType>) =>{
+        dispatch(togglelIsFetching(true))
+        await API.unFollow(userId).then(data => {
+            console.log("folow")
+            console.log(data.resultCode)
+            data.resultCode === 0 &&  dispatch(followUser(userId))
+            dispatch(togglelIsFetching(false))
+        })
+    }
+}
+
+
+export const setCurrentPageTC = (currentPage:number) => {
+    return async (dispatch : Dispatch<ActionType>,) => {
+        dispatch(togglelIsFetching(true))
+        dispatch(setCurrentPage(currentPage))
+        await API.getUsers(currentPage).then(data => {
+            dispatch(setUsers(data.items))
+            dispatch(togglelIsFetching(false))
+        })
+    }
+}
+
 
 export default usersReducer

@@ -17,8 +17,7 @@ export const Header:React.FC<HeaderPropsType> = ({login,isAuth}) => {
             </div>
             <div className={styles.loginBlock}>
                 <NavLink to={'/login'}>
-                    {isAuth!} && Login
-                    {isAuth && login}
+                  {isAuth!}login
                 </NavLink>
             </div>
         </div>
