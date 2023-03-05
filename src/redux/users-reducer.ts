@@ -132,7 +132,7 @@ export  const unFollowTC = (userId:string) => {
 export  const followTC = (userId:string) => {
     return async (dispatch:Dispatch<ActionType>) =>{
         dispatch(togglelIsFetching(true))
-        await API.unFollow(userId).then(data => {
+        await API.follow(userId).then(data => {
             console.log("folow")
             console.log(data.resultCode)
             data.resultCode === 0 &&  dispatch(followUser(userId))
