@@ -14,12 +14,15 @@ export type rootStateType  = {
     auth:AuthType,
 }
 
-const reducers = combineReducers({
+const reducer = combineReducers({
     dialogPage: dialogReducer,
     profilePage: profileReducer,
     usersPage : usersReducer,
     auth: authReducer,
 })
-const store = createStore(reducers,applyMiddleware(thunk));
+
+
+export type RootStateType = ReturnType<typeof reducer>
+const store = createStore(reducer,applyMiddleware(thunk));
 
 export default store

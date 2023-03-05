@@ -11,6 +11,7 @@ const SET_PROFILE = "PROFILE/SET-PROFILE"
         profile:ProfileType| null,
         text: string,
         posts: Array<{ id: string, message: string, likeCounts: number }>,
+
 }
 
 export type ProfileType = {
@@ -63,6 +64,7 @@ const initialProfilePageState:ProfilePageType = {
             {id: v1(), message: "mes0", likeCounts: 0},
         ],
     }
+
 
 type  ActionType = addNewPostActionType
  | changeTextNewPostActionType

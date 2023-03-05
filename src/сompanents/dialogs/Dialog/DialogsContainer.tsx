@@ -4,6 +4,7 @@ import {Dialogs} from "../Dialogs";
 import {changeTextNewMessAC, sendNewMessAC} from "../../../redux/dialog-reducer";
 import {ActionType} from "../../../redux/state";
 import {rootStateType} from "../../../redux/redux-store";
+import {WithAuthRedirect} from "../../../hoc/withAuthRedirect";
 
 
 const mapDispatchToProps = (dispatch: (a: ActionType) => void) => ({
@@ -17,8 +18,8 @@ const mapDispatchToProps = (dispatch: (a: ActionType) => void) => ({
 
 const mapStateToProps = (state: rootStateType) => ({
     dialogPage: state.dialogPage,
+    isAuth:state.auth.isAuth,
 });
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
 
-export default DialogsContainer;
+export default WithAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(Dialogs));

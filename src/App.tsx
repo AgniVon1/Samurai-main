@@ -8,6 +8,7 @@ import DialogsContainer from "./сompanents/dialogs/Dialog/DialogsContainer";
 import UsersContainer from "./сompanents/Users/UsersContainer";
 import ProfileContainer from "./сompanents/profile/ProfileContainer";
 import HeaderContainer from "./сompanents/header/HeaderContainer";
+import {Login} from "./сompanents/login/Login";
 
 
 
@@ -27,6 +28,8 @@ const App: React.FC<AppType> = () => {
                                render={() => <DialogsContainer/>}/>
                         <Route path={"/profile/:userId?"}
                                render={() => <ProfileContainer />}/>
+                        <Route path={"/login"}
+                               render={() => <Login />}/>
 
                             <Route path={"/users"}  render={() => <UsersContainer/>}/>
                     </div>

@@ -8,9 +8,8 @@ import {
   ProfilePageType,
   setProfileTC
 } from "../../redux/profile-reducer";
-import {RouteComponentProps, withRouter} from "react-router-dom";
-
-
+import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
 
 type MapStateToPropsType = ProfilePageType
 type MapDispatchToPropsType = {
@@ -26,13 +25,10 @@ type PropsType = RouteComponentProps<PathParamType> & OwnPropsType
 
 export class ProfileContainer extends React.Component<PropsType>{
     componentDidMount() {
-        let usID = Number(this.props.match.params.userId)//параметра нет?
-        if (usID!) usID = 2
-      usID = 2
-
-      this.props.setProfile(2)
+      this.props.setProfile(this.props.match.params.userId ?Number(this.props.match.params.userId):2)
     }
     render() {
+     /* if (!this.props.isAuth) return <Redirect to={"./login"}/>*/
        return (
            <Profile profile = {this.props.profile}  />
        );
@@ -44,11 +40,12 @@ const mapStateToProps = (state:rootStateType):MapStateToPropsType => (
             profile:state.profilePage.profile,
             posts:state.profilePage.posts,
             text:state.profilePage.text,
+           /* isAuth:state.auth.isAuth*/
         }
     )
 const Companent = withRouter(ProfileContainer)
-export default connect(mapStateToProps,{
+export default WithAuthRedirect(connect(mapStateToProps,{
     addNewPost,
     changeTextNewPost,
     setProfile:setProfileTC,
-})(Companent)
+})(Companent))

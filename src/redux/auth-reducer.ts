@@ -53,7 +53,7 @@ export const setAuthUserData = (id:number,email:string,login:string) => {
         login,
     } as const
 }
-export const setAuthUserDataTC = () => {
+export const getAuthUserDataTC = () => {
     return async (dispatch : Dispatch<ActionType>) => {
         authAPI.me().then(data => {
             data.resultCode === 0 && dispatch(setAuthUserData(
