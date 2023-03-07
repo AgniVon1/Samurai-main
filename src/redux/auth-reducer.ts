@@ -55,11 +55,13 @@ export const setAuthUserData = (id:number,email:string,login:string) => {
 }
 export const getAuthUserDataTC = () => {
     return async (dispatch : Dispatch<ActionType>) => {
-        authAPI.me().then(data => {
-            data.resultCode === 0 && dispatch(setAuthUserData(
+       await authAPI.me().then(data => {
+            if (data.resultCode === 0)  {
+                dispatch(setAuthUserData(
               data.data.id,
               data.data.login,
               data.data.email))
+            }
         })
     }
 }

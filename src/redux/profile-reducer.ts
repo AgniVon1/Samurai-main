@@ -13,6 +13,7 @@ const SET_STATUS = "PROFILE/SET-STATUS"
         text: string,
         posts: Array<{ id: string, message: string, likeCounts: number }>,
         status:string,
+
 }
 
 export type ProfileType = {

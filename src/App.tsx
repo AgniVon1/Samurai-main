@@ -15,6 +15,7 @@ import {Login} from "./сompanents/login/Login";
 type AppType = {}
 
 const App: React.FC<AppType> = () => {
+
     return (
         <BrowserRouter>
             <div className="App">
@@ -30,8 +31,7 @@ const App: React.FC<AppType> = () => {
                                render={() => <ProfileContainer />}/>
                         <Route path={"/login"}
                                render={() => <Login />}/>
-
-                            <Route path={"/users"}  render={() => <UsersContainer/>}/>
+                        <Route path={"/users"}  render={() => <UsersContainer/>}/>
                     </div>
                 </div>
             </div>

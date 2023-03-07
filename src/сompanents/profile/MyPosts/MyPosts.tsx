@@ -17,7 +17,7 @@ export const MyPosts: React.FC<MyPostsPropsType> = ({
                                                         addPost,
                                                         onNewPost,
                                                     }) => {
-    const mappedPosts = posts.map((p) => <Post id={p.id} likeCounts={p.likeCounts} message={p.message}/>)
+    const mappedPosts = posts.map((p) => <Post  key = {p.id} id={p.id} likeCounts={p.likeCounts} message={p.message}/>)
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         onNewPost(e.currentTarget.value)
     }

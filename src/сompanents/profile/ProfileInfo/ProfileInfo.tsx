@@ -13,7 +13,9 @@ export const ProfileInfo:React.FC<ProfileInfoPropsType> = ({profile}) => {
   return (
     <div>
       {profile.photos.large && <img src={profile.photos.large}/> }
-      {profile.aboutMe} <div>profile.aboutMe</div>
+      {profile.aboutMe && <div>{profile.aboutMe}</div>}
+      {profile.userId && <div>{profile.userId}</div>}
+      {profile.fullName && <div>{profile.fullName} </div>}
       <ProfileStatus status={"test"}/>
     </div>
   );

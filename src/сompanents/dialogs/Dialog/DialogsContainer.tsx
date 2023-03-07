@@ -6,8 +6,7 @@ import {ActionType} from "../../../redux/state";
 import {rootStateType} from "../../../redux/redux-store";
 import {WithAuthRedirect} from "../../../hoc/withAuthRedirect";
 import {compose} from "redux";
-import {withRouter} from "react-router-dom";
-import {ProfileContainer} from "../../profile/ProfileContainer";
+
 
 
 const mapDispatchToProps = (dispatch: (a: ActionType) => void) => ({
