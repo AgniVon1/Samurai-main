@@ -22,7 +22,6 @@ export  function WithAuthRedirect<T>(Component:ComponentType<T>)  {
 
 // нужно для получения auth
   let ConnectedRedirect = connect(mapStateToProps)(RedirectComponent)
-
   return ConnectedRedirect;
-};
+}
 

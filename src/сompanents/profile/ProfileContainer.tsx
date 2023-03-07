@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {rootStateType} from "../../redux/redux-store";
 import {
   addNewPost,
-  changeTextNewPost,
+  changeTextNewPost, getUserStatus,
   ProfilePageType,
   setProfileTC
 } from "../../redux/profile-reducer";
@@ -17,6 +17,8 @@ type MapDispatchToPropsType = {
     setProfile:(ui:number) => void,
     addNewPost:()=>void,
     changeTextNewPost:(text:string)=>void,
+
+    getUserStatus:(uId:number) => void,
 }
 type PathParamType = {
     userId:string,
@@ -26,7 +28,9 @@ type PropsType = RouteComponentProps<PathParamType> & OwnPropsType
 
 export class ProfileContainer extends React.Component<PropsType>{
     componentDidMount() {
-      this.props.setProfile(this.props.match.params.userId ?Number(this.props.match.params.userId):2)
+      const uId = this.props.match.params.userId ?Number(this.props.match.params.userId):2
+      this.props.setProfile(uId)
+      this.props.getUserStatus(uId);
     }
     render() {
      /* if (!this.props.isAuth) return <Redirect to={"./login"}/>*/
@@ -38,6 +42,7 @@ export class ProfileContainer extends React.Component<PropsType>{
 
 const mapStateToProps = (state:rootStateType):MapStateToPropsType => (
         {
+            status:state.profilePage.status,
             profile:state.profilePage.profile,
             posts:state.profilePage.posts,
             text:state.profilePage.text,
@@ -50,4 +55,5 @@ export default compose<React.ComponentType>(
   addNewPost,
   changeTextNewPost,
   setProfile:setProfileTC,
+    getUserStatus,
 }),WithAuthRedirect,withRouter)(ProfileContainer)
