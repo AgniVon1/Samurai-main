@@ -6,7 +6,7 @@ import {
   addNewPost,
   changeTextNewPost, getUserStatus,
   ProfilePageType,
-  setProfileTC
+  setProfileTC, updateUserStatus
 } from "../../redux/profile-reducer";
 import { RouteComponentProps, withRouter} from "react-router-dom";
 import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
@@ -21,6 +21,8 @@ type MapDispatchToPropsType = {
     changeTextNewPost:(text:string)=>void,
 
     getUserStatus:(uId:number) => void,
+
+    updateUserStatus:(newStatus :string) =>void,
 }
 type PathParamType = {
     userId:string,
@@ -31,16 +33,13 @@ type PropsType = RouteComponentProps<PathParamType> & OwnPropsType
 export class ProfileContainer extends React.Component<PropsType>{
     componentDidMount() {
       const uId = this.props.match.params.userId ?Number(this.props.match.params.userId):27772
-      console.log(this.props.match.params.userId)
       console.log(uId)
-
       this.props.setProfile(uId)
       this.props.getUserStatus(uId);
     }
-
     render() {
        return (
-           <Profile profile = {this.props.profile}  />
+           <Profile profile = {this.props.profile}  status = {this.props.status} updateUserStatus = {this.props.updateUserStatus} />
        );
    }
 }
@@ -60,6 +59,7 @@ export default compose<React.ComponentType>(
   changeTextNewPost,
   setProfile:setProfileTC,
     getUserStatus,
+    updateUserStatus,
 })
   ,WithAuthRedirect
   ,withRouter)(ProfileContainer)

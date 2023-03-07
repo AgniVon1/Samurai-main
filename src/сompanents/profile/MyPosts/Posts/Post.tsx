@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './post.module.css'
+import {updateUserStatus} from "../../../../redux/profile-reducer";
 
 
 export type PostPropsType = {

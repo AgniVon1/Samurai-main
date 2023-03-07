@@ -4,6 +4,8 @@ import {NavLink} from "react-router-dom";
 import {HeaderPropsType} from "./HeaderContainer";
 
 
+
+
 export const Header:React.FC<HeaderPropsType> = ({login,isAuth}) => {
     return (
         <div className={styles.header}>

@@ -124,6 +124,21 @@ export const getUserStatus = (userId :number) => {
     }
 }
 
+export const updateUserStatus = (status :string) => {
+    return async (dispatch:Dispatch<ActionType>) =>{
+        console.log("status res")
+        dispatch(togglelIsFetching(true))
+        await profileAPI.updateStatus(status).then(res=>
+          {   if (res.data.resultCode === 0){
+              dispatch(setStatus(status))
+              console.log("status res")
+          }
+              dispatch(togglelIsFetching(false))
+          }
+        )
+    }
+}
+
 
 export type addNewPostActionType = { type: typeof ADD_POST, }
 export type changeTextNewPostActionType = { type: typeof CHANGE_TEXTAREA, text: string }
@@ -133,7 +148,6 @@ export type SetStatusActionType = { type: typeof SET_STATUS, status: string }
 export const addNewPost = (): addNewPostActionType => ({type: ADD_POST})
 export const changeTextNewPost = (text: string): changeTextNewPostActionType => ({type: CHANGE_TEXTAREA, text: text})
 export const setProfile = (profile: ProfileType): setProfileActionType => ({type: SET_PROFILE, profile})
-
 export const setStatus = (status:string):SetStatusActionType => ({
     type:SET_STATUS,status
 })

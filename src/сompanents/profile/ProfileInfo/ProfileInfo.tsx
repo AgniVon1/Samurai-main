@@ -5,10 +5,12 @@ import {ProfileStatus} from "./ProfileStatus";
 
 
 type ProfileInfoPropsType = {
+  status:string,
   profile:ProfileType| null,
+  updateUserStatus:(newStatus:string) => void,
 }
 
-export const ProfileInfo:React.FC<ProfileInfoPropsType> = ({profile}) => {
+export const ProfileInfo:React.FC<ProfileInfoPropsType> = ({updateUserStatus,status,profile}) => {
   if (!profile) return <Preloader/>
   return (
     <div>
@@ -16,7 +18,7 @@ export const ProfileInfo:React.FC<ProfileInfoPropsType> = ({profile}) => {
       {profile.aboutMe && <div>{profile.aboutMe}</div>}
       {profile.userId && <div>{profile.userId}</div>}
       {profile.fullName && <div>{profile.fullName} </div>}
-      <ProfileStatus status={"test"}/>
+      <ProfileStatus status={status} updateUserStatus = {updateUserStatus}/>
     </div>
   );
 };
