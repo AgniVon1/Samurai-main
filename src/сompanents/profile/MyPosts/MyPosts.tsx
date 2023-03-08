@@ -23,13 +23,10 @@ export const MyPosts: React.FC<MyPostsPropsType> = ({
         addPost(formData.newPost)
     }
     return (
-
         <div>
           <AddPostForm onSubmit = {addNewPost}/>
             {mappedPosts}
         </div>
-
-
     );
 };
 
