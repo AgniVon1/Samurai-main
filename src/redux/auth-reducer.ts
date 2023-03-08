@@ -61,8 +61,10 @@ export const getAuthUserData = () => {
   }
 }
 export const login = (email: string, password: string, rememberMe: boolean): RootThunkType => {
-  return async (dispatch) => {
-    await authAPI.login(email, password, rememberMe).then((res) => {
+  return  (dispatch) => {
+     authAPI.login(email, password, rememberMe).then((res) => {
+       console.log(res)
+       console.log(email,password)
       if (res.data.resultCode === 0) {
         dispatch(getAuthUserData())
       }

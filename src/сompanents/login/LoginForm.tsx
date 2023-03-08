@@ -20,7 +20,7 @@ export const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFor
         <div>
           <Field
             placeholder={"Login"}
-            name={'login'}
+            name={'email'}
             component={"input"}
           />
         </div>
