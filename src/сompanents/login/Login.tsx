@@ -3,7 +3,7 @@ import {LoginForm, LoginFormOwnProps, LoginFormValuesType} from "./LoginForm";
 import {RootStateType} from "../../redux/redux-store";
 import {reduxForm} from "redux-form";
 import {connect} from "react-redux";
-import {Redirect} from "react-router-dom";
+/*import {Redirect} from "react-router-dom";*/
 
 
 export type LoginPropsType = MapStateToPropsLoginType & MapDispatchToPropsLoginType;
@@ -27,12 +27,12 @@ const mapDispatchToProps: MapDispatchToPropsLoginType = {
 export const Login = (props: LoginPropsType) => {
 
   const onSubmit = (formData: LoginFormValuesType) => {
-
+    console.log(formData)
   }
 
-  if (props.isAuth) {
+  /*if (props.isAuth) {
      return <Redirect to={'/profile'}/>
-  }
+  }*/
   return (
     <div>
       <div>
