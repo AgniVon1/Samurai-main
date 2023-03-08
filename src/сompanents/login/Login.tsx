@@ -26,8 +26,9 @@ const mapDispatchToProps: MapDispatchToPropsLoginType = {
 
 export const Login = (props: LoginPropsType) => {
 
+
   const onSubmit = (formData: LoginFormValuesType) => {
-    console.log(formData)
+    console.log("trx")
   }
 
   /*if (props.isAuth) {

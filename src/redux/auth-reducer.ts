@@ -1,6 +1,5 @@
 import {Dispatch} from "redux";
-import {API, authAPI} from "../api/api";
-import {setUsers, togglelIsFetching} from "./users-reducer";
+import {authAPI} from "../api/api";
 
 const SET_USER_DATA = "AUTH/SET_USER_DATA"
 
@@ -27,6 +26,7 @@ export type AuthType = {
 }
 type StateType = AuthType
 type ActionType =  ReturnType<typeof setAuthUserData>
+export type AuthActionType =  ReturnType<typeof setAuthUserData>
 
 const authReducer = (state: StateType = initialState , action: ActionType):StateType  => {
     switch (action.type) {

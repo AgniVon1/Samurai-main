@@ -1,21 +1,18 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {Dialogs} from "../Dialogs";
-import {changeTextNewMessAC, sendNewMessAC} from "../../../redux/dialog-reducer";
-import {ActionType} from "../../../redux/state";
+import {DialogActionType, sendNewMessAC} from "../../../redux/dialog-reducer";
+
 import {RootStateType} from "../../../redux/redux-store";
 import {WithAuthRedirect} from "../../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
 
 
-const mapDispatchToProps = (dispatch: (a: ActionType) => void) => ({
-    sendNewMess: () => {
-        dispatch(sendNewMessAC())
+const mapDispatchToProps = (dispatch: (a: DialogActionType) => void) => ({
+    sendNewMess: (newMess:string) => {
+        dispatch(sendNewMessAC(newMess))
     },
-    changeTextNewMess: (text: string) => {
-        dispatch(changeTextNewMessAC(text))
-    }
 });
 
 const mapStateToProps = (state: RootStateType) => ({

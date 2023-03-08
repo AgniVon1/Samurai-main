@@ -40,26 +40,6 @@ export type ProfileType = {
 
 const initialProfilePageState:ProfilePageType = {
     profile: null
-    /*{aboutMe: "",
-        contacts: {
-        facebook: "",
-            website: null,
-            vk: "",
-            twitter: "",
-            instagram: "",
-            youtube: null,
-            github: "",
-            mainLink: null
-    },
-    lookingForAJob: true,
-        lookingForAJobDescription: "",
-        fullName: "",
-        userId: 2,
-        photos: {
-        small: "",
-            large: ""
-    }
-    }*/
     ,
         text: "",
         posts: [
@@ -69,13 +49,13 @@ const initialProfilePageState:ProfilePageType = {
     }
 
 
-type  ActionType = addNewPostActionType
+ export type  ProfileActionType = addNewPostActionType
  | changeTextNewPostActionType
  | setProfileActionType
-| ActionAssure
-| SetStatusActionType
+ | ActionAssure
+ | SetStatusActionType
 
-const profileReducer = (state: ProfilePageType = initialProfilePageState, action: ActionType): ProfilePageType => {
+const profileReducer = (state: ProfilePageType = initialProfilePageState, action: ProfileActionType): ProfilePageType => {
     switch (action.type) {
         case ADD_POST:
             return {
@@ -104,7 +84,7 @@ const profileReducer = (state: ProfilePageType = initialProfilePageState, action
     }
 }
 export const setProfileTC = (userId:number) => {
-    return  async (dispatch : Dispatch<ActionType>) => {
+    return  async (dispatch : Dispatch<ProfileActionType>) => {
          dispatch(togglelIsFetching(true))
          await API.getProfile(userId).then(res => {
             dispatch(setProfile(res.data))
@@ -113,7 +93,7 @@ export const setProfileTC = (userId:number) => {
     }
 }
 export const getUserStatus = (userId :number) => {
-    return async (dispatch:Dispatch<ActionType>) =>{
+    return async (dispatch:Dispatch<ProfileActionType>) =>{
         dispatch(togglelIsFetching(true))
         await profileAPI.getStatus(userId).then(res=>
           {
@@ -125,7 +105,7 @@ export const getUserStatus = (userId :number) => {
 }
 
 export const updateUserStatus = (status :string) => {
-    return async (dispatch:Dispatch<ActionType>) =>{
+    return async (dispatch:Dispatch<ProfileActionType>) =>{
         console.log("status res")
         dispatch(togglelIsFetching(true))
         await profileAPI.updateStatus(status).then(res=>

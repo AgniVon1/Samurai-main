@@ -1,36 +1,33 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import styles from './dialogs.module.css'
 import {Dialog} from "./Dialog/Dialog";
 import {Message} from "./Dialog/Message";
-import {DialogPageType} from "../../redux/state";
+import {reduxForm} from "redux-form";
+import {AddMessageForm, AddMessageFormOwnProps, AddMessageFormValuesType} from "./AddMessageForm/AddMessageForm";
+import {DialogPageType} from "../../redux/dialog-reducer";
 
 
 export type DialogsPropsType = {
     dialogPage:DialogPageType
+    sendNewMess: (newMess:string) => void,
 
-    sendNewMess: () => void,
-    changeTextNewMess: (value: string) => void,
 }
 
 export const Dialogs: React.FC<DialogsPropsType> = ({
                                                         dialogPage: {
-                                                            textNewMess: textNewMess,
                                                             dialogs: dialogs,
                                                             messages: messages,
                                                         },
                                                         sendNewMess,
-                                                        changeTextNewMess,
                                                     }) => {
 
-  const mappedMessages = messages.map((m) => <Message message={m.message}/>)
-    const mappedDialogs = dialogs.map((d) => <Dialog id={d.id} name={d.name}/>)
+  const mappedMessages = messages.map((m) => <Message message={m}/>)
+  const mappedDialogs = dialogs.map((d) => <Dialog id={d.id} name={d.name}/>)
 
-    const sendMessOnClickHandler = () => {
-        sendNewMess()
-    }
-    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        changeTextNewMess(e.currentTarget.value)
-    }
+  const  addNewMessage = (formData: AddMessageFormValuesType) => {
+    sendNewMess(formData.newMess)
+  }
+
     return (
         <div className={styles.dialogs}>
             <div className={styles.dialogs_items}>
@@ -39,15 +36,13 @@ export const Dialogs: React.FC<DialogsPropsType> = ({
             <div className={styles.messages}>
                 {mappedMessages}
             </div>
-            <div>
-                <div>
-                    <textarea onChange={onChangeHandler} value={textNewMess}></textarea>
-                </div>
-                <div>
-                    <button onClick={sendMessOnClickHandler}>Send</button>
-                </div>
-            </div>
-
+           <AddMessageFormReduxForm onSubmit ={addNewMessage}/>
         </div>
     );
 };
+
+export const AddMessageFormReduxForm = reduxForm<AddMessageFormValuesType, AddMessageFormOwnProps>({
+  form: 'dialogAddMessageForm' // уникальное строковое имя для каждой формы
+})(AddMessageForm);
+
+export default Dialogs;

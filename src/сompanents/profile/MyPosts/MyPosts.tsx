@@ -1,9 +1,10 @@
 import React, {ChangeEvent} from 'react';
 import {Post} from "./Posts/Post";
-import {profilePageType} from "../../../redux/state";
+import {ProfilePageType} from "../../../redux/profile-reducer";
+
 
 export type MyPostsPropsType = {
-    profilePage: profilePageType,
+    profilePage: ProfilePageType,
     addPost: () => void,
     onNewPost: (text: string) => void,
 }

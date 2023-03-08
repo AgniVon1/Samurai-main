@@ -1,47 +1,56 @@
-import {ActionType, DialogPageType} from "./state";
+
 import {v1} from "uuid";
 
 
 
 const SEND_NEW_MESS = "SEND-MESSAGE"
-const CHANGE_TEXT_NEW_MESS = "CHANGE-NEW-MESS"
 
-const initialMessagesPageState: DialogPageType =
+
+export type DialogPageType = {
+    dialogs: Array<DialogsArray>
+    messages: Array<MessagesArray>
+}
+
+
+export type DialogsArray = {
+    id: string
+    name: string
+}
+export type MessagesArray = {
+    id: string
+    text: string
+}
+type InitStateType = DialogPageType
+
+const initialMessagesPageState: InitStateType =
     {
-        textNewMess: "",
+
         dialogs: [
-            {id: v1(), name: "Mark"},
-            {id: v1(), name: "Tom"},
-            {id: v1(), name: "Mercava"},
-        ],
+            {id: v1(), name: 'Neil Tunicliff'},
+            {id: v1(), name: 'Craig Lee Scott'},
+            {id: v1(), name: 'Ali Clarkson'},
+            {id: v1(), name: 'Thomas Remvik Aasen'},
+            {id: v1(), name: 'Damon Watson'}
+        ] as Array<DialogsArray>,
         messages: [
-            {message: {id: v1(), text: "cooбщение0"}},
-            {message: {id: v1(), text: "cooбщение1"}},
-            {message: {id: v1(), text: "cooбщение2"}},
-            {message: {id: v1(), text: "cooбщение3"}},
-            {message: {id: v1(), text: "cooбщение4"}},
-            {message: {id: v1(), text: "cooбщение5"}},
-        ],
+            {id: v1(), text: 'Hello, Neil Tunicliff'},
+            {id: v1(), text: 'Hello, Craig Lee Scott'},
+            {id: v1(), text: 'Hello, Ali Clarkson'},
+            {id: v1(), text: 'Hello, Thomas Remvik Aasen'},
+            {id: v1(), text: 'Hello, Damon Watson'}
+        ] as Array<MessagesArray>,
     }
 
-
-const dialogReducer = (state: DialogPageType = initialMessagesPageState, action: ActionType): DialogPageType => {
+export type DialogActionType = sendNewMessActionType
+const dialogReducer = (state: InitStateType = initialMessagesPageState, action: DialogActionType): DialogPageType => {
     switch (action.type) {
         case SEND_NEW_MESS:
             return {
                 ...state,
-                textNewMess: "",
                 dialogs: [...state.dialogs],
                 messages:
-                    [...state.messages.map(m => ({...m})),
-                        {message: {id: v1(), text: state.textNewMess}}],
-            }
-        case CHANGE_TEXT_NEW_MESS:
-            return {
-                ...state,
-                textNewMess: action.textNewMess,
-                dialogs: [...state.dialogs],
-                messages: state.messages.map(m => ({...m})),
+                    [...state.messages,
+                         {id: v1(), text: action.newMess}],
             }
         default:
             return state
@@ -49,18 +58,11 @@ const dialogReducer = (state: DialogPageType = initialMessagesPageState, action:
 }
 
 export type sendNewMessActionType = ReturnType<typeof sendNewMessAC>
-export type changeTextNewMessActionType = ReturnType<typeof changeTextNewMessAC>
 
-export const sendNewMessAC = () => {
-    return {
-        type: SEND_NEW_MESS,
-    } as const
-}
 
-export const changeTextNewMessAC = (text: string) => {
+export const sendNewMessAC = (newMess:string) => {
     return {
-        type: CHANGE_TEXT_NEW_MESS,
-        textNewMess: text
+        type: SEND_NEW_MESS,newMess
     } as const
 }
 
