@@ -1,39 +1,31 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import {Post} from "./Posts/Post";
 import {ProfilePageType} from "../../../redux/profile-reducer";
+import AddPostForm, {AddPostFormValuesType} from "./AddPostForm/AddPostForm";
 
 
 export type MyPostsPropsType = {
     profilePage: ProfilePageType,
-    addPost: () => void,
-    onNewPost: (text: string) => void,
+    addPost: (newPost:string) => void,
 }
 
 export const MyPosts: React.FC<MyPostsPropsType> = ({
                                                         profilePage:
                                                             {
                                                                 posts: posts,
-                                                                text: textNewPost
                                                             },
                                                         addPost,
-                                                        onNewPost,
+
                                                     }) => {
     const mappedPosts = posts.map((p) => <Post  key = {p.id} id={p.id} likeCounts={p.likeCounts} message={p.message}/>)
-    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        onNewPost(e.currentTarget.value)
-    }
-    const addPostOnClickHandler = () => {
-        addPost()
+
+    const addNewPost = (formData: AddPostFormValuesType) => {
+        addPost(formData.newPost)
     }
     return (
 
         <div>
-            <div>
-                <textarea onChange={onChangeHandler} value={textNewPost}></textarea>
-            </div>
-            <div>
-                <button onClick={addPostOnClickHandler}>Add post</button>
-            </div>
+          <AddPostForm onSubmit = {addNewPost}/>
             {mappedPosts}
         </div>
 

@@ -13,7 +13,7 @@ const AddPostForm : React.FC<InjectedFormProps<AddPostFormValuesType, AddPostFor
     <form onSubmit={handleSubmit}>
       <Field
         placeholder={"Enter your post"}
-        name={'newPostBody'}
+        name={'newPost'}
         component={"input"}
       />
       <div>

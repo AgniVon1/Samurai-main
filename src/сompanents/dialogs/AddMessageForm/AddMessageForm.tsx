@@ -14,7 +14,7 @@ const AddMessageForm : React.FC<InjectedFormProps<AddMessageFormValuesType, AddM
     <form onSubmit={handleSubmit}>
       <Field
         placeholder={"Enter your message"}
-        name={'newMessageBody'}
+        name={'newMess'}
         component={"input"}
       />
       <div>
@@ -24,6 +24,7 @@ const AddMessageForm : React.FC<InjectedFormProps<AddMessageFormValuesType, AddM
 
   );
 };
+
 export default reduxForm<AddMessageFormValuesType, AddMessageFormOwnProps>({
   form: 'dialogAddMessageForm' // уникальное строковое имя для каждой формы
 })(AddMessageForm);

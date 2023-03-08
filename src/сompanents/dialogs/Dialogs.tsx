@@ -2,8 +2,9 @@ import React from 'react';
 import styles from './dialogs.module.css'
 import {Dialog} from "./Dialog/Dialog";
 import {Message} from "./Dialog/Message";
-import AddMessageForm, {AddMessageFormValuesType} from "./AddMessageForm/AddMessageForm";
+import AddMessageForm, { AddMessageFormValuesType} from "./AddMessageForm/AddMessageForm";
 import {DialogPageType} from "../../redux/dialog-reducer";
+
 
 
 export type DialogsPropsType = {
@@ -39,4 +40,5 @@ export const Dialogs: React.FC<DialogsPropsType> = ({
         </div>
     );
 };
+
 

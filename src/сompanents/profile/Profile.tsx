@@ -8,8 +8,7 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
 
 export type ProfilePropsType = {
-    profile:ProfileType | null
-
+  profile:ProfileType | null
   status:string,
   updateUserStatus:(newStatus :string) =>void,
 }

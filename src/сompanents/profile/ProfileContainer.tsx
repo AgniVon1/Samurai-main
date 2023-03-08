@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 
 import {
   addNewPost,
-  changeTextNewPost, getUserStatus,
+  getUserStatus,
   ProfilePageType,
   setProfileTC, updateUserStatus
 } from "../../redux/profile-reducer";
@@ -19,7 +19,6 @@ type MapStateToPropsType = ProfilePageType
 type MapDispatchToPropsType = {
     setProfile:(ui:number) => void,
     addNewPost:()=>void,
-    changeTextNewPost:(text:string)=>void,
 
     getUserStatus:(uId:number) => void,
 
@@ -50,14 +49,13 @@ const mapStateToProps = (state:RootStateType):MapStateToPropsType => (
             status:state.profilePage.status,
             profile:state.profilePage.profile,
             posts:state.profilePage.posts,
-            text:state.profilePage.text,
+
         }
     )
 
 export default compose<React.ComponentType>(
   connect(mapStateToProps,{
   addNewPost,
-  changeTextNewPost,
   setProfile:setProfileTC,
     getUserStatus,
     updateUserStatus,

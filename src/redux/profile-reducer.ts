@@ -3,14 +3,13 @@ import {Dispatch} from "redux";
 import {API, profileAPI} from "../api/api";
 import {ActionAssure, togglelIsFetching} from "./users-reducer";
 
-const CHANGE_TEXTAREA = "PROFILE/CHANGE-TEXTAREA"
 const ADD_POST = "PROFILE/ADD-POST"
 const SET_PROFILE = "PROFILE/SET-PROFILE"
 const SET_STATUS = "PROFILE/SET-STATUS"
 
  export type ProfilePageType =   {
         profile:ProfileType| null,
-        text: string,
+
         posts: Array<{ id: string, message: string, likeCounts: number }>,
         status:string,
 
@@ -41,7 +40,7 @@ export type ProfileType = {
 const initialProfilePageState:ProfilePageType = {
     profile: null
     ,
-        text: "",
+
         posts: [
             {id: v1(), message: "mes0", likeCounts: 0},
         ],
@@ -50,7 +49,6 @@ const initialProfilePageState:ProfilePageType = {
 
 
  export type  ProfileActionType = addNewPostActionType
- | changeTextNewPostActionType
  | setProfileActionType
  | ActionAssure
  | SetStatusActionType
@@ -60,15 +58,10 @@ const profileReducer = (state: ProfilePageType = initialProfilePageState, action
         case ADD_POST:
             return {
                 ...state,
-                posts: [...state.posts, {id: v1(), message: state.text, likeCounts: 0}],
-                text: ""
+                posts: [...state.posts, {id: v1(), message: action.newPost, likeCounts: 0}],
+
             }
-        case CHANGE_TEXTAREA:
-            return {
-                ...state,
-                posts: [...state.posts],
-                text: action.text
-            }
+
         case SET_PROFILE:
             return {
                 ...state,
@@ -120,13 +113,13 @@ export const updateUserStatus = (status :string) => {
 }
 
 
-export type addNewPostActionType = { type: typeof ADD_POST, }
-export type changeTextNewPostActionType = { type: typeof CHANGE_TEXTAREA, text: string }
+export type addNewPostActionType = { type: typeof ADD_POST, newPost:string}
+
 export type setProfileActionType = { type: typeof SET_PROFILE, profile: ProfileType }
 export type SetStatusActionType = { type: typeof SET_STATUS, status: string }
 
-export const addNewPost = (): addNewPostActionType => ({type: ADD_POST})
-export const changeTextNewPost = (text: string): changeTextNewPostActionType => ({type: CHANGE_TEXTAREA, text: text})
+export const addNewPost = (newPost:string): addNewPostActionType => ({type: ADD_POST,newPost})
+
 export const setProfile = (profile: ProfileType): setProfileActionType => ({type: SET_PROFILE, profile})
 export const setStatus = (status:string):SetStatusActionType => ({
     type:SET_STATUS,status
