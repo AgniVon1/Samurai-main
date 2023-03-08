@@ -3,7 +3,6 @@ import {Post} from "./Posts/Post";
 import {ProfilePageType} from "../../../redux/profile-reducer";
 import AddPostForm, {AddPostFormValuesType} from "./AddPostForm/AddPostForm";
 
-
 export type MyPostsPropsType = {
     profilePage: ProfilePageType,
     addPost: (newPost:string) => void,
