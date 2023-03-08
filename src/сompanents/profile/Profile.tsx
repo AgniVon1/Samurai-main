@@ -1,8 +1,7 @@
 import React from 'react';
 import styles from './profile.module.css'
-
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
-import {ProfileType, updateUserStatus} from "../../redux/profile-reducer";
+import {ProfileType} from "../../redux/profile-reducer";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
 

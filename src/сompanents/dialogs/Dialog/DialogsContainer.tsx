@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {Dialogs} from "../Dialogs";
 import {changeTextNewMessAC, sendNewMessAC} from "../../../redux/dialog-reducer";
 import {ActionType} from "../../../redux/state";
-import {rootStateType} from "../../../redux/redux-store";
+import {RootStateType} from "../../../redux/redux-store";
 import {WithAuthRedirect} from "../../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
@@ -18,7 +18,7 @@ const mapDispatchToProps = (dispatch: (a: ActionType) => void) => ({
     }
 });
 
-const mapStateToProps = (state: rootStateType) => ({
+const mapStateToProps = (state: RootStateType) => ({
     dialogPage: state.dialogPage,
 });
 

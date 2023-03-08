@@ -3,7 +3,7 @@ import React, {useEffect} from 'react';
 import {Header} from "./Header";
 import {connect} from "react-redux";
 import { getAuthUserDataTC} from "../../redux/auth-reducer";
-import {rootStateType} from "../../redux/redux-store";
+import {RootStateType} from "../../redux/redux-store";
 
 
 export type HeaderPropsType = {
@@ -23,7 +23,7 @@ const HeaderContainer:React.FC<HeaderPropsType> = (props) => {
     );
 };
 
-const mapStateToProps = (state:rootStateType) => ({
+const mapStateToProps = (state:RootStateType) => ({
     isAuth:state.auth.isAuth,
     login:state.auth.data.login,
 })

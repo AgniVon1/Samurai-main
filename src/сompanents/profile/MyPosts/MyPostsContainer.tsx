@@ -3,10 +3,10 @@ import {ActionType} from "../../../redux/state";
 import {addNewPost, changeTextNewPost} from "../../../redux/profile-reducer";
 import {connect} from "react-redux";
 import {MyPosts} from "./MyPosts";
-import {rootStateType} from "../../../redux/redux-store";
+import {RootStateType} from "../../../redux/redux-store";
 
 
-const mapStateToProps = (state:rootStateType) =>{
+const mapStateToProps = (state:RootStateType) =>{
     return {
         profilePage:state.profilePage
     }

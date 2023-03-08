@@ -1,7 +1,7 @@
 import React from 'react';
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
-import {rootStateType} from "../../redux/redux-store";
+
 import {
   addNewPost,
   changeTextNewPost, getUserStatus,
@@ -11,6 +11,7 @@ import {
 import { RouteComponentProps, withRouter} from "react-router-dom";
 import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {RootStateType} from "../../redux/redux-store";
 
 
 type MapStateToPropsType = ProfilePageType
@@ -44,7 +45,7 @@ export class ProfileContainer extends React.Component<PropsType>{
    }
 }
 
-const mapStateToProps = (state:rootStateType):MapStateToPropsType => (
+const mapStateToProps = (state:RootStateType):MapStateToPropsType => (
         {
             status:state.profilePage.status,
             profile:state.profilePage.profile,
