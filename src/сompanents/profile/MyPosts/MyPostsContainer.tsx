@@ -6,6 +6,7 @@ import {MyPosts} from "./MyPosts";
 import {RootStateType} from "../../../redux/redux-store";
 
 
+
 const mapStateToProps = (state:RootStateType) =>{
     return {
         profilePage:state.profilePage

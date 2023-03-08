@@ -1,8 +1,19 @@
 import React from 'react';
+import {InjectedFormProps} from "redux-form";
 
 
-type PropsType = {}
-export const LoginForm = (props:PropsType) => {
+export type LoginFormValuesType = {
+  email: string
+  password: string
+  rememberMe: boolean
+
+}
+
+export type LoginFormOwnProps = {
+
+}
+export const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnProps> & LoginFormOwnProps> =
+  ({ handleSubmit, error})  => {
   return (
     <div>
       <form>

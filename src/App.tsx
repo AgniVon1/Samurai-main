@@ -1,14 +1,12 @@
 import './App.css';
-import {Header} from "./сompanents/header/Header";
 import {Navbar} from "./сompanents/navbar/Navbar";
-import {Profile} from "./сompanents/profile/Profile";
 import {BrowserRouter, Route} from "react-router-dom";
 import React from "react";
 import DialogsContainer from "./сompanents/dialogs/Dialog/DialogsContainer";
 import UsersContainer from "./сompanents/Users/UsersContainer";
 import ProfileContainer from "./сompanents/profile/ProfileContainer";
 import HeaderContainer from "./сompanents/header/HeaderContainer";
-import {Login} from "./сompanents/login/Login";
+import {LoginContainer} from "./сompanents/login/Login";
 
 
 
@@ -30,7 +28,7 @@ const App: React.FC<AppType> = () => {
                         <Route path={"/profile/:userId?"}
                                render={() => <ProfileContainer />}/>
                         <Route path={"/login"}
-                               render={() => <Login />}/>
+                               render={() => <LoginContainer />}/>
                         <Route path={"/users"}  render={() => <UsersContainer/>}/>
                     </div>
                 </div>
