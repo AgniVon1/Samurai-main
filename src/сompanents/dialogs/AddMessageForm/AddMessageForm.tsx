@@ -1,8 +1,6 @@
 import React from "react";
-import {Field, InjectedFormProps} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {LoginFormOwnProps} from "../../login/LoginForm";
-
-
 
 export type AddMessageFormValuesType = {
  newMess: string
@@ -11,7 +9,7 @@ export type AddMessageFormValuesType = {
 export type AddMessageFormOwnProps = {
 
 }
- export  const AddMessageForm : React.FC<InjectedFormProps<AddMessageFormValuesType, AddMessageFormOwnProps> & LoginFormOwnProps>= ({handleSubmit}) => {
+const AddMessageForm : React.FC<InjectedFormProps<AddMessageFormValuesType, AddMessageFormOwnProps> & LoginFormOwnProps>= ({handleSubmit}) => {
   return (
     <form onSubmit={handleSubmit}>
       <Field
@@ -26,4 +24,7 @@ export type AddMessageFormOwnProps = {
 
   );
 };
+export default reduxForm<AddMessageFormValuesType, AddMessageFormOwnProps>({
+  form: 'dialogAddMessageForm' // уникальное строковое имя для каждой формы
+})(AddMessageForm);
 

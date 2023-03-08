@@ -2,8 +2,7 @@ import React from 'react';
 import styles from './dialogs.module.css'
 import {Dialog} from "./Dialog/Dialog";
 import {Message} from "./Dialog/Message";
-import {reduxForm} from "redux-form";
-import {AddMessageForm, AddMessageFormOwnProps, AddMessageFormValuesType} from "./AddMessageForm/AddMessageForm";
+import AddMessageForm, {AddMessageFormValuesType} from "./AddMessageForm/AddMessageForm";
 import {DialogPageType} from "../../redux/dialog-reducer";
 
 
@@ -36,13 +35,8 @@ export const Dialogs: React.FC<DialogsPropsType> = ({
             <div className={styles.messages}>
                 {mappedMessages}
             </div>
-           <AddMessageFormReduxForm onSubmit ={addNewMessage}/>
+           <AddMessageForm onSubmit ={addNewMessage}/>
         </div>
     );
 };
 
-export const AddMessageFormReduxForm = reduxForm<AddMessageFormValuesType, AddMessageFormOwnProps>({
-  form: 'dialogAddMessageForm' // уникальное строковое имя для каждой формы
-})(AddMessageForm);
-
-export default Dialogs;
