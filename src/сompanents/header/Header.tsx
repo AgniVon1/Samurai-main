@@ -6,7 +6,7 @@ import {HeaderPropsType} from "./HeaderContainer";
 
 
 
-export const Header:React.FC<HeaderPropsType> = ({login,isAuth}) => {
+export const Header:React.FC<HeaderPropsType> = ({login,isAuth,logout}) => {
     return (
         <div className={styles.header}>
             <div className={styles.header__img}>
@@ -18,10 +18,15 @@ export const Header:React.FC<HeaderPropsType> = ({login,isAuth}) => {
                 </div>
             </div>
             <div className={styles.loginBlock}>
-              {isAuth ? (
-                <NavLink to={'/profile'}>
-                  {login}
-                </NavLink>
+              {isAuth ? (<div>
+                  <NavLink to={'/profile'}>
+                    {login}
+                  </NavLink>
+                  <button onClick={logout}>
+
+                  </button>
+                </div>
+
               ) : (
               <NavLink to={'/login'}>
                 Login

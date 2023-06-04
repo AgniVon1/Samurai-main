@@ -14,7 +14,11 @@ import {compose} from "redux";
 import {RootStateType} from "../../redux/redux-store";
 
 
-type MapStateToPropsType = ProfilePageType
+
+type MapStateToPropsType = ProfilePageType &{
+  authorizedUserId:number|null,
+  isAuth:boolean
+}
 
 type MapDispatchToPropsType = {
     setProfile:(ui:number) => void,
@@ -32,11 +36,13 @@ type PropsType = RouteComponentProps<PathParamType> & OwnPropsType
 
 export class ProfileContainer extends React.Component<PropsType>{
     componentDidMount() {
-      const uId = this.props.match.params.userId ?Number(this.props.match.params.userId):27772
+      let uId = this.props.match.params.userId ?Number(this.props.match.params.userId):this.props.authorizedUserId
       console.log(uId)
+      if (!uId) uId = 27772
       this.props.setProfile(uId)
       this.props.getUserStatus(uId);
     }
+
     render() {
        return (
            <Profile profile = {this.props.profile}  status = {this.props.status} updateUserStatus = {this.props.updateUserStatus} />
@@ -49,7 +55,8 @@ const mapStateToProps = (state:RootStateType):MapStateToPropsType => (
             status:state.profilePage.status,
             profile:state.profilePage.profile,
             posts:state.profilePage.posts,
-
+            authorizedUserId:state.auth.id,
+            isAuth:state.auth.isAuth
         }
     )
 

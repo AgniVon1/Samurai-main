@@ -4,7 +4,7 @@ import {RootStateType} from "../../redux/redux-store";
 import {reduxForm} from "redux-form";
 import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
-/*import {Redirect} from "react-router-dom";*/
+import {Redirect} from "react-router-dom";
 
 
 export type LoginPropsType = MapStateToPropsLoginType & MapDispatchToPropsLoginType;
@@ -28,9 +28,9 @@ export const Login = (props: LoginPropsType) => {
     props.login(formData.email,formData.password,formData.rememberMe)
   }
 
-  /*if (props.isAuth) {
+  if (props.isAuth) {
      return <Redirect to={'/profile'}/>
-  }*/
+  }
   return (
     <div>
       <div>
@@ -43,7 +43,7 @@ export const Login = (props: LoginPropsType) => {
 };
 
 
-//Hooc
+//Hoc
 export const LoginReduxForm = reduxForm<LoginFormValuesType, LoginFormOwnProps>({
   form: 'login' // уникальное строковое имя для каждой формы
 })(LoginForm)
