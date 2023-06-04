@@ -36,9 +36,9 @@ type PropsType = RouteComponentProps<PathParamType> & OwnPropsType
 
 export class ProfileContainer extends React.Component<PropsType>{
     componentDidMount() {
-      let uId = this.props.match.params.userId ?Number(this.props.match.params.userId):this.props.authorizedUserId
+      let uId = this.props.match.params.userId ? Number(this.props.match.params.userId) : this.props.authorizedUserId
       console.log(uId)
-      if (!uId) uId = 27772
+      if (!uId) uId = Number(this.props.authorizedUserId)
       this.props.setProfile(uId)
       this.props.getUserStatus(uId);
     }
@@ -67,5 +67,4 @@ export default compose<React.ComponentType>(
     getUserStatus,
     updateUserStatus,
 })
-  ,WithAuthRedirect
   ,withRouter)(ProfileContainer)

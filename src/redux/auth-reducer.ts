@@ -50,17 +50,15 @@ export const setAuthUserData = (id: number|null, email: string|null, login: stri
 
 
 export const getAuthUserData = () => {
-  return async (dispatch: Dispatch<ActionType>) => {
-    await authAPI.me().then(data => {
+  return  (dispatch: Dispatch<ActionType>) => {
+    return  authAPI.me().then(data => {
       if (data.resultCode === 0) {
-        dispatch(setAuthUserData(
-          data.data.id,
-          data.data.login,
-          data.data.email, true))
+        dispatch(setAuthUserData(data.data.id, data.data.login, data.data.email, true))
       }
     })
   }
 }
+
 export const login = (email: string, password: string, rememberMe: boolean) => {
   return  async (dispatch:ThunkDispatchForm) => {
      await authAPI.login(email, password, rememberMe).then((res) => {
