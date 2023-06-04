@@ -114,10 +114,10 @@ const usersReducer = (state: UsersType = initialUsersState, action: UserActionTy
 export const getUsersTC = (currentPage:number) => {
   return async (dispatch : Dispatch<UserActionType>) => {
       dispatch(togglelIsFetching(true))
-     await API.getUsers(currentPage).then(data => {
-          dispatch(setUsers(data.items))
-          dispatch(togglelIsFetching(false))
-      })
+      const data = await  API.getUsers(currentPage)
+      dispatch(setUsers(data.items))
+      dispatch(setTotalUsersCount(data.totalCount))
+      dispatch(togglelIsFetching(false))
   }
 }
 export  const unFollowTC = (userId:string) => {

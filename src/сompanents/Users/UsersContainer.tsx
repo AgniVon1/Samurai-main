@@ -27,8 +27,8 @@ type PropsType = UsersType & {
 
 export const UsersContainer: React.FC<PropsType> = (props) => {
     useEffect(() => {
-        props.getUsers(1)
-    }, []);
+        props.getUsers(props.currentPage)
+    }, [props.currentPage]);
 
 
     const onPageChanged = (newCurrentPage: number) => {
@@ -53,6 +53,7 @@ export const UsersContainer: React.FC<PropsType> = (props) => {
 }
 
 const mapStateToProps = (state: RootStateType) => {
+    console.log(state.usersPage.totalUserCount)
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,

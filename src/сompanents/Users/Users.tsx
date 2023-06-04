@@ -29,9 +29,7 @@ export const Users: React.FC<UsersPropsType> = ({users,pageSize,totalUserCount, 
                  <span>
                      <div>
                          <NavLink to = {'/profile/'+ u.id}><img src={u.photos.small}/></NavLink>
-
                      </div>
-
                        {
                            u.followed
                                 ? <button onClick={() => unFollowUser(u.id)}>Unfollow</button>

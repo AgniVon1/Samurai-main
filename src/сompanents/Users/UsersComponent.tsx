@@ -3,6 +3,7 @@ import {UsersType, UserType} from "../../redux/users-reducer";
 import s from "../Users/users.module.css"
 import {NavLink} from "react-router-dom";
 import ava from "../../assets/imges/Ellipse45.png"
+import {Paginator} from "../../common/UI/Pagination/Paginator";
 
 
 type UsersPropsType = UsersType & {
@@ -15,11 +16,6 @@ type UsersPropsType = UsersType & {
 
 
 export const UsersComponent: React.FC<UsersPropsType> = (props) => {
-  const pagesCount = props.totalUserCount / props.pageSize
-  const pages = []
-  for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i)
-  }
 
   return (
     <div>
@@ -50,10 +46,7 @@ export const UsersComponent: React.FC<UsersPropsType> = (props) => {
            </span>
       </div>)}
       <div>
-        {pages.map(p => {
-          return <span className={(props.currentPage === p) ? s.selectedPage : ''}
-                       onClick={() => props.setCurrentPage(p)}> {p}</span>
-        })}
+        <Paginator pageSize={4} totalUsersCount={ props.totalUserCount} currentPage={props.currentPage } onChangePageHandler={props.setCurrentPage} numberOfPagesInBlock={15} />
       </div>
     </div>
   );
