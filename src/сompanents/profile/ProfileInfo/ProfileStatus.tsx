@@ -5,7 +5,7 @@ type PropsType = {
     updateUserStatus:(newStatus :string) =>void,
 }
 
-export const ProfileStatus:React.FC<PropsType> = ({status,updateUserStatus}) => {
+export const ProfileStatus:React.FC<PropsType> =React.memo(({status,updateUserStatus}) => {
     const [editMode,setEditMode] = useState(false)
     const [localStatus,setLocalStatus] = useState(status)
 
@@ -33,4 +33,4 @@ export const ProfileStatus:React.FC<PropsType> = ({status,updateUserStatus}) => 
         (<input  autoFocus={true} onBlur={deActivateMode} onChange={onValueChange} value={localStatus}/>)}
       </div>
     );
-};
+})

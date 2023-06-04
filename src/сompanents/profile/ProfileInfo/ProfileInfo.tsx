@@ -10,7 +10,7 @@ type ProfileInfoPropsType = {
   updateUserStatus:(newStatus:string) => void,
 }
 
-export const ProfileInfo:React.FC<ProfileInfoPropsType> = ({updateUserStatus,status,profile}) => {
+export const ProfileInfo:React.FC<ProfileInfoPropsType> = React.memo( ({updateUserStatus,status,profile}) => {
   if (!profile) return <Preloader/>
   return (
     <div>
@@ -21,5 +21,5 @@ export const ProfileInfo:React.FC<ProfileInfoPropsType> = ({updateUserStatus,sta
       <ProfileStatus status={status} updateUserStatus = {updateUserStatus}/>
     </div>
   );
-};
+})
 

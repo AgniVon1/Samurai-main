@@ -8,7 +8,7 @@ export type MyPostsPropsType = {
     addPost: (newPost:string) => void,
 }
 
-export const MyPosts: React.FC<MyPostsPropsType> = ({
+export const MyPosts: React.FC<MyPostsPropsType> = React.memo( ({
                                                         profilePage:
                                                             {
                                                                 posts: posts,
@@ -27,5 +27,5 @@ export const MyPosts: React.FC<MyPostsPropsType> = ({
             {mappedPosts}
         </div>
     );
-};
+})
 
