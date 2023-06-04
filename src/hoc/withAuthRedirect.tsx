@@ -1,8 +1,9 @@
 
 import React, {Component, ComponentType} from 'react';
 import {connect} from "react-redux";
-import {RootStateType} from "../redux/redux-store";
+
 import {Navigate} from "react-router-dom";
+import {RootStateType} from "../store/store";
 
 type MapStateToPropsAuthRedirectType = {
   isAuth: boolean

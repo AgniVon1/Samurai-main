@@ -11,8 +11,8 @@ import {
     UserType
 } from "../../store/users/users-reducer";
 import {UsersComponent} from "./UsersComponent";
-import {Preloader} from "../../common/UI/preloader/Preloader";
 import {RootStateType} from "../../store/store";
+import {Preloader} from "../../common/UI/Preloader/Preloader";
 
 
 type PropsType = UsersType & {
