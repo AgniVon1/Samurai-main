@@ -1,13 +1,13 @@
 import React from 'react';
 import {LoginForm, LoginFormOwnProps, LoginFormValuesType} from "./LoginForm";
-import {RootStateType} from "../../redux/redux-store";
 import {reduxForm} from "redux-form";
 import {connect} from "react-redux";
-import {login} from "../../redux/auth-reducer";
+import {login} from "../../store/auth/auth-reducer";
 import {Navigate} from "react-router-dom";
+import {RootStateType} from "../../store/store";
 
 
-export type LoginPropsType = MapStateToPropsLoginType & MapDispatchToPropsLoginType;
+export type PropsType = MapStateToPropsLoginType & MapDispatchToPropsLoginType;
 
 export type MapDispatchToPropsLoginType = {
     login: (email: string, password: string, rememberMe: boolean, captchaUrl: string| null) => void,
@@ -24,7 +24,7 @@ const mapStateToProps = (state: RootStateType): MapStateToPropsLoginType => {
     }
 }
 
-export const Login = (props: LoginPropsType) => {
+export const Login = (props: PropsType) => {
     const onSubmit = (formData: LoginFormValuesType) => {
         props.login(formData.email, formData.password, formData.rememberMe,formData.captchaUrl)
     }

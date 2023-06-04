@@ -1,18 +1,18 @@
 import React, {useEffect} from 'react';
 import {connect} from "react-redux";
-import {RootStateType} from "../../redux/redux-store";
 import {
-    followTC,
-    getUsersTC,
-    setCurrentPageTC,
+    follow,
+    getUsers,
+    setPage,
     setTotalUsersCount,
     setUsers,
-    unFollowTC,
+    unFollow,
     UsersType,
     UserType
-} from "../../redux/users-reducer";
+} from "../../store/users/users-reducer";
 import {UsersComponent} from "./UsersComponent";
-import {Preloader} from "../common/preloader/Preloader";
+import {Preloader} from "../../common/UI/preloader/Preloader";
+import {RootStateType} from "../../store/store";
 
 
 type PropsType = UsersType & {
@@ -30,14 +30,12 @@ export const UsersContainer: React.FC<PropsType> = (props) => {
         props.getUsers(props.currentPage)
     }, [props.currentPage]);
 
-
     const onPageChanged = (newCurrentPage: number) => {
         props.setCurrentPage(newCurrentPage)
     }
 
     return <div key={'1'}>
         {props.isFetching ? <Preloader/> : null}
-
         <UsersComponent users={props.users}
                         isFetching={props.isFetching}
                         pageSize={props.pageSize}
@@ -86,10 +84,10 @@ const mapStateToProps = (state: RootStateType) => {
 
 export default connect(mapStateToProps, {
     setUsers,
-    followUser: followTC,
-    unFollowUser: unFollowTC,
-    getUsers: getUsersTC,
-    setCurrentPage: setCurrentPageTC,
+    followUser: follow,
+    unFollowUser: unFollow,
+    getUsers,
+    setCurrentPage: setPage,
     setTotalUsersCount,
 })(UsersContainer);
 

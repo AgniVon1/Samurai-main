@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react';
-import {UserType} from "../../redux/users-reducer";
+
 import axios from "axios";
 import {NavLink} from "react-router-dom";
+import {UserType} from "../../store/users/users-reducer";
 
 type UsersPropsType = {
     users: Array<UserType>,

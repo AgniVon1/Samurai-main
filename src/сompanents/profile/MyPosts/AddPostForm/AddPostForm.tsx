@@ -1,6 +1,6 @@
 import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Textarea} from "../../../common/Textarea/Textarea";
+import {Textarea} from "../../../../common/UI/Textarea/Textarea";
 import {requiredField} from "../../../../utils/validators";
 
 export type AddPostFormValuesType = {

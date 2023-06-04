@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {Dialogs} from "../Dialogs";
-import {DialogActionType, sendNewMessAC} from "../../../redux/dialog-reducer";
+import {DialogActionType, sendNewMessAC} from "../../../store/dialog/dialog-reducer";
 
 import {RootStateType} from "../../../redux/redux-store";
 import {WithAuthRedirect} from "../../../hoc/withAuthRedirect";

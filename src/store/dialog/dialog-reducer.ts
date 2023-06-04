@@ -1,26 +1,6 @@
-
 import {v1} from "uuid";
 
-
-
 const SEND_NEW_MESS = "SEND-MESSAGE"
-
-
-export type DialogPageType = {
-    dialogs: Array<DialogsArray>
-    messages: Array<MessagesArray>
-}
-
-
-export type DialogsArray = {
-    id: string
-    name: string
-}
-export type MessagesArray = {
-    id: string
-    text: string
-}
-type InitStateType = DialogPageType
 
 const initialMessagesPageState: InitStateType =
     {
@@ -57,13 +37,26 @@ const dialogReducer = (state: InitStateType = initialMessagesPageState, action: 
     }
 }
 
-export type sendNewMessActionType = ReturnType<typeof sendNewMessAC>
-
-
 export const sendNewMessAC = (newMess:string) => {
     return {
         type: SEND_NEW_MESS,newMess
     } as const
 }
+
+export type sendNewMessActionType = ReturnType<typeof sendNewMessAC>
+
+export type DialogPageType = {
+    dialogs: Array<DialogsArray>
+    messages: Array<MessagesArray>
+}
+export type DialogsArray = {
+    id: string
+    name: string
+}
+export type MessagesArray = {
+    id: string
+    text: string
+}
+type InitStateType = DialogPageType
 
 export default dialogReducer

@@ -1,10 +1,13 @@
 import React from 'react';
 import styles from './header.module.css'
 import {NavLink} from "react-router-dom";
-import {HeaderPropsType} from "./HeaderContainer";
 
-
-export const Header: React.FC<HeaderPropsType> = ({login, isAuth, logout}) => {
+type PropsType = {
+    logout:() => void,
+    isAuth:boolean,
+    login:string|null,
+}
+export const Header: React.FC<PropsType> = ({login, isAuth, logout}) => {
     return (
         <div className={styles.header}>
             <div className={styles.header__img}>

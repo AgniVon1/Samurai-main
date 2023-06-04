@@ -1,9 +1,9 @@
 import React from 'react';
-import {UsersType, UserType} from "../../redux/users-reducer";
-import s from "../Users/users.module.css"
+
 import {NavLink} from "react-router-dom";
 import ava from "../../assets/imges/Ellipse45.png"
 import {Paginator} from "../../common/UI/Pagination/Paginator";
+import {UsersType, UserType} from "../../store/users/users-reducer";
 
 
 type UsersPropsType = UsersType & {

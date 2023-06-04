@@ -1,7 +1,5 @@
 import React from 'react';
 import {Field, InjectedFormProps} from "redux-form";
-import {requiredField} from "../../utils/validators";
-import {Input} from "../../common/UI/Input/Input";
 
 
 export type LoginFormValuesType = {
@@ -42,7 +40,7 @@ export const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFor
         </div>
         <div>
 
-          {
+       {/*   {
             captchaUrl &&
             <div style={{marginTop: '100px'}}>
             <img src={captchaUrl} alt='captcha'/>
@@ -63,7 +61,7 @@ export const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFor
                             component={Input}
                             validate={[requiredField]}
                         />
-                    }
+                    }*/}
 
         </div>
         <div>

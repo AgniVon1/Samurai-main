@@ -1,30 +1,21 @@
 import {Dispatch} from "redux";
-import {authAPI, ResultCodesEnum, securityAPI} from "../api/api";
-import {RootThunkType, ThunkDispatchForm} from "./redux-store";
 import {stopSubmit} from "redux-form";
+import {authAPI} from "../../api/auth/authAPI";
+import {securityAPI} from "../../api/auth/securityAPI";
+import {RootThunkType, ThunkDispatchForm} from "../store";
+import {ResultCodesEnum} from "../../api/types/types";
 
 const SET_USER_DATA = "AUTH/SET_USER_DATA"
 const GET_CAPTCHA = "AUTH/GET_CAPTCHA"
 
 const initialState: StateType =
   {
-
     id: 0,
     email: null,
     login: null,
     isAuth: false,
     captchaUrl:'',
   }
-export type AuthType = {
-  id: number ,
-  email: string | null,
-  login: string | null,
-  isAuth: boolean,captchaUrl:string
-}
-type StateType = AuthType
-type ActionType = AuthActionType
-export type AuthActionType = ReturnType<typeof setAuthUserData>
-    | ReturnType<typeof getCaptcha>
 
 const authReducer = (state: StateType = initialState, action: AuthActionType): StateType => {
   switch (action.type) {
@@ -42,22 +33,6 @@ const authReducer = (state: StateType = initialState, action: AuthActionType): S
       return state
   }
 }
-
-export const setAuthUserData = (id: number, email: string|null, login: string|null, isAuth: boolean) => {
-  return {
-    type: SET_USER_DATA,
-    id,
-    email,
-    login,
-    isAuth
-  } as const
-}
-
-export const getCaptcha = (captchaUrl: string) => ({
-  type: GET_CAPTCHA, captchaUrl
-} as const)
-
-
 
 export const getAuthUserData = () => {
   return  (dispatch: Dispatch<ActionType>) => {
@@ -89,9 +64,10 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
      })
   }
 }
+
 export const logout = (): RootThunkType => {
   return async (dispatch) => {
-    await authAPI.logaut().then((res) => {
+    await authAPI.logOut().then((res) => {
       console.log(res)
       if (res.data.resultCode === 0) {
         dispatch(setAuthUserData(0, null, null, false))
@@ -100,6 +76,7 @@ export const logout = (): RootThunkType => {
     })
   }
 }
+
 export const getCaptchaURL = (): RootThunkType => {
   return (dispatch) => {
     securityAPI.getCaptcha()
@@ -111,6 +88,29 @@ export const getCaptchaURL = (): RootThunkType => {
         })
   }
 }
+export const setAuthUserData = (id: number, email: string|null, login: string|null, isAuth: boolean) => {
+    return {
+        type: SET_USER_DATA,
+        id,
+        email,
+        login,
+        isAuth
+    } as const
+}
 
+export const getCaptcha = (captchaUrl: string) => ({
+    type: GET_CAPTCHA, captchaUrl
+} as const)
 
+export type AuthActionType = ReturnType<typeof setAuthUserData>
+    | ReturnType<typeof getCaptcha>
+
+type ActionType = AuthActionType
+type StateType = AuthType
+export type AuthType = {
+    id: number ,
+    email: string | null,
+    login: string | null,
+    isAuth: boolean,captchaUrl:string
+}
 export default authReducer

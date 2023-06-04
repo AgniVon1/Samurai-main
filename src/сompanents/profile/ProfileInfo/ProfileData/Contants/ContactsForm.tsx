@@ -2,7 +2,7 @@ import React from 'react';
 import {Field} from "redux-form";
 import {Input} from "../../../../../common/UI/Input/Input";
 import {requiredField} from "../../../../../utils/validators";
-import {ContactsType} from "../../../../../redux/profile-reducer";
+import {ContactsType} from "../../../../../store/profile/profile-reducer";
 
 
 type PropsType = {

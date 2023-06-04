@@ -1,4 +1,5 @@
-import {RootStateType} from "../redux-store";
+import {RootStateType} from "../store";
+
 
 export const selectIsAuth = (state: RootStateType) => state.auth.isAuth
 export const selectLogin = (state: RootStateType) => state.auth.login

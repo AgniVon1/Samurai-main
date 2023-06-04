@@ -25,7 +25,7 @@ const AddMessageForm : React.FC<InjectedFormProps<AddMessageFormValuesType, AddM
   );
 };
 
-export default reduxForm<AddMessageFormValuesType, AddMessageFormOwnProps>({
+export default reduxForm<AddMessageFormValuesType, any>({
   form: 'dialogAddMessageForm'
 })(AddMessageForm);
 

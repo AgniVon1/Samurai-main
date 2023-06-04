@@ -1,4 +1,4 @@
-import {ProfileType} from "../../../../redux/profile-reducer";
+import {ProfileType} from "../../../../store/profile/profile-reducer";
 import {Contacts} from "./Contants/Contants";
 
 

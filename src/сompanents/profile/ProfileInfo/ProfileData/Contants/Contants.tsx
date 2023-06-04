@@ -1,6 +1,6 @@
 import React from 'react';
 import {Contact} from "./Contact";
-import {ContactsType} from "../../../../../redux/profile-reducer";
+import {ContactsType} from "../../../../../store/profile/profile-reducer";
 
 type PropsType = {
     contacts: ContactsType

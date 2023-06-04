@@ -6,12 +6,11 @@ import HeaderContainer from "./сompanents/header/HeaderContainer";
 import {LoginContainer} from "./сompanents/login/Login";
 import {connect} from "react-redux";
 import {compose} from "redux";
-import {initializeApp} from "./redux/app-reducer";
-import {RootStateType} from "./redux/redux-store";
-import {Preloader} from "./сompanents/common/preloader/Preloader";
+import {initializeApp} from "./store/app/app-reducer";
+import {Preloader} from "./common/UI/Preloader/Preloader";
 import {Profile} from "./сompanents/profile/Profile";
-import {securityAPI} from "./api/api";
-import {log} from "util";
+import {RootStateType} from "./store/store";
+
 
 const DialogsContainer = lazy(() => import('./сompanents/dialogs/Dialog/DialogsContainer'));
 const UsersContainer = lazy(() => import('./сompanents/Users/UsersContainer'));

@@ -3,7 +3,7 @@ import styles from './dialogs.module.css'
 import {Dialog} from "./Dialog/Dialog";
 import {Message} from "./Dialog/Message";
 import AddMessageForm, { AddMessageFormValuesType} from "./AddMessageForm/AddMessageForm";
-import {DialogPageType} from "../../redux/dialog-reducer";
+import {DialogPageType} from "../../store/dialog/dialog-reducer";
 
 
 

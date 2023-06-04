@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 
-import {Preloader} from "../../common/preloader/Preloader";
+
 import {ProfileStatus} from "./ProfileStatus";
 import {ProfileDataForm, ProfileDataFormPropsType} from "./ProfileData/ProfileDataForm";
 import {ProfileData} from "./ProfileData/ProfileData";
-import {selectAuthUserId} from "../../../redux/selectors/auth-selectors";
-import {selectProfile, selectProfileStatus} from "../../../redux/selectors/profile-selectors";
-import {useAppSelector} from "../../../common/hooks/useAppSelector";
-import {useAppDispatch} from "../../../common/hooks/useAppDispatch";
+import {selectAuthUserId} from "../../../store/auth/auth-selectors";
+import {selectProfile, selectProfileStatus} from "../../../store/profile/profile-selectors";
+import {useAppSelector} from "../../../store/hooks/useAppSelector";
+import {useAppDispatch} from "../../../store/hooks/useAppDispatch";
 import {useParams} from "react-router-dom";
 import {
   fetchProfile,
@@ -15,8 +15,9 @@ import {
   updateUserPhoto,
   updateUserProfile,
   updateUserStatus
-} from "../../../redux/profile-reducer";
+} from "../../../store/profile/profile-reducer";
 import {reduxForm} from "redux-form";
+import {Preloader} from "../../../common/UI/Preloader/Preloader";
 
 
 export const ProfileInfo:React.FC = React.memo( () => {
@@ -62,7 +63,7 @@ export const ProfileInfo:React.FC = React.memo( () => {
   if (!profile) return <Preloader/>
   return (
     <div>
-      {profile.photos.large && <img src={profile.photos.small ||''}/> }
+      {profile.photos.large && <img src={profile.photos.small || 'PHOTO'} alt={'PHOTO'}/> }
       {
         !userId
             ?
