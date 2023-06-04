@@ -15,7 +15,6 @@ export type ProfilePropsType = {
 
 
 export const Profile: React.FC<ProfilePropsType> = ({status,profile,updateUserStatus}) => {
-
     return (
         <div className={styles.profile}>
             <ProfileInfo profile = {profile}   status ={status}  updateUserStatus = {updateUserStatus}/>
