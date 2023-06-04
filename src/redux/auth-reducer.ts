@@ -8,13 +8,13 @@ const SET_USER_DATA = "AUTH/SET_USER_DATA"
 const initialState: StateType =
   {
 
-    id: null,
+    id: 0,
     email: null,
     login: null,
     isAuth: false,
   }
 export type AuthType = {
-  id: number | null,
+  id: number ,
   email: string | null,
   login: string | null,
   isAuth: boolean,
@@ -38,7 +38,7 @@ const authReducer = (state: StateType = initialState, action: ActionType): State
   }
 }
 
-export const setAuthUserData = (id: number|null, email: string|null, login: string|null, isAuth: boolean) => {
+export const setAuthUserData = (id: number, email: string|null, login: string|null, isAuth: boolean) => {
   return {
     type: SET_USER_DATA,
     id,
@@ -77,7 +77,7 @@ export const logout = (): RootThunkType => {
     await authAPI.logaut().then((res) => {
       console.log(res)
       if (res.data.resultCode === 0) {
-        dispatch(setAuthUserData(null, null, null, false))
+        dispatch(setAuthUserData(0, null, null, false))
 
       }
     })

@@ -1,18 +1,19 @@
 import {Dispatch} from "redux";
-import {authAPI} from "../api/api";
-import {getAuthUserData, setAuthUserData} from "./auth-reducer";
-import {RootThunkType} from "./redux-store";
+import {getAuthUserData} from "./auth-reducer";
+
 
 const SET_INITIALIZED = "APP/SET_INITIALIZED"
+const SET_ERROR = "APP/SET_ERROR"
 
 const initialState: AppInitStateType = {
     initialized: false,
+    errorMessage: "" ,
 }
 
 type AppInitStateType = {
-    initialized: boolean,
+    initialized: boolean,errorMessage:string| null,
 }
-export type AppActionType = ReturnType<typeof setInit>
+export type AppActionType = ReturnType<typeof setInit> | ReturnType<typeof setErrorMessage>
 
 export const appReducer = (state: AppInitStateType = initialState, action: AppActionType): AppInitStateType => {
     switch (action.type) {
@@ -21,6 +22,12 @@ export const appReducer = (state: AppInitStateType = initialState, action: AppAc
                 ...state,
                 initialized: true
             }
+            case SET_ERROR:
+            return {
+                ...state,
+                errorMessage: action.errorMessage
+            }
+
         default:
             return state
     }
@@ -29,6 +36,11 @@ export const appReducer = (state: AppInitStateType = initialState, action: AppAc
 export const setInit = () => {
     return {
         type: SET_INITIALIZED,
+    } as const
+}
+export const setErrorMessage = (errorMessage:string| null) => {
+    return {
+        type: SET_ERROR,errorMessage
     } as const
 }
 

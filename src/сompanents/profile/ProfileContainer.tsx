@@ -1,3 +1,4 @@
+/*
 import React, {useEffect} from 'react';
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
@@ -16,9 +17,7 @@ type MapStateToPropsType = ProfilePageType & {
 type MapDispatchToPropsType = {
     setProfile: (ui: number) => void,
     addNewPost: () => void,
-
     getUserStatus: (uId: number) => void,
-
     updateUserStatus: (newStatus: string) => void,
 }
 type PathParamType = {
@@ -37,10 +36,10 @@ export const ProfileContainer: React.FC<PropsType> = (props) => {
         props.getUserStatus(uId);
     }, []);
 
-    return (
+    /!*return (
         <Profile profile={props.profile} status={props.status} updateUserStatus={props.updateUserStatus}/>
-    );
-
+    );*!/
+    return <></>
 }
 
 const mapStateToProps = (state: RootStateType): MapStateToPropsType => (
@@ -52,6 +51,7 @@ const mapStateToProps = (state: RootStateType): MapStateToPropsType => (
         isAuth: state.auth.isAuth
     }
 )
+/!*
 
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {
@@ -60,4 +60,8 @@ export default compose<React.ComponentType>(
         getUserStatus,
         updateUserStatus,
     })
-    , withRouter)(ProfileContainer)
+    , withRouter)(ProfileContainer)*!/
+*/
+
+export default () => {
+}

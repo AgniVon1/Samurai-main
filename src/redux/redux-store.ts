@@ -27,6 +27,13 @@ export type RootThunkType<ReturnType = void> = ThunkAction<ReturnType, RootState
 export type ThunkDispatchForm = ThunkDispatch<RootStateType, unknown, ReturnType<typeof stopSubmit>>
 const store = createStore(reducer,composeEnhancers(applyMiddleware(thunk)));
 
+export type AppThunkDispatch = ThunkDispatch<RootStateType, unknown, RootActionType>
+
+
+
+
+
+
 // @ts-ignore
 Window.store = store
 export default store
