@@ -1,19 +1,21 @@
 import React from 'react';
 import {Field, InjectedFormProps} from "redux-form";
+import {requiredField} from "../../utils/validators";
+import {Input} from "../../common/UI/Input/Input";
 
 
 export type LoginFormValuesType = {
   email: string
   password: string
   rememberMe: boolean
-
+  captchaUrl: string | null
 }
 
 export type LoginFormOwnProps = {
-
+  captchaUrl: string | null
 }
 export const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnProps> & LoginFormOwnProps> =
-  ({ handleSubmit, error})  => {
+  ({ handleSubmit, error,captchaUrl})  => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -39,12 +41,30 @@ export const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFor
           /> Remember me
         </div>
         <div>
+
+          {
+            captchaUrl &&
+            <div style={{marginTop: '100px'}}>
+            <img src={captchaUrl} alt='captcha'/>
+            </div>
+          }
+
           {
             error &&
-              <div>
-                {error}
-              </div>
+            <div>
+          {error}
+            </div>
           }
+
+          {captchaUrl &&
+                        <Field
+                            placeholder={'Введите символы'}
+                            name={'captchaUrl'}
+                            component={Input}
+                            validate={[requiredField]}
+                        />
+                    }
+
         </div>
         <div>
           <button>

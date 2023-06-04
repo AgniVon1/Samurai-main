@@ -10,6 +10,8 @@ import {initializeApp} from "./redux/app-reducer";
 import {RootStateType} from "./redux/redux-store";
 import {Preloader} from "./сompanents/common/preloader/Preloader";
 import {Profile} from "./сompanents/profile/Profile";
+import {securityAPI} from "./api/api";
+import {log} from "util";
 
 const DialogsContainer = lazy(() => import('./сompanents/dialogs/Dialog/DialogsContainer'));
 const UsersContainer = lazy(() => import('./сompanents/Users/UsersContainer'));

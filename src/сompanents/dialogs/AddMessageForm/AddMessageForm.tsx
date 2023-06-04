@@ -26,6 +26,6 @@ const AddMessageForm : React.FC<InjectedFormProps<AddMessageFormValuesType, AddM
 };
 
 export default reduxForm<AddMessageFormValuesType, AddMessageFormOwnProps>({
-  form: 'dialogAddMessageForm' // уникальное строковое имя для каждой формы
+  form: 'dialogAddMessageForm'
 })(AddMessageForm);
 

@@ -19,7 +19,7 @@ const reducer = combineReducers({
 
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export type RootActionType = UserActionType | ProfileActionType | AuthActionType|DialogActionType |AppActionType
+export type RootActionType = UserActionType | ProfileActionType | AuthActionType | DialogActionType | AppActionType
 export type RootStateType = ReturnType<typeof reducer>
 export type RootThunkType<ReturnType = void> = ThunkAction<ReturnType, RootStateType, unknown, RootActionType>
 
