@@ -10,6 +10,7 @@ import {initializeApp} from "./store/app/app-reducer";
 import {Preloader} from "./common/UI/Preloader/Preloader";
 import {Profile} from "./сompanents/profile/Profile";
 import {RootStateType} from "./store/store";
+import ChatPage from "./сompanents/chat/ChatPage";
 
 
 const DialogsContainer = lazy(() => import('./сompanents/dialogs/Dialog/DialogsContainer'));
@@ -47,6 +48,8 @@ const App: React.FC<PropsType> = ({isInitApp, initializeApp}) => {
 
                         <Route path={"/login"}
                                element={<LoginContainer/>}/>
+                        <Route path={"/chat"}
+                               element={<ChatPage/>}/>
                         <Route path={"/users"} element={
                             <Suspense fallback={<Preloader/>}>
                                 <UsersContainer/>

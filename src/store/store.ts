@@ -10,11 +10,12 @@ import {ProfileActionType} from "./profile/profile-reducer";
 import {AuthActionType} from "./auth/auth-reducer";
 import {DialogActionType} from "./dialog/dialog-reducer";
 import {AppActionType} from "./app/app-reducer";
+import {ChatActionsType} from "./chat/chat-reducer";
 
 
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export type RootActionType = UserActionType | ProfileActionType | AuthActionType | DialogActionType | AppActionType
+export type RootActionType = UserActionType | ProfileActionType | AuthActionType | DialogActionType | AppActionType | ChatActionsType
 export type RootStateType = ReturnType<typeof rootReducer>
 export type RootThunkType<ReturnType = void> = ThunkAction<ReturnType, RootStateType, unknown, RootActionType>
 export type ThunkDispatchForm = ThunkDispatch<RootStateType, unknown, ReturnType<typeof stopSubmit>>

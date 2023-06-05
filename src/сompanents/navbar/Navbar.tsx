@@ -15,6 +15,9 @@ export const Navbar = () => {
             <div className={styles.item}>
                 <NavLink to="/users">Users</NavLink>
             </div>
+            <div className={styles.item}>
+                <NavLink to="/chat">Group Chat</NavLink>
+            </div>
         </nav>
     );
 };

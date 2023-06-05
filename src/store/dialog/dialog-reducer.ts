@@ -4,7 +4,6 @@ const SEND_NEW_MESS = "SEND-MESSAGE"
 
 const initialMessagesPageState: InitStateType =
     {
-
         dialogs: [
             {id: v1(), name: 'Neil Tunicliff'},
             {id: v1(), name: 'Craig Lee Scott'},
@@ -22,6 +21,7 @@ const initialMessagesPageState: InitStateType =
     }
 
 export type DialogActionType = sendNewMessActionType
+
 const dialogReducer = (state: InitStateType = initialMessagesPageState, action: DialogActionType): DialogPageType => {
     switch (action.type) {
         case SEND_NEW_MESS:
