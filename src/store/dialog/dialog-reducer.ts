@@ -1,62 +1,70 @@
-import {v1} from "uuid";
+import {DialogResponse, dialogsAPI} from "../../api/dialogs/dialogs-api";
+import {Dispatch} from "redux";
+import {RootStateType, RootThunkType} from "../store";
+import {ThunkDispatch} from "redux-thunk";
 
-const SEND_NEW_MESS = "SEND-MESSAGE"
-
-const initialMessagesPageState: InitStateType =
-    {
-        dialogs: [
-            {id: v1(), name: 'Neil Tunicliff'},
-            {id: v1(), name: 'Craig Lee Scott'},
-            {id: v1(), name: 'Ali Clarkson'},
-            {id: v1(), name: 'Thomas Remvik Aasen'},
-            {id: v1(), name: 'Damon Watson'}
-        ] as Array<DialogsArray>,
-        messages: [
-            {id: v1(), text: 'Hello, Neil Tunicliff'},
-            {id: v1(), text: 'Hello, Craig Lee Scott'},
-            {id: v1(), text: 'Hello, Ali Clarkson'},
-            {id: v1(), text: 'Hello, Thomas Remvik Aasen'},
-            {id: v1(), text: 'Hello, Damon Watson'}
-        ] as Array<MessagesArray>,
-    }
-
-export type DialogActionType = sendNewMessActionType
-
-const dialogReducer = (state: InitStateType = initialMessagesPageState, action: DialogActionType): DialogPageType => {
-    switch (action.type) {
-        case SEND_NEW_MESS:
-            return {
-                ...state,
-                dialogs: [...state.dialogs],
-                messages:
-                    [...state.messages,
-                         {id: v1(), text: action.newMess}],
-            }
-        default:
-            return state
-    }
-}
+/*const SEND_NEW_MESS = "SEND-MESSAGE"
 
 export const sendNewMessAC = (newMess:string) => {
     return {
         type: SEND_NEW_MESS,newMess
     } as const
 }
+export type sendNewMessActionType = ReturnType<typeof sendNewMessAC>*/
 
-export type sendNewMessActionType = ReturnType<typeof sendNewMessAC>
+const SET_ALL_DIALOGS = "DIALOG/SET_ALL_DIALOGS"
+const DIALOG_IS_FETCHING = "DIALOG/TOGGLE_IS_FETCHING"
 
-export type DialogPageType = {
-    dialogs: Array<DialogsArray>
-    messages: Array<MessagesArray>
+const initialState: DialogsStateType =
+    {
+        dialogs: [
+        ] as DialogResponse[],
+        isFetching: false,
+    }
+
+const dialogReducer = (state: DialogsStateType = initialState, action: DialogActionType): DialogsStateType => {
+    switch (action.type) {
+        case SET_ALL_DIALOGS:
+            return {
+                ...state,dialogs: [...action.dialogs]
+            }
+        case DIALOG_IS_FETCHING:
+            return {
+                ...state,
+                isFetching: action.value
+            }
+        default:
+            return state
+    }
 }
-export type DialogsArray = {
-    id: string
-    name: string
+
+export const fetchDialogs = () => {
+    return async (dispatch: Dispatch<DialogActionType>,getState: () => RootStateType) => {
+        dispatch(dialogIsFetching(true))
+        const res = await dialogsAPI.getAllDialogs()
+        dispatch(setAllDialogs(res.data))
+        dispatch(dialogIsFetching(false))
+    }
 }
-export type MessagesArray = {
-    id: string
-    text: string
+
+
+export const setAllDialogs = (dialogs:DialogResponse[]) => {
+    return {
+        type: SET_ALL_DIALOGS,
+        dialogs,
+    } as const
 }
-type InitStateType = DialogPageType
+
+export type DialogIsFetching = ReturnType<typeof dialogIsFetching>
+export const dialogIsFetching = (value: boolean) => {return {type: DIALOG_IS_FETCHING, value} as const}
+
+
+export type DialogActionType = ReturnType<typeof setAllDialogs> |
+    DialogIsFetching
+
+type DialogsStateType = {
+    dialogs: Array<DialogResponse>,
+    isFetching:boolean,
+}
 
 export default dialogReducer

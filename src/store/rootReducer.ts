@@ -6,9 +6,11 @@ import authReducer from "./auth/auth-reducer";
 import {appReducer} from "./app/app-reducer";
 import reducer from "redux-form/lib/reducer";
 import chatReducer from "./chat/chat-reducer";
+import messagesReducer from "./message/mesage-reducer";
 
 export const rootReducer = combineReducers({
-    dialogPage: dialogReducer,
+    dialog: dialogReducer,
+    messages: messagesReducer,
     profilePage: profileReducer,
     usersPage : usersReducer,
     auth: authReducer,

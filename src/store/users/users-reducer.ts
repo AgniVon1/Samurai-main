@@ -108,13 +108,13 @@ export type UserActionType = ReturnType<typeof unFollowUser>
     | TogglelIsFetching
 
 export type TogglelIsFetching = ReturnType<typeof togglelIsFetching>
+export const togglelIsFetching = (value: boolean) => {return {type: TOGGLE_IS_FETCHING, value} as const}
 
 export const unFollowUser = (userID: string) => {return {type: UNFOLLOW, userID} as const}
 export const followUser = (userID: string) => {return {type: FOLLOW, userID} as const}
 export const setUsers = (users: Array<UserType>) => {return {type: SET_USERS, users} as const}
 export const setCurrentPage = (page: number) => {return {type: SET_CURRENT_PAGE, page} as const}
 export const setTotalUsersCount = (usersCount: number) => {return {type: SET_TOTAL_USERS_COUNT, usersCount} as const}
-export const togglelIsFetching = (value: boolean) => {return {type: TOGGLE_IS_FETCHING, value} as const}
 
 
 export type UsersType = {

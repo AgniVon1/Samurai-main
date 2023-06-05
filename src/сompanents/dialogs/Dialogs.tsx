@@ -1,42 +1,35 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './dialogs.module.css'
 import {Dialog} from "./Dialog/Dialog";
-import {Message} from "./Dialog/Message";
-import AddMessageForm, { AddMessageFormValuesType} from "./AddMessageForm/AddMessageForm";
-import {DialogPageType} from "../../store/dialog/dialog-reducer";
+import {useAppDispatch} from "../../store/hooks/useAppDispatch";
+import {useAppSelector} from "../../store/hooks/useAppSelector";
+import {selectDialogs} from "../../store/dialog/dialog-selectors";
+import {fetchDialogs} from "../../store/dialog/dialog-reducer";
 
 
+export const Dialogs: React.FC = () => {
 
-export type DialogsPropsType = {
-    dialogPage:DialogPageType
-    sendNewMess: (newMess:string) => void,
+    const dispatch = useAppDispatch()
+    const dialogs = useAppSelector(selectDialogs)
 
-}
+    useEffect(() => {
+        dispatch(fetchDialogs())
+    }, [])
 
-export const Dialogs: React.FC<DialogsPropsType> = ({
-                                                        dialogPage: {
-                                                            dialogs: dialogs,
-                                                            messages: messages,
-                                                        },
-                                                        sendNewMess,
-                                                    }) => {
+    useEffect(() => {
+        const timer = setInterval(() => {
+            dispatch(fetchDialogs())
+        }, 30000);
+        return () => clearInterval(timer);
+    });
 
-  const mappedMessages = messages.map((m) => <Message message={m}/>)
-  const mappedDialogs = dialogs.map((d) => <Dialog id={d.id} name={d.name}/>)
-
-  const  addNewMessage = (formData: AddMessageFormValuesType) => {
-    sendNewMess(formData.newMess)
-  }
+    const mappedDialogs = dialogs.map((d) => <Dialog key = {d.id} dialog = {d}/>)
 
     return (
         <div className={styles.dialogs}>
             <div className={styles.dialogs_items}>
                 {mappedDialogs}
             </div>
-            <div className={styles.messages}>
-                {mappedMessages}
-            </div>
-           <AddMessageForm onSubmit ={addNewMessage}/>
         </div>
     );
 };

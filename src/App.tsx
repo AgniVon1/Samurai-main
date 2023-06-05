@@ -11,9 +11,10 @@ import {Preloader} from "./common/UI/Preloader/Preloader";
 import {Profile} from "./сompanents/profile/Profile";
 import {RootStateType} from "./store/store";
 import ChatPage from "./сompanents/chat/ChatPage";
+import {Dialogs} from "./сompanents/dialogs/Dialogs";
+import {dialogsAPI} from "./api/dialogs/dialogs-api";
 
 
-const DialogsContainer = lazy(() => import('./сompanents/dialogs/Dialog/DialogsContainer'));
 const UsersContainer = lazy(() => import('./сompanents/Users/UsersContainer'));
 
 type PropsType = {
@@ -37,11 +38,11 @@ const App: React.FC<PropsType> = ({isInitApp, initializeApp}) => {
                 <div className="App_content">
 
                     <Routes>
-                        <Route path={"/dialogs"}
-                               element={<Suspense fallback={<Preloader/>}>
-                                   <DialogsContainer/>
-                               </Suspense>
-                               }/>
+                        <Route path={"/dialogs/*"}
+                               element={<Dialogs/>
+                               }>
+                            <Route path={':dialogId'} element={<Dialogs/>}/>
+                        </Route>
                         <Route path={'/profile/*'} element={<Profile/>}>
                             <Route path={':userId'} element={<Profile/>}/>
                         </Route>
