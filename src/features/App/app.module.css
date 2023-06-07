@@ -1,0 +1,20 @@
+:root {
+  --text-color: #8a8c99
+}
+* {
+  font-size: 1.4rem;
+  box-sizing:border-box;
+}
+
+.gird{
+  display: grid;
+  width: 1200px;
+  margin: 0 auto;
+  grid-template-areas:
+  "head head"
+  "nav _content";
+  grid-template-rows: 60px;
+  grid-template-columns: 2fr 10fr;
+  grid-gap: 10px;
+}
+

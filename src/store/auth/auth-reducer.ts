@@ -22,7 +22,7 @@ const authReducer = (state: StateType = initialState, action: AuthActionType): S
     case SET_USER_DATA:
       return {
         ...state,
-        isAuth: true,
+        isAuth: action.isAuth,
         id: action.id,
         email: action.email,
         login: action.login,
@@ -68,10 +68,8 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
 export const logout = (): RootThunkType => {
   return async (dispatch) => {
     await authAPI.logOut().then((res) => {
-      console.log(res)
       if (res.data.resultCode === 0) {
         dispatch(setAuthUserData(0, null, null, false))
-
       }
     })
   }

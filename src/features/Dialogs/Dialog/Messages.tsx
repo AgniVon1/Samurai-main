@@ -4,6 +4,7 @@ import {useAppDispatch} from "../../../store/hooks/useAppDispatch";
 import {useAppSelector} from "../../../store/hooks/useAppSelector";
 import {selectMessages} from "../../../store/message/messages-selectors";
 import {fetchMessages, sendMessage} from "../../../store/message/mesage-reducer";
+import {fetchDialogs} from "../../../store/dialog/dialog-reducer";
 
 
 
@@ -18,6 +19,12 @@ export const Messages: React.FC = () => {
     useEffect(() => {
         if (dialogId) dispatch(fetchMessages(+dialogId))
     }, [dialogId])
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            if (dialogId) dispatch(fetchMessages(+dialogId))}, 35000);
+        return () => clearInterval(timer);
+    });
 
     const [message, setMessage] = useState('')
 

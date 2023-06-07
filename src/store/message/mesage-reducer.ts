@@ -9,7 +9,7 @@ const SET_INTERLOCUTOR_ID = "MESSAGES/SET_INTERLOCUTOR_ID"
 const initialState: MessagesStateType =
     {
         messages: [] as MessageResponse[],
-        interlocutorId: 0,
+        dialogId: 0,
     }
 
 const messagesReducer = (state: MessagesStateType = initialState, action: MessagesActionType): MessagesStateType => {
@@ -20,7 +20,7 @@ const messagesReducer = (state: MessagesStateType = initialState, action: Messag
             }
         case SET_INTERLOCUTOR_ID:
             return {
-                ...state, interlocutorId:action.interlocutorId
+                ...state, dialogId:action.dialogId
             }
         default:
             return state
@@ -32,15 +32,15 @@ export const fetchMessages = (userIdFriend: number) => {
         dispatch(dialogIsFetching(true))
         const res = await dialogsAPI.getAllMessagesFromFriend(userIdFriend)
         dispatch(setMessages(res.data.items))
-        dispatch(setInterlocutorId(userIdFriend))
+        dispatch(setDialogId(userIdFriend))
         dispatch(dialogIsFetching(false))
     }
 }
 export const sendMessage = (message:string) => {
     return async (dispatch: Dispatch<DialogIsFetching | MessagesActionType>,getState : () =>  RootStateType) => {
         dispatch(dialogIsFetching(true))
-        console.log(getState().messages.interlocutorId)
-        const res = await dialogsAPI.sendMessage(getState().messages.interlocutorId,message)
+        console.log(getState().messages.dialogId)
+        const res = await dialogsAPI.sendMessage(getState().messages.dialogId,message)
         dispatch(dialogIsFetching(false))
     }
 }
@@ -51,19 +51,19 @@ export const setMessages = (messages: MessageResponse[]) => {
         messages,
     } as const
 }
-export const setInterlocutorId = (interlocutorId: number) => {
+export const setDialogId = (dialogId: number) => {
     return {
         type: SET_INTERLOCUTOR_ID,
-        interlocutorId,
+        dialogId,
     } as const
 }
 
 export type MessagesActionType = ReturnType<typeof setMessages>
-| ReturnType<typeof setInterlocutorId>
+| ReturnType<typeof setDialogId>
 
 type MessagesStateType = {
     messages: Array<MessageResponse>,
-    interlocutorId:number,
+    dialogId:number,
 }
 
 export default messagesReducer

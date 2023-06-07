@@ -1,0 +1,31 @@
+.navbar {
+    background: #c0d8e0;
+    grid-area: nav;
+    display: flex;
+    flex-direction: column;
+}
+.item {
+    border-radius: 4px;
+    margin-bottom: 10px;
+    padding: 10px 0 10px 7px;
+    transition: background-color 0.3s ease;
+}
+
+a{
+    color: var(--text-color) ;
+    text-decoration: none;
+    user-select: none;
+}
+
+a.active {
+    color: #000000;
+    font-weight: 600;
+}
+a.active > div {
+    background-color: #dec1bd;
+}
+
+
+.item:hover {
+    background-color: #dec1bd;
+}
