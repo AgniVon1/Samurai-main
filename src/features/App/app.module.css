@@ -1,6 +1,4 @@
-:root {
-  --text-color: #8a8c99
-}
+
 * {
   font-size: 1.4rem;
   box-sizing:border-box;
@@ -16,5 +14,6 @@
   grid-template-rows: 60px;
   grid-template-columns: 2fr 10fr;
   grid-gap: 10px;
+  height: 100vh;
 }
 

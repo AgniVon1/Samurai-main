@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {login} from "../../store/auth/auth-reducer";
 import {Navigate} from "react-router-dom";
 import {RootStateType} from "../../store/store";
-
+import s from "./login.module.css"
 
 export type PropsType = MapStateToPropsLoginType & MapDispatchToPropsLoginType;
 
@@ -33,9 +33,9 @@ export const Login = (props: PropsType) => {
         return <Navigate to={'/profile'}/>
     }
     return (
-        <div>
+        <div className={s.login}>
             <div>
-                Login
+                <h2>Login</h2>
             </div>
             <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
         </div>
@@ -43,8 +43,6 @@ export const Login = (props: PropsType) => {
     );
 };
 
-
-//Hoc
 export const LoginReduxForm = reduxForm<LoginFormValuesType, LoginFormOwnProps>({
     form: 'login'
 })(LoginForm)

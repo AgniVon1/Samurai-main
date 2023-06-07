@@ -1,5 +1,5 @@
 import React, {lazy} from 'react';
-import {Route,Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import {Dialogs} from "../../Dialogs/Dialogs";
 import s from "../Routes/routers.module.css"
 import {Profile} from "../../Profile/Profile";
