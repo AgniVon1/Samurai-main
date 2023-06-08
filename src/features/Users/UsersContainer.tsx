@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 import {
     follow,
     getUsers,
-    setPage,
     setTotalUsersCount,
     setUsers,
     unFollow,
@@ -13,6 +12,7 @@ import {
 import {UsersComponent} from "./UsersComponent";
 import {RootStateType} from "../../store/store";
 import {Preloader} from "../../common/UI/Preloader/Preloader";
+import {Users} from "./Users";
 
 
 type PropsType = UsersType & {
@@ -35,8 +35,8 @@ export const UsersContainer: React.FC<PropsType> = (props) => {
     }
 
     return <div key={'1'}>
-        {props.isFetching ? <Preloader/> : null}
-        <UsersComponent users={props.users}
+        {props.isFetching ? <Preloader/> : <Users /> }
+       {/* <UsersComponent users={props.users}
                         isFetching={props.isFetching}
                         pageSize={props.pageSize}
                         totalUserCount={props.totalUserCount}
@@ -45,13 +45,12 @@ export const UsersContainer: React.FC<PropsType> = (props) => {
                         unFollowUser={props.unFollowUser}
                         setUsers={props.setUsers}
                         setCurrentPage={onPageChanged}
-                        setTotalUsersCount={props.setTotalUsersCount}/>
+                        setTotalUsersCount={props.setTotalUsersCount}/>*/}
     </div>
 
 }
 
 const mapStateToProps = (state: RootStateType) => {
-    console.log(state.usersPage.totalUserCount)
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
@@ -60,27 +59,7 @@ const mapStateToProps = (state: RootStateType) => {
         isFetching: state.usersPage.isFetching,
     }
 }
-
-/*const mapDispatchToProps = (dispatch: (a: UsersActionType) => void) => ({
-    followUser: (userID:string) => {
-        dispatch(followUserAC(userID))
-    },
-    unFollowUser: (userID:string) => {
-        dispatch(unFollowUserAC(userID))
-    },
-    setUsers: (users:Array<UserType>)=>{
-        dispatch(setUsersAC(users))
-    },
-    setCurrentPage: (page:number)=>{
-        dispatch(setCurrentPageAC(page))
-    },
-    setTotalUsersCount: (usersCount:number)=>{
-        dispatch(setTotalUsersCountAC(usersCount))
-    },
-    togglelIsFetching:(value:boolean)=>{
-        dispatch(togglelIsFetchingAC(value))
-    },
-});*/
+/*
 
 export default connect(mapStateToProps, {
     setUsers,
@@ -90,4 +69,6 @@ export default connect(mapStateToProps, {
     setCurrentPage: setPage,
     setTotalUsersCount,
 })(UsersContainer);
+*/
 
+export default () => <></>;

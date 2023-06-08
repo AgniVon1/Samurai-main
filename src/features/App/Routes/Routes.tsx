@@ -1,13 +1,15 @@
-import React, {lazy} from 'react';
+import React from 'react';
 import {Route, Routes} from "react-router-dom";
 import {Dialogs} from "../../Dialogs/Dialogs";
 import s from "../Routes/routers.module.css"
 import {Profile} from "../../Profile/Profile";
 import {LoginContainer} from "../../Login/Login";
-import ChatPage from "../../Chat/ChatPage";
-import {withSuspense} from "../../../common/hoc/withSuspense";
+import {ChatPage} from "../../Chat/ChatPage";
+import {Users} from "../../Users/Users";
 
+/*
 const UsersContainer = lazy(() => import('../../Users/UsersContainer'));
+*/
 
 export const AppRoutes: React.FC = () => (
     <div className={s.content}>
@@ -24,9 +26,7 @@ export const AppRoutes: React.FC = () => (
                    element={<LoginContainer/>}/>
             <Route path={"/chat"}
                    element={<ChatPage/>}/>
-            <Route path={"/users"} element={
-                () => withSuspense(UsersContainer)
-            }/>
+            <Route path={"/users"} element={<Users/>}/>
         </Routes>
     </div>
 );

@@ -5,12 +5,15 @@ import {useAppDispatch} from "../../store/hooks/useAppDispatch";
 import {useAppSelector} from "../../store/hooks/useAppSelector";
 import {selectDialogs} from "../../store/dialog/dialog-selectors";
 import {fetchDialogs} from "../../store/dialog/dialog-reducer";
+import {useAuthRedirect} from "../../common/hooks/useAuthRedirect";
 
 
 export const Dialogs: React.FC = () => {
 
     const dispatch = useAppDispatch()
     const dialogs = useAppSelector(selectDialogs)
+
+    useAuthRedirect()
 
     useEffect(() => {
         dispatch(fetchDialogs())

@@ -1,0 +1,51 @@
+.wrapper {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    background-color: #ffffff;
+    gap: 40px;
+    border-radius: 5px;
+}
+.btnWrapper {
+    display: flex;
+    justify-content: center;
+    width: 90px;
+    height: 46px;
+    user-select: none;
+}
+.imgWrapper {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 20px;
+    user-select: none;
+}
+.imgWrapper img{
+    border-radius: 100%;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.avaBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.infoBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start
+}
+.infoMain {
+    margin-bottom: 30px;
+}
+.fullname {
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+.status {
+    font-style: italic;
+    font-size: 1rem;
+}
+.location {
+    font-size: 1rem;
+}

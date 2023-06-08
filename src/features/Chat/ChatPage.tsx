@@ -4,8 +4,11 @@ import {RootStateType} from "../../store/store";
 import {sendMessage, startMessagesListening, stopMessagesListening} from "../../store/chat/chat-reducer";
 import {ChatMessageAPIType} from "../../api/chat/chat-api";
 import {useAppDispatch} from "../../store/hooks/useAppDispatch";
+import {useAuthRedirect} from "../../common/hooks/useAuthRedirect";
 
-const ChatPage: React.FC = () => {
+export const ChatPage: React.FC = () => {
+    useAuthRedirect()
+
     return <div>
         <Chat/>
     </div>
@@ -24,6 +27,8 @@ const Chat: React.FC = () => {
             dispatch(stopMessagesListening())
         }
     }, [])
+
+
 
     return <div>
         {status === 'error' && <div>Some error occured. Please refresh the page</div>}

@@ -41,7 +41,6 @@ export const Login = (props: PropsType) => {
             </div>
             <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
         </div>
-
     );
 };
 

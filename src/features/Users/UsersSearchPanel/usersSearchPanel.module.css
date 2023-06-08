@@ -1,0 +1,24 @@
+.wrapper{
+    padding: 10px 10px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #aba6e5;
+}
+.wrapper label{
+    display: block;
+}
+.wrapper div{
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+}
+.searchInputWrapper{}
+.searchInput{}
+.searchSelect{}
+.findButton{}
+.clearInput{
+    height: 30px;
+    width: 30px;
+    font-weight: bold;
+    color: #e52525;
+}
