@@ -6,6 +6,7 @@ import {useAppSelector} from "../../store/hooks/useAppSelector";
 import {selectDialogs} from "../../store/dialog/dialog-selectors";
 import {fetchDialogs} from "../../store/dialog/dialog-reducer";
 import {useAuthRedirect} from "../../common/hooks/useAuthRedirect";
+import {Messages} from "./Dialog/Messages";
 
 
 export const Dialogs: React.FC = () => {
@@ -33,6 +34,7 @@ export const Dialogs: React.FC = () => {
             <div className={styles.dialogs_items}>
                 {mappedDialogs}
             </div>
+            <Messages/>
         </div>
     );
 };

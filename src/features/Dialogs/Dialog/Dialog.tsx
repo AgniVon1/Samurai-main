@@ -1,7 +1,6 @@
 import styles from "../dialogs.module.css";
 import {NavLink} from "react-router-dom";
 import React from "react";
-import {Messages} from "./Messages";
 
 export type PropsType = {
     dialog: {
@@ -19,13 +18,16 @@ export type PropsType = {
 }
 
 export const Dialog: React.FC<PropsType> = (props) => {
+
+
+
+    //setCurrentDialog
     return (
         <div className={styles.dialog + ' ' + styles.active}>
             <div>
                 {props.dialog.newMessagesCount}
             </div>
             <NavLink to={"/dialogs/" + props.dialog.id}>{props.dialog.userName}</NavLink>
-            <Messages/>
         </div>
     )
 }
