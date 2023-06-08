@@ -1,5 +1,5 @@
 .friendMessage {
-    width:100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -19,7 +19,7 @@
 
 .friendText {
     margin-bottom: 10px;
-    background-color: #a754cb;
+    background-color: #54c7cb;
     border-radius: 10px;
     height: auto;
     display: flex;

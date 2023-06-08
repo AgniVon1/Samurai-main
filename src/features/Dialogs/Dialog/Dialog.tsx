@@ -1,6 +1,8 @@
 import styles from "../dialogs.module.css";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import React from "react";
+import {useAppDispatch} from "../../../store/hooks/useAppDispatch";
+import {setCurrentDialog} from "../../../store/dialog/dialog-reducer";
 
 export type PropsType = {
     dialog: {
@@ -19,15 +21,20 @@ export type PropsType = {
 
 export const Dialog: React.FC<PropsType> = (props) => {
 
+    const navigate = useNavigate()
+    const dispatch = useAppDispatch()
 
+    const redirectHandler = () => {
+        dispatch(setCurrentDialog(props.dialog))
+        navigate("/dialogs/" + props.dialog.id)
+    }
 
-    //setCurrentDialog
     return (
         <div className={styles.dialog + ' ' + styles.active}>
-            <div>
+            <label onClick={redirectHandler}>
                 {props.dialog.newMessagesCount}
-            </div>
-            <NavLink to={"/dialogs/" + props.dialog.id}>{props.dialog.userName}</NavLink>
+                {props.dialog.userName}
+            </label>
         </div>
     )
 }
