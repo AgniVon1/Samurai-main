@@ -7,17 +7,22 @@ import {selectDialogs} from "../../store/dialog/dialog-selectors";
 import {fetchDialogs} from "../../store/dialog/dialog-reducer";
 import {useAuthRedirect} from "../../common/hooks/useAuthRedirect";
 import {Messages} from "./Dialog/Messages";
+import {fetchProfile} from "../../store/profile/profile-reducer";
+import {selectUserId} from "../../store/profile/profile-selectors";
+import {selectAuthUserId} from "../../store/auth/auth-selectors";
 
 
 export const Dialogs: React.FC = () => {
 
     const dispatch = useAppDispatch()
     const dialogs = useAppSelector(selectDialogs)
+    const userId = useAppSelector(selectAuthUserId)
 
     useAuthRedirect()
 
     useEffect(() => {
         dispatch(fetchDialogs())
+        dispatch(fetchProfile(userId))
     }, [])
 
     useEffect(() => {
