@@ -1,4 +1,5 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
+import s from "./profileStatus.module.css"
 
 type PropsType = {
     status:string
@@ -26,9 +27,9 @@ export const ProfileStatus:React.FC<PropsType> =React.memo(({status,updateUserSt
       setLocalStatus(e.currentTarget.value)
     }
 
-    return (<div>
+    return (<div className={s.wrapper}>
       {!editMode ? (
-        <span onClick={activateMode}>{status}</span>
+        <span onClick={activateMode} className={s.statusText}>{status}</span>
         ):
         (<input  autoFocus={true} onBlur={deActivateMode} onChange={onValueChange} value={localStatus}/>)}
       </div>

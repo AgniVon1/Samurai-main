@@ -8,25 +8,27 @@ type PropsType = {
 
 export const Contacts: React.FC<PropsType> =({contacts}) => {
 
+    const copyContacts = {...contacts}
+
+    Object.keys(copyContacts).forEach((k) => copyContacts[k as keyof ContactsType] == null && delete copyContacts[k as keyof ContactsType])
+
     const mappedContacts =
-        Object.keys(contacts).map((key) => {
+        Object.keys(copyContacts).map((key) => {
             return <Contact key={key}
-                             contactsTitle={key}
-                             contactsValue={contacts[key as keyof ContactsType]}
+                            contactsTitle={key}
+                            contactsValue={copyContacts[key as keyof ContactsType]}
             />
         })
 
     return (
-        <div>
-            <div>
-                <b>Контакты:</b>
-            </div>
-            {contacts
-                ?
-                mappedContacts
-                :
-                <> </>
+        <>
+            {
+                Object.keys(copyContacts).length !== 0 &&
+                <div>
+                    <b>Контакты:</b>
+                    {mappedContacts}
+                </div>
             }
-        </div>
+        </>
     );
 };

@@ -10,85 +10,93 @@ import {useAppSelector} from "../../../store/hooks/useAppSelector";
 import {useAppDispatch} from "../../../store/hooks/useAppDispatch";
 import {useParams} from "react-router-dom";
 import {
-  fetchProfile,
-  fetchStatus,
-  updateUserPhoto,
-  updateUserProfile,
-  updateUserStatus
+    fetchProfile,
+    fetchStatus,
+    updateUserPhoto,
+    updateUserProfile,
+    updateUserStatus
 } from "../../../store/profile/profile-reducer";
 import {reduxForm} from "redux-form";
 import {Preloader} from "../../../common/UI/Preloader/Preloader";
+import s from "../ProfileInfo/profileInfo.module.css"
+import photo from "../../../assets/imges/photo.jpg"
+import {follow, unFollow} from "../../../store/users/users-reducer";
+
+export const ProfileInfo: React.FC = React.memo(() => {
+    const dispatch = useAppDispatch()
+
+    const profile = useAppSelector(selectProfile)
+    const status = useAppSelector(selectProfileStatus)
+    const authUserId = useAppSelector(selectAuthUserId)
 
 
-export const ProfileInfo:React.FC = React.memo( () => {
-  const dispatch = useAppDispatch()
+    const params = useParams<'userId'>();
+    let userId = params.userId;
+    const isMyProfile = userId === authUserId.toString()
 
-  const profile = useAppSelector(selectProfile)
-  const status = useAppSelector(selectProfileStatus)
-  const authUserId = useAppSelector(selectAuthUserId)
+    useEffect(() => {
+        if (!userId) {
+            userId = authUserId?.toString();
+        }
+        if (userId) {
+            dispatch(fetchProfile(Number(userId)));
+            dispatch(fetchStatus(Number(userId)));
+        }
+    }, [userId])
 
-  const params = useParams<'userId'>();
-  let userId = params.userId;
+    const [editMode, setEditMode] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (!userId) {
-      userId = authUserId?.toString();
+    const changeEditMode = () => {
+        setEditMode(!editMode);
     }
-    if (userId) {
-      dispatch(fetchProfile(Number(userId)));
-      dispatch(fetchStatus(Number(userId)));
+
+    const onSubmit = (formData: ProfileDataFormPropsType) => {
+        dispatch(updateUserProfile(formData)).then(() => {
+            changeEditMode()
+        });
     }
-  }, [userId])
 
-  const [editMode, setEditMode] = useState<boolean>(false);
-
-  const changeEditMode = () => {
-    setEditMode(!editMode);
-  }
-
-
-  const onSubmit = (formData: ProfileDataFormPropsType) => {
-    dispatch(updateUserProfile(formData)).then(() => {
-      changeEditMode()
-    });
-  }
-
-  const onAvatarSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files?.length) {
-      dispatch(updateUserPhoto(event.target.files[0]));
+    const onAvatarSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files?.length) {
+            dispatch(updateUserPhoto(event.target.files[0]));
+        }
     }
-  }
 
+    if (!profile) return <Preloader/>
 
-  if (!profile) return <Preloader/>
-  return (
-    <div>
-      {profile.photos.large && <img src={profile.photos.small || 'PHOTO'} alt={'PHOTO'}/> }
-      {
-        !userId
-            ?
-            <>
-              <input type='file' onChange={onAvatarSelected}/>
-              <span>Выберите файл</span>
-            </>
-            : ''
-      }
+    return (
+        <div className={s.wrapper}>
+            <div className={s.right}>
+                {
+                    isMyProfile && <label>
+                        <input type='file' className={s.input} onChange={onAvatarSelected}/>
+                        <div className={s.avaWrapper}>
+                            <img src={ profile.photos.small? profile.photos.small : photo} alt={"avatar"}/>
+                        </div>
+                    </label>}
+                {     isMyProfile ||  <div className={s.avaWrapper}>
+                    <img src={ profile.photos.small? profile.photos.small : photo} alt={"avatar"}/>
+                    </div>
+                }
+                <ProfileStatus status={status} updateUserStatus={updateUserStatus}/>
+            </div>
+            <div className={s.left}>
+                {
+                    editMode
+                        ?
+                        <ProfileDataReduxForm initialValues={{...profile}} onSubmit={onSubmit}
+                        />
+                        :
+                        <ProfileData profile={profile}
+                                     isOwner={isMyProfile}
+                                     changeEditMode={changeEditMode}
+                        />
+                }
 
-      {
-        editMode
-            ?
-            <ProfileDataReduxForm initialValues={{...profile}} onSubmit={onSubmit}
-            />
-            :
-            <ProfileData profile={profile}
-                         isOwner={!userId}
-                         changeEditMode={changeEditMode}
-            />
-      }
-      <ProfileStatus status={status} updateUserStatus = {updateUserStatus}/>
-    </div>
-  );
+            </div>
+        </div>
+    );
 })
 export const ProfileDataReduxForm = reduxForm<ProfileDataFormPropsType>({
-  form: 'profileDataForm'
+    form: 'profileDataForm'
 })(ProfileDataForm)

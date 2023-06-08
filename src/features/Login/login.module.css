@@ -19,6 +19,13 @@
 }
 .loginButton {
     margin-bottom: 10px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.loginButton:hover {
+    background-color: #1f1f1f;
+    color: #FFF;
 }
 
 .formErrorBlock {

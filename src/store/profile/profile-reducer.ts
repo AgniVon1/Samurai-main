@@ -10,6 +10,7 @@ import {AppThunkDispatch, RootStateType} from "../store";
 import {ResultCodesEnum} from "../../api/types/types";
 
 const ADD_POST = "PROFILE/ADD-POST"
+const ADD_LIKE = "PROFILE/ADD-LIKE"
 const SET_PROFILE = "PROFILE/SET-PROFILE"
 const SET_STATUS = "PROFILE/SET-STATUS"
 const UPDATE_USER_PHOTO = "PROFILE/UPDATE_USER_PHOTO"
@@ -17,7 +18,30 @@ const UPDATE_USER_PHOTO = "PROFILE/UPDATE_USER_PHOTO"
 const initialProfilePageState: ProfilePageType = {
     profile: null,
     posts: [
-        {id: v1(), message: "mes0", likeCounts: 0},
+        {
+            id: v1(),
+            message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam facilisis ipsum",
+            likeCounts: 56,
+            isMyLike: false,
+            date: "12.03.18 15:54"
+        }, {
+            id: v1(),
+            message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam facilisis ipsum sit amet semper faucibus.",
+            likeCounts: 56,
+            isMyLike: false,
+            date: "12.03.18 15:54"
+        }, {
+            id: v1(),
+            likeCounts: 56,
+            isMyLike: false,
+            date: "12.03.18 15:54",
+            message: "This post id is 3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+                "Nullam facilisis ipsum sit amet semper faucibus. Aenean eu vestibulum orci, nec vestibulum nisi. " +
+                "Proin dapibus diam neque, sed malesuada ex euismod et. Quisque ex risus, consequat sit amet mi ac," +
+                " lobortis tincidunt erat. Donec acc umsan quis magna sed feugiat. Nulla elementum metus id odio" +
+                " dapibus consectetMaecenas vitae nibh in dolor malesuada bibendum aliquam ac leo.eu congue nulla " +
+                "feugiat sit amet. Duis at aliquet lacus.",
+        }
     ],
     status: "",
 }
@@ -27,9 +51,25 @@ const profileReducer = (state: ProfilePageType = initialProfilePageState, action
         case ADD_POST:
             return {
                 ...state,
-                posts: [...state.posts, {id: v1(), message: action.newPost, likeCounts: 0}],
+                posts: [ {id: v1(),
+                    message: action.newPost,
+                    isMyLike:false,
+                    likeCounts: 0,
+                    date: new Intl.DateTimeFormat('en-GB', {
+                        day: "2-digit",
+                        month: "2-digit",
+                        year: "2-digit",
+                        hour: "2-digit",
+                        minute: "2-digit"
+                    }).format(new Date())},...state.posts,]
 
             }
+        case ADD_LIKE:
+            const newPosts = state.posts.map(p => p.id !== action.id ? p : {
+                ...p,
+                isMyLike: !p.isMyLike
+            })
+            return {...state, posts: [...newPosts]}
         case SET_PROFILE:
             return {
                 ...state,
@@ -122,26 +162,28 @@ export const updateUserProfile = (profile: FormDataType) =>
     }
 
 export const addNewPost = (newPost: string): AddNewPostActionType => ({type: ADD_POST, newPost})
+export const addLikePost = (id: string): AddLikePostActionType => ({type: ADD_LIKE, id})
 export const setProfile = (profile: ProfileType): SetProfileActionType => ({type: SET_PROFILE, profile})
 export const setStatus = (status: string): SetStatusActionType => ({type: SET_STATUS, status})
 export const updateUserSmallPhoto = ( small: string):UpdateUserSmallPhotoActionType => ({type: UPDATE_USER_PHOTO, small})
 
 export type  ProfileActionType = AddNewPostActionType
+    | AddLikePostActionType
     | SetProfileActionType
     | SetStatusActionType
     | UpdateUserSmallPhotoActionType
     | TogglelIsFetching
 
 export type AddNewPostActionType = { type: typeof ADD_POST, newPost: string }
+export type AddLikePostActionType = { type: typeof ADD_LIKE, id: string }
 export type SetProfileActionType = { type: typeof SET_PROFILE, profile: ProfileType }
 export type SetStatusActionType = { type: typeof SET_STATUS, status: string }
 export type UpdateUserSmallPhotoActionType = { type: typeof UPDATE_USER_PHOTO, small: string }
 
 export type ProfilePageType = {
     profile: ProfileType | null,
-    posts: Array<{ id: string, message: string, likeCounts: number }>,
+    posts: Array<{ id: string, message: string, likeCounts: number ,isMyLike:boolean,date:string}>,
     status: string,
-
 }
 export type ContactsType = {
     facebook: string,

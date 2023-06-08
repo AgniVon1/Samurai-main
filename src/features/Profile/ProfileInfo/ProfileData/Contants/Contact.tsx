@@ -6,7 +6,7 @@ type PropsType = {
 export const Contact: React.FC<PropsType> = ({contactsTitle, contactsValue}) => {
     return (
         <>
-            {contactsValue && <div><b>{contactsTitle}: </b>{contactsValue} </div>}
+             <div><b>{contactsTitle}: </b>{contactsValue} </div>
         </>
     );
 }

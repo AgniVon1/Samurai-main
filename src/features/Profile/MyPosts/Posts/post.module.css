@@ -1,3 +1,62 @@
 .post {
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border-radius: 5px;
+    color: var(--text_color_)
+}
+.avatarWrapper {
+    width: 70px;
+    height: 70px;
+}
+.post img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #dec1bd;
+}
+.author {
+    display: flex;
+}
+.authorInfo{
+    padding-left: 20px;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    justify-items: center;
+}
+.messageText {
+}
+.name {
+    font-weight: bold;
+    font-size: 2rem;
+}
+.date {
+}
+.likeSvgWrapper{
+    min-width: 30px;
+    height: 20px;
+}
+.likes {
+    float: right;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+.likes svg {
+    cursor: pointer;
+    fill: #2a3249;
+    display: block;
+    margin: auto;
+    width: 20px;
+    transition: width 0.2s ease-out
+}
+.likes svg:hover {
+    width: 25px;
 
+}
+.active svg{
+    fill: #e52525;
+    width: 25px;
 }

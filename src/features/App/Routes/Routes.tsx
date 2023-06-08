@@ -25,7 +25,7 @@ export const AppRoutes: React.FC = () => (
             <Route path={"/chat"}
                    element={<ChatPage/>}/>
             <Route path={"/users"} element={
-                withSuspense(UsersContainer)
+                () => withSuspense(UsersContainer)
             }/>
         </Routes>
     </div>

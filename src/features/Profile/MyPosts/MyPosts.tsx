@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Post} from "./Posts/Post";
 import {ProfilePageType} from "../../../store/profile/profile-reducer";
-import AddPostForm, {AddPostFormValuesType} from "./AddPostForm/AddPostForm";
+import s from "./myPosts.module.css"
+import {FormDataType, SendMessageForm} from "../../../common/UI/MessageForm/MessageForm";
 
 export type PropsType = {
     profilePage: ProfilePageType,
@@ -15,16 +16,28 @@ export const MyPosts: React.FC<PropsType> = React.memo( ({
                                                             },
                                                         addPost,
                                                     }) => {
-    const mappedPosts = posts.map((p) => <Post  key = {p.id} id={p.id} likeCounts={p.likeCounts} message={p.message}/>)
+    const mappedPosts = posts.map((p) => <Post  key = {p.id} post = {p}/>)
+    const [error, setError] = useState("")
 
-    const addNewPost = (formData: AddPostFormValuesType) => {
-        addPost(formData.newPost)
+    const addNewPost = (message: string) => {
+        if (!message.trim()) setError("Your post is empty!")
+        else {
+            addPost(message)
+            setError("")
+        }
+
     }
     return (
-        <div>
-          <AddPostForm onSubmit = {addNewPost}/>
-            {mappedPosts}
-        </div>
+            <div className={s.wrapper}>
+                <div className={s.addBlock}>
+                    <SendMessageForm
+                        placeholder={'Write a post...'}
+                        onSubmit={addNewPost}
+                    />
+                    <div className={s.error}>{error}</div>
+                </div>
+                {mappedPosts}
+            </div>
     );
 })
 

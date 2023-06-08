@@ -6,6 +6,8 @@ import {login} from "../../store/auth/auth-reducer";
 import {Navigate} from "react-router-dom";
 import {RootStateType} from "../../store/store";
 import s from "./login.module.css"
+import {useAppSelector} from "../../store/hooks/useAppSelector";
+import {selectAuthUserId} from "../../store/auth/auth-selectors";
 
 export type PropsType = MapStateToPropsLoginType & MapDispatchToPropsLoginType;
 
@@ -28,9 +30,9 @@ export const Login = (props: PropsType) => {
     const onSubmit = (formData: LoginFormValuesType) => {
         props.login(formData.email, formData.password, formData.rememberMe,formData.captchaUrl)
     }
-
+    const id = useAppSelector(selectAuthUserId)
     if (props.isAuth) {
-        return <Navigate to={'/profile'}/>
+        return <Navigate to={'/profile/' + id}/>
     }
     return (
         <div className={s.login}>

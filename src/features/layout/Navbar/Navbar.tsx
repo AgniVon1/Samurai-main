@@ -3,12 +3,15 @@ import styles from './navbar.module.css'
 import {NavLink} from "react-router-dom";
 import s from "./navbar.module.css"
 import {callBack} from "../utils/callBack";
+import {useAppSelector} from "../../../store/hooks/useAppSelector";
+import {selectAuthUserId} from "../../../store/auth/auth-selectors";
 
 
-export const Navbar = () => (
-    <nav className={styles.navbar}>
-        <NavLink to="/profile" className={callBack}>
-            <div className={s.item}>Profile</div>
+export const Navbar = () => {
+    const id = useAppSelector(selectAuthUserId)
+    return (<nav className={styles.navbar}>
+        <NavLink to={'/profile/'+ id} className={callBack}>
+            <div className={s.item}> My Profile</div>
         </NavLink>
         <NavLink to="/dialogs" className={callBack}>
             <div className={s.item}>Dialogs</div>
@@ -20,5 +23,6 @@ export const Navbar = () => (
             <div className={s.item}>Group Chat</div>
         </NavLink>
     </nav>)
+}
 
 

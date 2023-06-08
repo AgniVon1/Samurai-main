@@ -1,6 +1,6 @@
 import {ProfileType} from "../../../../store/profile/profile-reducer";
 import {Contacts} from "./Contants/Contants";
-
+import s from "./profileData.module.css"
 
 type PropsType = {
     profile: ProfileType
@@ -22,13 +22,13 @@ export const ProfileData: React.FC<PropsType> =
                     </div>
                 }
 
-                <div style={{marginTop: '10px'}}>
-                    <b>Имя:</b> {profile.fullName}
+                <div className={s.fullName}>
+                     {profile.fullName}
                 </div>
-                <div>
+                <div className={s.item}>
                     <b>Работа:</b> {profile.lookingForAJobDescription}
                 </div>
-                <div>
+                <div className={s.item}>
                     <b>Обо мне:</b> {profile.aboutMe}
                 </div>
 
