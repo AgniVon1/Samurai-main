@@ -28,7 +28,7 @@ export const Dialogs: React.FC = () => {
     useEffect(() => {
         const timer = setInterval(() => {
             dispatch(fetchDialogs())
-        }, 30000);
+        }, 15000);
         return () => clearInterval(timer);
     });
 

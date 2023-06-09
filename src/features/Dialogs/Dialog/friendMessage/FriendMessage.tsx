@@ -28,9 +28,9 @@ export const FriendMessage: React.FC<PropsType> = ({
                     <div className={s.friendName}>
                         {currentDialog.userName}
                     </div>
-                    <pre className={s.friendMessageText}>
+                    <p className={s.friendMessageText}>
                         {text}
-                    </pre>
+                    </p>
                 </div>
             </div>
             <div className={s.friendTime}>

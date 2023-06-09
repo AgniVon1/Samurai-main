@@ -21,9 +21,9 @@ export const Message: React.FC<PropsType> = ({text, addedAt}) => {
                     <div className={s.name}>
                         {name}
                     </div>
-                    <pre className={s.messageText}>
+                    <p className={s.messageText}>
                         {text}
-                    </pre>
+                    </p>
                 </div>
             </div>
             <div className={s.time}>

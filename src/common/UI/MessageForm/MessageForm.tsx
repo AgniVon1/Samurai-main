@@ -9,6 +9,7 @@ export interface FormDataType {
 interface SendMessageFormInterface {
     initialValue?: string
     placeholder?: string
+    disabled?:boolean
     onSubmit: (message:string) => void
 }
 
@@ -29,7 +30,7 @@ export const SendMessageForm = (props: SendMessageFormInterface) => {
                           placeholder={props.placeholder}
                           onChange={handleChange}
                           value={values.message}/>
-                <button type="submit">Send</button>
+                <button type="submit" disabled={props.disabled}>Send</button>
             </Form>
                 )}
         </Formik>

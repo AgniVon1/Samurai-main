@@ -1,6 +1,8 @@
 .friendMessage {
-    width: 100%;
+    width: 60%;
     display: flex;
+    align-self: flex-end;
+    justify-self: flex-end;
     flex-direction: column;
 }
 
@@ -41,7 +43,9 @@
 }
 
 .friendMessageText {
-    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
     padding-top: 10px;
     font-family: 'Montserrat', serif;
     font-style: normal;

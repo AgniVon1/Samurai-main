@@ -7,10 +7,6 @@ import {LoginContainer} from "../../Login/Login";
 import {ChatPage} from "../../Chat/ChatPage";
 import {Users} from "../../Users/Users";
 
-/*
-const UsersContainer = lazy(() => import('../../Users/UsersContainer'));
-*/
-
 export const AppRoutes: React.FC = () => (
     <div className={s.content}>
         <Routes>

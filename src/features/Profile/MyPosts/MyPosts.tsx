@@ -30,10 +30,7 @@ export const MyPosts: React.FC<PropsType> = React.memo( ({
     return (
             <div className={s.wrapper}>
                 <div className={s.addBlock}>
-                    <SendMessageForm
-                        placeholder={'Write a post...'}
-                        onSubmit={addNewPost}
-                    />
+                    <SendMessageForm placeholder={'Write a post...'} onSubmit={addNewPost}/>
                     <div className={s.error}>{error}</div>
                 </div>
                 {mappedPosts}

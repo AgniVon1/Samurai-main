@@ -1,7 +1,7 @@
 
 .wrapper {
     display: flex;
-    height: 30vh;
+    min-height: 30vh;
     align-items: center;
     background-color: #aba6e5;
     margin-bottom: 10px;

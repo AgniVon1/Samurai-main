@@ -1,20 +1,12 @@
 import {DialogResponse, dialogsAPI} from "../../api/dialogs/dialogs-api";
 import {Dispatch} from "redux";
-import {RootStateType, RootThunkType} from "../store";
-import {ThunkDispatch} from "redux-thunk";
+import {RootStateType} from "../store";
 
-/*const SEND_NEW_MESS = "SEND-MESSAGE"
-
-export const sendNewMessAC = (newMess:string) => {
-    return {
-        type: SEND_NEW_MESS,newMess
-    } as const
-}
-export type sendNewMessActionType = ReturnType<typeof sendNewMessAC>*/
 
 const SET_ALL_DIALOGS = "DIALOG/SET_ALL_DIALOGS"
 const DIALOG_IS_FETCHING = "DIALOG/TOGGLE_IS_FETCHING"
 const SET_CURRENT_DIALOG = "DIALOG/SET_CURRENT_DIALOG"
+const RESET_DIALOG_HAS_NEW_MESSAGES = "DIALOG/RESET_DIALOG_HAS_NEW_MESSAGES"
 
 const initialState: DialogsStateType =
     {
@@ -50,6 +42,13 @@ const dialogReducer = (state: DialogsStateType = initialState, action: DialogAct
                 ...state,
                 currentDialog: {...action.dialog}
             }
+        case RESET_DIALOG_HAS_NEW_MESSAGES:
+            return {
+                ...state,
+                dialogs: state.dialogs.map((dialog) => (dialog.id === action.id ?
+                    {...dialog, hasNewMessages: false}
+                    : dialog))
+            }
         default:
             return state
     }
@@ -63,7 +62,6 @@ export const fetchDialogs = () => {
         dispatch(dialogIsFetching(false))
     }
 }
-
 
 export const setAllDialogs = (dialogs: DialogResponse[]) => {
     return {
@@ -79,6 +77,13 @@ export const setCurrentDialog = (dialog: DialogResponse) => {
     } as const
 }
 
+export const resetDialogHasNewMessages = (id :number) => {
+    return {
+        type: RESET_DIALOG_HAS_NEW_MESSAGES,
+        id
+    } as const
+}
+
 export type DialogIsFetching = ReturnType<typeof dialogIsFetching>
 export const dialogIsFetching = (value: boolean) => {
     return {type: DIALOG_IS_FETCHING, value} as const
@@ -87,6 +92,7 @@ export const dialogIsFetching = (value: boolean) => {
 
 export type DialogActionType = ReturnType<typeof setAllDialogs> |
     ReturnType<typeof setCurrentDialog> |
+    ReturnType<typeof resetDialogHasNewMessages> |
     DialogIsFetching
 
 type DialogsStateType = {

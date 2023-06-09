@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {useParams} from "react-router-dom";
 import {useAppDispatch} from "../../../store/hooks/useAppDispatch";
 import {useAppSelector} from "../../../store/hooks/useAppSelector";
@@ -9,11 +9,15 @@ import {Message} from "./Message/Message";
 import {FriendMessage} from "./friendMessage/FriendMessage";
 import {fetchProfile} from "../../../store/profile/profile-reducer";
 import s from "./messages.module.css"
+import {useScroll} from "../../../common/hooks/useScroll";
+import {SendMessageForm} from "../../../common/UI/MessageForm/MessageForm";
+import {selectCurrentDialogHasNewMessages} from "../../../store/dialog/dialog-selectors";
 
 
 export const Messages: React.FC = () => {
     const dispatch = useAppDispatch()
     const messages = useAppSelector(selectMessages)
+    const currentDialogHasNewMessages = useAppSelector(selectCurrentDialogHasNewMessages)
     const userId = useAppSelector(selectAuthUserId)
 
     const params = useParams<'dialogId'>();
@@ -22,46 +26,38 @@ export const Messages: React.FC = () => {
     useEffect(() => {
         if (dialogId) {
             dispatch(fetchMessages(+dialogId))
-           /* dispatch(fetchProfileFriend(+dialogId))*/
+            /* dispatch(fetchProfileFriend(+dialogId))*/
             dispatch(fetchProfile(userId))
         }
     }, [dialogId])
 
     useEffect(() => {
-        const timer = setInterval(() => {
-            if (dialogId) dispatch(fetchMessages(+dialogId))
-        }, 35000);
-        return () => clearInterval(timer);
-    });
+        if (dialogId) dispatch(fetchMessages(+dialogId))
+    }, [currentDialogHasNewMessages]);
 
-    const [message, setMessage] = useState('')
-
-    const sendMessageHandler = (dialogId:string| undefined) => {
+    const sendMessageHandler = (message: string) => {
         if (!message) {
             return
         }
         dispatch(sendMessage(message))
-        setMessage('')
         if (dialogId) dispatch(fetchMessages(+dialogId))
     }
 
+    const {scrollHandler, anchorRef} = useScroll(messages)
+
     return (<div className={s.wrapper}>
+        <div className={s.chatBlock} style={{overflowY: "auto"}} onScroll={scrollHandler}>
             {messages.map(m => {
-                if (m.senderId === userId)
-                    return <Message key={m.id} text={m.body} addedAt={m.addedAt}/>
-                else
-                    return <FriendMessage key={m.id} text={m.body} addedAt={m.addedAt}/>
+                return m.senderId === userId ?
+                    <Message key={m.id} text={m.body} addedAt={m.addedAt}/>
+                    :
+                    <FriendMessage key={m.id} text={m.body} addedAt={m.addedAt}/>;
             })}
-            <div>
-                <div>
-                    <textarea onChange={(e) => setMessage(e.currentTarget.value)} value={message}></textarea>
-                </div>
-                <div>
-                    <button onClick={() => sendMessageHandler(dialogId)}>Send</button>
-                </div>
-            </div>
+            <div ref={anchorRef}></div>
         </div>
-    )
+        {dialogId &&
+            <SendMessageForm onSubmit={sendMessageHandler} initialValue={""} placeholder={"Enter message..."}/>}
+    </div>)
 }
 
 

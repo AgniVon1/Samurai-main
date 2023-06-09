@@ -1,3 +1,10 @@
-.wrapper{
+.wrapper {
     grid-area: messages;
+    height: 90vh;
+}
+
+.chatBlock {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
 }

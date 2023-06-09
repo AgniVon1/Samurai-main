@@ -24,7 +24,7 @@ export const Users: React.FC = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     let pageQuery = searchParams.get('page') || 1;
     let termQuery = searchParams.get('term') || '';
-    let friendQuery = searchParams.get('friend') || null;
+    let friendQuery = searchParams.get('friend') || 'null';
 
     const [selectedValue, setSelectValue] = useState<any>(friendQuery);
 

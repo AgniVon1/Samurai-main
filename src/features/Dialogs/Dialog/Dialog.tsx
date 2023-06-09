@@ -1,8 +1,10 @@
-import styles from "../dialogs.module.css";
 import {NavLink, useNavigate} from "react-router-dom";
 import React from "react";
 import {useAppDispatch} from "../../../store/hooks/useAppDispatch";
-import {setCurrentDialog} from "../../../store/dialog/dialog-reducer";
+import {fetchDialogs, resetDialogHasNewMessages, setCurrentDialog} from "../../../store/dialog/dialog-reducer";
+import {callBack} from "../../layout/utils/callBack";
+import s from "./dialog.module.css"
+import bullet from "./../../../assets/imges/i-bullet-svgrepo-com.svg"
 
 export type PropsType = {
     dialog: {
@@ -20,21 +22,21 @@ export type PropsType = {
 }
 
 export const Dialog: React.FC<PropsType> = (props) => {
-
-    const navigate = useNavigate()
     const dispatch = useAppDispatch()
 
     const redirectHandler = () => {
         dispatch(setCurrentDialog(props.dialog))
-        navigate("/dialogs/" + props.dialog.id)
+        dispatch(resetDialogHasNewMessages(props.dialog.id))
     }
-
     return (
-        <div className={styles.dialog + ' ' + styles.active}>
-            <label onClick={redirectHandler}>
-                {props.dialog.newMessagesCount}
-                {props.dialog.userName}
+        <NavLink to={"/dialogs/" + props.dialog.id}
+                 className={callBack}>
+            <label onClick={redirectHandler} className={s.userNameBlock}>
+                <p>{props.dialog.userName}</p>
+                <div className={s.bullet}>
+                    {props.dialog.hasNewMessages && <img src={bullet} alt="*"/>}
+                </div>
             </label>
-        </div>
+        </NavLink>
     )
 }

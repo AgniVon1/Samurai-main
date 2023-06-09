@@ -79,6 +79,7 @@ export const ProfileInfo: React.FC = React.memo(() => {
                     </div>
                 }
                 <ProfileStatus status={status} updateUserStatus={updateUserStatus}/>
+
             </div>
             <div className={s.left}>
                 {

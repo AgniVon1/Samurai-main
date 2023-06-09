@@ -3,7 +3,7 @@ import {Action, Dispatch} from "redux";
 import {FormAction} from "redux-form";
 import {v1} from "uuid";
 import {ThunkAction} from "redux-thunk";
-import {RootStateType, RootThunkType} from "../store";
+import {RootStateType} from "../store";
 
 type ChatMessageType = ChatMessageAPIType & { id: string }
 
