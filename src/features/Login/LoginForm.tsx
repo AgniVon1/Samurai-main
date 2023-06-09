@@ -19,12 +19,14 @@ export const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFor
                 placeholder={"Login"}
                 name={'email'}
                 component={"input"}
+
             /></div>
             <div>
                 <Field
                     placeholder={"Password"}
                     name={'password'}
                     component={"input"}
+
                 /></div>
             <div><Field
                 name={'rememberMe'}

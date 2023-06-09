@@ -39,7 +39,9 @@ export const Login = (props: PropsType) => {
             <div>
                 <h2>Login</h2>
             </div>
-            <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
+            <LoginReduxForm initialValues = {
+                {email:"iliatron00@gmail.com", password:"forgetman", rememberMe:false}
+            }onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
         </div>
     );
 };
